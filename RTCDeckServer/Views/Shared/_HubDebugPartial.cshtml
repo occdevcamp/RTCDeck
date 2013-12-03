@@ -1,12 +1,12 @@
 ﻿<div id="hubdebugmethods">
     <h3>Hub Debug Methods</h3>
     <div class="row">
-        <div id="SetCurrentSlide" class="col-md-4">
+        <div id="SetCurrentSlide" class="col-md-6">
             <h4>Set Current Slide</h4>
             <input type="number" id="setCurrentSlidePart1" /><input type="number" id="setCurrentSlidePart2" />
             <input type="button" id="setCurrentSlideButton" value="Set" />
         </div>
-        <div id="RequestCurrentSlide" class="col-md-4">
+        <div id="RequestCurrentSlide" class="col-md-6">
             <h4>Request Current Slide</h4>
             <ul>
                 <li id="getCurrentSlidePart1"></li>
@@ -14,16 +14,31 @@
             </ul>
         </div>
     </div>
+    <div class="row">
+        <div id="SendPresentationNavigationCommand" class="col-md-6">
+            <h4>Send Presentation Navigation Command</h4>
+            <input type="text" id="navigationCommand" />
+            <input type="button" id="sendNavigationCommand" value="Send" />
+        </div>
+        <div id="receivePresentationNavigationCommand" class="col-md-6">
+            <h4>Receive Presentation Navigation Command</h4>
+            <p>Last command received: <span id="receivePresentationNavigationCommandCommand"></span></p>
+        </div>
+    </div>
     <h3>Hub Documentation</h3>
     <div class="row">
         <div class="col-md-4">
-            <h4>Server Side</h4>
+            <h4>Server Side Methods</h4>
             <dl>
-                <dt>SetCurrentSlide</dt>
+                <dt>SetCurrentSlide(int, int) (setCurrentSlide from JS)</dt>
                 <dd>Sets the indices for the current slide; broadcast to all at present via notifyCurrentSlide</dd>
 
-                <dt>RequestCurrentSlide</dt>
+                <dt>RequestCurrentSlide() (requestCurrentSlide from JS)</dt>
                 <dd>Gets the indices for the current slide; expected to be used when connecting to a presentation to get initial state. Calls back to notifyCurrentSlide.</dd>
+
+                <dt>SendPresentationNavigationCommand(command) (sendPresentationNavigationCommand from JS)</dt>
+                <dd>Passes a navigation command from a client device to the main presentation. Not yet sure how only the presenter will interpret the message. Probably they'll be the only one listening.</dd>
+
             </dl>
         </div>
         <div class="col-md-4">
@@ -31,7 +46,18 @@
             <dl>
                 <dt>notifyCurrentSlide</dt>
                 <dd>Informs a client what the current slide is</dd>
+
+                <dt>receivePresentationNavigationCommand(command)</dt>
+                <dd>Receives a navigation command for action.</dd>
             </dl>
+        </div>
+        <div class="col-md-4">
+            <h4>Server-side persistence</h4>
+            <dl>
+                <dt>CurrentSlide</dt>
+                <dd>The current slide's indices are persisted.</dd>
+            </dl>
+            <p>NavigationCommands are transient: they are expected to cause a CurrentSlide update.</p>
         </div>
     </div>
 </div>
