@@ -11,12 +11,12 @@ namespace RTCDeckServer
         {
             ConfigureAuth(app);
 
-
             var hubConfiguration = new HubConfiguration();
 #if DEBUG
             hubConfiguration.EnableDetailedErrors = true;
 #endif
             app.MapSignalR(hubConfiguration);
+
         }
     }
 }
