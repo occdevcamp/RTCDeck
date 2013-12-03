@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25dip"
+        android:minHeight="25dip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout1">
+        <TextView
+            android:text="@string/slideNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/slideNumberLabel"
+            android:layout_margin="10dip" />
+        <TextView
+            android:text="0/0"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/slideNumberText"
+            android:layout_margin="10dip" />
+    </LinearLayout>
+    <TableLayout
+        android:minWidth="25dip"
+        android:minHeight="25dip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/tableLayout1"
+        android:padding="10dip">
+        <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <Button
+                android:text="@string/slideUp"
+                android:layout_column="1"
+                android:id="@+id/slideUp"
+                android:layout_height="72dip"
+                android:layout_width="72dip" />
+        </TableRow>
+        <TableRow
+            android:id="@+id/tableRow2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <Button
+                android:text="@string/slideLeft"
+                android:layout_column="0"
+                android:id="@+id/slideLeft"
+                android:layout_height="72dip"
+                android:layout_width="72dip" />
+            <Button
+                android:text="@string/slideRight"
+                android:layout_column="2"
+                android:id="@+id/slideRight"
+                android:layout_height="72dip"
+                android:layout_width="72dip" />
+        </TableRow>
+        <TableRow
+            android:id="@+id/tableRow3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <Button
+                android:text="@string/slideDown"
+                android:layout_column="1"
+                android:id="@+id/slideDown"
+                android:layout_width="72dip"
+                android:layout_height="72dip" />
+        </TableRow>
+    </TableLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:minWidth="25dip"
+        android:minHeight="25dip"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/linearLayout2">
+        <TextView
+            android:text="@string/speakerNotes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView6"
+            android:padding="10dip" />
+        <WebView
+            android:id="@+id/speakerNotes"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dip" />
+    </LinearLayout>
+</LinearLayout>

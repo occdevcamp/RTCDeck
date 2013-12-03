@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="slideNumber">Slide Number: </string>
+	<string name="slideUp">Up</string>
+	<string name="slideDown">Down</string>
+	<string name="slideLeft">Left</string>
+	<string name="slideRight">Right</string>
+	<string name="speakerNotes">Speaker Notes</string>
+</resources>
