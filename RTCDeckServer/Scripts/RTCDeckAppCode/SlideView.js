@@ -21,6 +21,9 @@ var Controllers;
                 return JSON.stringify(contenthtml);
             };
 
+            $scope.getQuestions = function () {
+            };
+
             //bind to events from server
             $scope.$parent.$on("acceptCurrentSlideIndex", function (e, slideData) {
                 $scope.$apply(function () {

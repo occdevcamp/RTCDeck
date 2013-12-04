@@ -7,17 +7,29 @@ module Services {
         private proxy: HubProxy;
         public sendCurrentSlideData: Function;
         public SendPresentationNavigationCommand: Function;
+        public requestCurrentSlide: Function;
 
         constructor($, $rootScope, $window) {
             var connection: HubConnection = $.hubConnection($window.HUB_URL);
             this.proxy = connection.createHubProxy($window.HUB_NAME);
 
-            connection.start();
+            connection.start().done(
+                function () {
+                    $rootScope.$emit("connectionStarted")
+                });
 
             //sending
 
             this.sendCurrentSlideData = function (slideData: Models.SlideData) {
                 this.proxy.invoke('SetCurrentSlide', slideData);
+            }
+
+            this.SendPresentationNavigationCommand = function (command: string) {
+                this.proxy.invoke('SendPresentationNavigationCommand', command);
+            };
+
+            this.requestCurrentSlide = function () {
+                this.proxy.invoke('RequestCurrentSlide');
             }
 
             //receiving
@@ -29,9 +41,6 @@ module Services {
                 $rootScope.$emit("receivePresentationNavigationCommand", command);
             });
 
-            //this.SendPresentationNavigationCommand = function (command: string) {
-            //    this.proxy.invoke('SendPresentationNavigationCommand', command);
-            //};
         }
     }
 
