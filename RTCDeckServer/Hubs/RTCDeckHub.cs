@@ -84,6 +84,11 @@ namespace RTCDeckServer.Hubs
 		{
 			try
 			{
+				// dress the PollAnswer with the user's connection id
+				// (I think this could be done in the client app if we wanted, 
+				// but not exploring that now)
+				pollAnswer.ConnectionId = Context.ConnectionId;
+
 				// add answer to stash of answers
 				_presentationState.AddPollAnswer(pollAnswer);
 

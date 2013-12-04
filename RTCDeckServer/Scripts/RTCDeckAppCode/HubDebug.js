@@ -30,9 +30,11 @@ $(function () {
 	// gets a set of raw poll data for debug purposes
 	rtc.client.debug_RawPollAnswers = function (pollAnswers) {
 		$('#pollAnswers_rawdata').empty();
-		for (answer in pollAnswers) {
-			li = '<li><strong>' + pollAnswers[answer].PollIdentifier + '</strong> <em>' + pollAnswers[answer].AnswerID + '</em> '
-				+ pollAnswers[answer].SelectedOptions[0].OptionText + '</li>';
+		for (answerIndex in pollAnswers) {
+			answer = pollAnswers[answerIndex];
+			li = '<li><strong>' + answer.PollIdentifier + '</strong> <em>' + answer.AnswerID + '</em> '
+				+ '(' + answer.ConnectionId + ', ' + answer.Timestamp + ') '
+				+ answer.SelectedOptions[0].OptionText + '</li>';
 			$('#pollAnswers_rawdata').append(li);
 		}
 	}
