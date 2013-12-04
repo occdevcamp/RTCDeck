@@ -1,18 +1,30 @@
-﻿
-@{
+﻿@{
     Layout = null;
 }
 
 <!DOCTYPE html>
 
-<html ng-app ="audienceView">
-    <head>
-        <meta name="viewport" content="width=device-width" />
-        <title>Audience</title>
-    </head>
-    <body ng-controller="">
-        <div>
+<html ng-app="audienceView">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Audience</title>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/signalR")
+        @Scripts.Render("~/bundles/angular")
+    <script>
+        window.BASE_URL = "@Html.Raw(Url.Content("~"))";
+        window.HUB_URL = "@Html.Raw(Url.Content("~/signalr/"))";
+        window.HUB_NAME = "RTCDeckHub";
+    </script>
+    <script src="~/Scripts/RTCDeckAppCode/Models.js"></script>
+    <script src="~/Scripts/RTCDeckAppCode/HubCommunications.js"></script>
+    <script src="~/Scripts/RTCDeckAppCode/AudienceView.js"></script>
+</head>
+<body ng-controller="Controllers.AudienceViewCtrl">
+    <div>
+        Slide ({{slideData.indexh}} , {{slideData.indexv}})
 
-        </div>
-    </body>
+        <div ng-bind-html="slideData.supplementaryContent"></div>
+    </div>
+</body>
 </html>

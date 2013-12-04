@@ -6,11 +6,21 @@ var Services;
             var connection = $.hubConnection($window.HUB_URL);
             this.proxy = connection.createHubProxy($window.HUB_NAME);
 
-            connection.start();
+            connection.start().done(function () {
+                $rootScope.$emit("connectionStarted");
+            });
 
             //sending
             this.sendCurrentSlideData = function (slideData) {
                 this.proxy.invoke('SetCurrentSlide', slideData);
+            };
+
+            this.SendPresentationNavigationCommand = function (command) {
+                this.proxy.invoke('SendPresentationNavigationCommand', command);
+            };
+
+            this.requestCurrentSlide = function () {
+                this.proxy.invoke('RequestCurrentSlide');
             };
 
             //receiving
@@ -21,9 +31,6 @@ var Services;
             this.proxy.on("receivePresentationNavigationCommand", function (command) {
                 $rootScope.$emit("receivePresentationNavigationCommand", command);
             });
-            //this.SendPresentationNavigationCommand = function (command: string) {
-            //    this.proxy.invoke('SendPresentationNavigationCommand', command);
-            //};
         }
         return RTCDeckHubService;
     })();

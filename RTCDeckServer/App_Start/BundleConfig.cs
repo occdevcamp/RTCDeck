@@ -12,7 +12,8 @@ namespace RTCDeckServer
                         "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/angular")
-                .Include("~/Scripts/angular.js"));
+                .Include("~/Scripts/angular.js")
+                .Include("~/Scripts/angular-sanitize.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/signalR")
                 .Include("~/Scripts/jquery.signalR-2.0.0.js").Include("~/signalr/hubs"));
