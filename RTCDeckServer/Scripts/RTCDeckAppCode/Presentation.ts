@@ -8,9 +8,9 @@ module Services {
         private proxy: HubProxy;
         public sendCurrentSlideIndex: Function;
         SendPresentationNavigationCommand: Function;
-        constructor($, $rootScope) {
-            var connection: HubConnection = $.hubConnection();
-            this.proxy = connection.createHubProxy("RTCDeckHub");
+        constructor($, $rootScope, $window) {
+            var connection: HubConnection = $.hubConnection($window.HUB_URL);
+            this.proxy = connection.createHubProxy($window.HUB_NAME);
             connection.start();
 
             this.proxy.on("notifyCurrentSlide", function (indexh: number, indexv: number) {
@@ -137,6 +137,6 @@ var app = angular.module("slideView", []);
     //});
 
 app.value('$', $);
-app.factory('SignalRService', function ($, $rootScope) {return new Services.SignalRService($, $rootScope) });
+app.factory('SignalRService', function ($, $rootScope) {return new Services.SignalRService($, $rootScope, window) });
 app.controller('Controllers.SlideViewCtrl', Controllers.SlideViewCtrl);
 

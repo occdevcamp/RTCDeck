@@ -2,9 +2,10 @@
 var Services;
 (function (Services) {
     var SignalRService = (function () {
-        function SignalRService($, $rootScope) {
-            var connection = $.hubConnection();
-            this.proxy = connection.createHubProxy("RTCDeckHub");
+        function SignalRService($, $rootScope, $window) {
+            var connection = $.hubConnection($window.HUB_URL);
+            alert($window.HUB_URL);
+            this.proxy = connection.createHubProxy($window.HUB_NAME);
             connection.start();
 
             this.proxy.on("notifyCurrentSlide", function (indexh, indexv) {
@@ -92,7 +93,7 @@ var app = angular.module("slideView", []);
 //});
 app.value('$', $);
 app.factory('SignalRService', function ($, $rootScope) {
-    return new Services.SignalRService($, $rootScope);
+    return new Services.SignalRService($, $rootScope, window);
 });
 app.controller('Controllers.SlideViewCtrl', Controllers.SlideViewCtrl);
 //# sourceMappingURL=Presentation.js.map
