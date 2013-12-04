@@ -19,7 +19,7 @@ module Controllers {
     // Class
     export class AudienceViewCtrl {
         // Constructor
-        constructor(private $scope: AudienceViewModel, private SignalRService: Services.RTCDeckHubService, private $window) {
+        constructor(private $scope: AudienceViewModel, private RTCDeckHubService: Services.RTCDeckHubService, private $window) {
 
             $scope.updateSlideIndex = function (slideData: AudienceSlideData) {
                 $scope.slideData = slideData;
@@ -46,6 +46,6 @@ var app = angular.module("audienceView", []);
 
 
 app.value('$', $);
-app.factory('SignalRService', function ($, $rootScope) {return new Services.RTCDeckHubService($, $rootScope) });
+app.factory('RTCDeckHubService', function ($, $rootScope) {return new Services.RTCDeckHubService($, $rootScope,window) });
 app.controller('Controllers.AudienceViewCtrl', Controllers.AudienceViewCtrl);
 

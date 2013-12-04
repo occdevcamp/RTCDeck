@@ -8,10 +8,18 @@ module Controllers {
         // Class
         export class SlideViewCtrl {
             // Constructor
-            constructor(private $scope, private SignalRService: Services.RTCDeckHubService, private $window) {
+            constructor(private $scope, private RTCDeckHubService: Services.RTCDeckHubService, private $window) {
 
-                $scope.sendCurrentSlideIndex = function (slideData: Models.SlideData) {
-                    SignalRService.sendCurrentSlideData(slideData);
+                $scope.sendCurrentSlideData = function (slideData: Models.SlideData) {
+                    RTCDeckHubService.sendCurrentSlideData(slideData);
+                };
+
+                $scope.getAsideContent = function (tag: string): string {
+                    var slideElement: HTMLElement = $window.Reveal.getCurrentSlide();
+                    //the casting here is to avoid problems with incorrect types in the core def file - Element.innerHtml does not exist, but should.
+                    var content: any = slideElement.querySelector('aside.' + tag);
+                    var contenthtml = content ? content.innerHTML : '';
+                    return JSON.stringify(contenthtml);
                 };
 
 
@@ -46,18 +54,12 @@ module Controllers {
                 //slide change event
                 $window.Reveal.addEventListener('slidechanged', function (event) {
                     event.preventDefault();
-                    $scope.sendCurrentSlideIndex({ indexh: event.indexh, indexv: event.indexv });
+                    var notesHtml = $scope.getAsideContent("notes");
+                    var supplementaryContentHtml = $scope.getAsideContent("supplementary-content");
+                    $scope.sendCurrentSlideData({ indexh: event.indexh, indexv: event.indexv, speakerNotes: notesHtml, supplementaryContent: supplementaryContentHtml });
                 });
 
 
-            }
-
-            getAsideContent(tag: string) {
-                var slideElement : HTMLElement = this.$window.Reveal.getCurrentSlide();
-                //the casting here is to avoid problems with incorrect types in the core def file - Element.innerHtml does not exist, but should.
-                var content :any = slideElement.querySelector('aside.' + tag);
-                var contenthtml = content ? content.innerHTML : '';
-                return JSON.stringify(contenthtml);
             }
 
         }
@@ -68,7 +70,7 @@ module Controllers {
     //    // Constructor
     //    constructor(private $scope) {
 
-    //        $scope.sendCurrentSlideIndex = function (slideData: Models.SlideData) {
+    //        $scope.sendCurrentSlideData = function (slideData: Models.SlideData) {
     //            alert("changing to " + slideData.h);
     //        }
 
@@ -90,6 +92,6 @@ var app = angular.module("slideView", []);
     //});
 
 app.value('$', $);
-app.factory('SignalRService', function ($, $rootScope) {return new Services.RTCDeckHubService($, $rootScope) });
+app.factory('RTCDeckHubService', function ($, $rootScope) {return new Services.RTCDeckHubService($, $rootScope, window) });
 app.controller('Controllers.SlideViewCtrl', Controllers.SlideViewCtrl);
 

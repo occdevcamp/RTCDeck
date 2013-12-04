@@ -4,12 +4,21 @@ var Controllers;
     // Class
     var SlideViewCtrl = (function () {
         // Constructor
-        function SlideViewCtrl($scope, SignalRService, $window) {
+        function SlideViewCtrl($scope, RTCDeckHubService, $window) {
             this.$scope = $scope;
-            this.SignalRService = SignalRService;
+            this.RTCDeckHubService = RTCDeckHubService;
             this.$window = $window;
-            $scope.sendCurrentSlideIndex = function (slideData) {
-                SignalRService.sendCurrentSlideData(slideData);
+            $scope.sendCurrentSlideData = function (slideData) {
+                RTCDeckHubService.sendCurrentSlideData(slideData);
+            };
+
+            $scope.getAsideContent = function (tag) {
+                var slideElement = $window.Reveal.getCurrentSlide();
+
+                //the casting here is to avoid problems with incorrect types in the core def file - Element.innerHtml does not exist, but should.
+                var content = slideElement.querySelector('aside.' + tag);
+                var contenthtml = content ? content.innerHTML : '';
+                return JSON.stringify(contenthtml);
             };
 
             //bind to events from server
@@ -43,17 +52,11 @@ var Controllers;
             //slide change event
             $window.Reveal.addEventListener('slidechanged', function (event) {
                 event.preventDefault();
-                $scope.sendCurrentSlideIndex({ indexh: event.indexh, indexv: event.indexv });
+                var notesHtml = $scope.getAsideContent("notes");
+                var supplementaryContentHtml = $scope.getAsideContent("supplementary-content");
+                $scope.sendCurrentSlideData({ indexh: event.indexh, indexv: event.indexv, speakerNotes: notesHtml, supplementaryContent: supplementaryContentHtml });
             });
         }
-        SlideViewCtrl.prototype.getAsideContent = function (tag) {
-            var slideElement = this.$window.Reveal.getCurrentSlide();
-
-            //the casting here is to avoid problems with incorrect types in the core def file - Element.innerHtml does not exist, but should.
-            var content = slideElement.querySelector('aside.' + tag);
-            var contenthtml = content ? content.innerHTML : '';
-            return JSON.stringify(contenthtml);
-        };
         return SlideViewCtrl;
     })();
     Controllers.SlideViewCtrl = SlideViewCtrl;
@@ -72,8 +75,8 @@ var app = angular.module("slideView", []);
 //    }
 //});
 app.value('$', $);
-app.factory('SignalRService', function ($, $rootScope) {
-    return new Services.RTCDeckHubService($, $rootScope);
+app.factory('RTCDeckHubService', function ($, $rootScope) {
+    return new Services.RTCDeckHubService($, $rootScope, window);
 });
 app.controller('Controllers.SlideViewCtrl', Controllers.SlideViewCtrl);
 //# sourceMappingURL=SlideView.js.map

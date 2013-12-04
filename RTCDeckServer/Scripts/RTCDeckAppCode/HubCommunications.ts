@@ -5,19 +5,16 @@ module Services {
 
     export class RTCDeckHubService {
         private proxy: HubProxy;
-        public sendCurrentSlideIndex: Function;
         public sendCurrentSlideData: Function;
         public SendPresentationNavigationCommand: Function;
 
-        constructor($, $rootScope) {
-            var connection: HubConnection = $.hubConnection();
-            this.proxy = connection.createHubProxy("RTCDeckHub");
+        constructor($, $rootScope, $window) {
+            var connection: HubConnection = $.hubConnection($window.HUB_URL);
+            this.proxy = connection.createHubProxy($window.HUB_NAME);
+
             connection.start();
 
             //sending
-            this.sendCurrentSlideIndex = function (slideData: Models.SlideData) {
-                this.proxy.invoke('SetCurrentSlide', slideData.indexh);
-            };
 
             this.sendCurrentSlideData = function (slideData: Models.SlideData) {
                 this.proxy.invoke('SetCurrentSlide', slideData);

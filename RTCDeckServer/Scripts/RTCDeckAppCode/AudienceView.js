@@ -4,9 +4,9 @@ var Controllers;
     // Class
     var AudienceViewCtrl = (function () {
         // Constructor
-        function AudienceViewCtrl($scope, SignalRService, $window) {
+        function AudienceViewCtrl($scope, RTCDeckHubService, $window) {
             this.$scope = $scope;
-            this.SignalRService = SignalRService;
+            this.RTCDeckHubService = RTCDeckHubService;
             this.$window = $window;
             $scope.updateSlideIndex = function (slideData) {
                 $scope.slideData = slideData;
@@ -27,8 +27,8 @@ var Controllers;
 var app = angular.module("audienceView", []);
 
 app.value('$', $);
-app.factory('SignalRService', function ($, $rootScope) {
-    return new Services.RTCDeckHubService($, $rootScope);
+app.factory('RTCDeckHubService', function ($, $rootScope) {
+    return new Services.RTCDeckHubService($, $rootScope, window);
 });
 app.controller('Controllers.AudienceViewCtrl', Controllers.AudienceViewCtrl);
 //# sourceMappingURL=AudienceView.js.map

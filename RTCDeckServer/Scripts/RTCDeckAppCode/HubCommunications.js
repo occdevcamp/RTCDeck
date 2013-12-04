@@ -2,16 +2,13 @@
 var Services;
 (function (Services) {
     var RTCDeckHubService = (function () {
-        function RTCDeckHubService($, $rootScope) {
-            var connection = $.hubConnection();
-            this.proxy = connection.createHubProxy("RTCDeckHub");
+        function RTCDeckHubService($, $rootScope, $window) {
+            var connection = $.hubConnection($window.HUB_URL);
+            this.proxy = connection.createHubProxy($window.HUB_NAME);
+
             connection.start();
 
             //sending
-            this.sendCurrentSlideIndex = function (slideData) {
-                this.proxy.invoke('SetCurrentSlide', slideData.indexh);
-            };
-
             this.sendCurrentSlideData = function (slideData) {
                 this.proxy.invoke('SetCurrentSlide', slideData);
             };
