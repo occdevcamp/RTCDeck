@@ -36,7 +36,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <Button
-                android:text="@string/slideUp"
                 android:background="@drawable/up_button"
                 android:layout_column="1"
                 android:id="@+id/slideUp" />
@@ -46,12 +45,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <Button
-                android:text="@string/slideLeft"
                 android:background="@drawable/left_button"
                 android:layout_column="0"
                 android:id="@+id/slideLeft" />
             <Button
-                android:text="@string/slideRight"
                 android:background="@drawable/right_button"
                 android:layout_column="2"
                 android:id="@+id/slideRight" />
@@ -61,7 +58,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <Button
-                android:text="@string/slideDown"
                 android:background="@drawable/down_button"
                 android:layout_column="1"
                 android:id="@+id/slideDown" />
