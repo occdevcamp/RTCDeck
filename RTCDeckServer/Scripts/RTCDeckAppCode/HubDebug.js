@@ -36,8 +36,8 @@
 			currentSlide.indexh = $('#setCurrentSlide_indexh').val();
 			currentSlide.indexv = $('#setCurrentSlide_indexv').val();
 			currentSlide.indexf = $('#setCurrentSlide_indexf').val();
-			currentSlide.speakerNotes = $('#setCurrentSlide_speakerNotes').val();
-			currentSlide.supplementaryContent = $('#setCurrentSlide_supplementaryContent').val();
+			currentSlide.speakerNotes = $('#setCurrentSlide_speakerNotes').val().replace(/\n/gi, '');
+			currentSlide.supplementaryContent = $('#setCurrentSlide_supplementaryContent').val().replace(/\n/gi, '');
 			// Call the Send method on the hub.
 			rtc.server.setCurrentSlide(currentSlide);
 		});
