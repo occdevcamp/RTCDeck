@@ -12,22 +12,27 @@ namespace RTCDeckState
 		/// Identifier in case we want to support more than one 
 		/// question per slide
 		/// </summary>
-		public string PollIdentifier { get; set; }
+		public string Identifier { get; set; }
 		
 		/// <summary>
 		/// Question to present
 		/// E.g. "Is this slide helpful?"
 		/// </summary>
-		public string PollQuestion { get; set; }
+		public string Question { get; set; }
 
 		/// <summary>
 		/// Type of poll
 		/// Anticipate using this to select a display template that is 
 		/// different for ThumbsUpThumbsDown / Radio / Multchoice etc
 		/// </summary>
-		public PollStyle PollStyle { get; set; }
+		public PollStyle Style { get; set; }
 
-		/// <su
+		/// <summary>
+		/// Poll options.
+		/// For Thumbs Up / Thumbs Down, we'll have two, both using image paths
+		/// For multi-choice polls we need more options. Simples.
+		/// </summary>
+		public List<PollOption> Options { get; set; }
 	}
 
 	/// <summary>
@@ -36,6 +41,7 @@ namespace RTCDeckState
 	/// or options text e.g. "Bananas", "Apples".
 	/// </summary>
 	public class PollOption {
+		public int OptionID { get; set; }
 		public string OptionImagePath {get; set;}
 		public string OptionText {get; set;}
 	}
@@ -45,5 +51,7 @@ namespace RTCDeckState
 		ThumbsUpThumbsDown,
 		// no further options yet but we'll probably want to 
 		// add support for Radio options / Multiple choice
+		// Radio,
+		// MultiChoice,
 	}
 }

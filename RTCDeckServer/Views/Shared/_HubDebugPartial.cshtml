@@ -8,6 +8,12 @@
             <label>Index F: <input type="number" id="setCurrentSlide_indexf" /></label> (for fragments? not yet supported by Reveal)<br />
             <label>Speaker Notes: <textarea id="setCurrentSlide_speakerNotes" rows="3" cols="30"></textarea></label><br />
             <label>Supplementary Content: <textarea id="setCurrentSlide_supplementaryContent" rows="3" cols="30"></textarea></label><br />
+            <label>Poll? <input type="checkbox" id="setCurrentSlide_simplepoll" /></label>
+            <p>
+                [Note, the model allows much more complicated polls, and indeed multiple polls per slide,
+                but for debug I just want to allow you to choose whether a simple thumbsup/thumbsdown poll
+                applies to this slide; largely so I don't have to write UI for it]
+            </p>
             <input type="button" id="setCurrentSlideButton" value="Set" />
         </div>
         <div id="RequestCurrentSlide" class="col-md-6">

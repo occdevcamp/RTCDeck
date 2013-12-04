@@ -1,5 +1,5 @@
 
-﻿$(function () {
+$(function () {
 	// Reference the auto-generated proxy for the hub.
 	var rtc = $.connection.RTCDeckHub;
 
@@ -12,7 +12,7 @@
 	rtc.client.notifyCurrentSlide = function (CurrentSlide) {
 		// Add the message to the page.
 		currentSlide = CurrentSlide;
-		$('#getCurrentSlide').text(JSON.stringify(CurrentSlide,null,4));
+		$('#getCurrentSlide').text(JSON.stringify(CurrentSlide, null, 4));
 		// Update input boxes too for debug
 		$('#setCurrentSlide_indexh').val(currentSlide.indexh);
 		$('#setCurrentSlide_indexv').val(currentSlide.indexv);
@@ -33,11 +33,24 @@
 		// Set up button methods
 		// send a "set current slide" request
 		$('#setCurrentSlideButton').click(function () {
-			currentSlide.indexh = $('#setCurrentSlide_indexh').val();
-			currentSlide.indexv = $('#setCurrentSlide_indexv').val();
-			currentSlide.indexf = $('#setCurrentSlide_indexf').val();
-			currentSlide.speakerNotes = $('#setCurrentSlide_speakerNotes').val().replace(/\n/gi, '');
-			currentSlide.supplementaryContent = $('#setCurrentSlide_supplementaryContent').val().replace(/\n/gi, '');
+			currentSlide = {
+				indexh: $('#setCurrentSlide_indexh').val(),
+				indexv: $('#setCurrentSlide_indexv').val(),
+				indexf: $('#setCurrentSlide_indexf').val(),
+				speakerNotes: $('#setCurrentSlide_speakerNotes').val().replace(/\n/gi, ''),
+				supplementaryContent: $('#setCurrentSlide_supplementaryContent').val().replace(/\n/gi, ''),
+				polls: [
+					{
+						Identifier: "PollForSlide1",
+						Question: "Is this slide helpful?",
+						Style: "ThumbsUpThumbsDown",
+						Options: [{ OptionID: 1, OptionText: "Yes" }, { OptionID: 2, OptionText: "No" }]
+					}
+				]
+			}
+			if(!$('#setCurrentSlide_simplepoll').is(':checked')) {
+				currentSlide.polls = null;
+			}
 			// Call the Send method on the hub.
 			rtc.server.setCurrentSlide(currentSlide);
 		});

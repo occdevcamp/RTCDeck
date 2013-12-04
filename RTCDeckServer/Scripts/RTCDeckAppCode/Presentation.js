@@ -4,7 +4,6 @@ var Services;
     var SignalRService = (function () {
         function SignalRService($, $rootScope, $window) {
             var connection = $.hubConnection($window.HUB_URL);
-            alert($window.HUB_URL);
             this.proxy = connection.createHubProxy($window.HUB_NAME);
             connection.start();
 

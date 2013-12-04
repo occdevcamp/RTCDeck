@@ -69,5 +69,7 @@ namespace RTCDeckServer.Hubs
 		{
 			Clients.All.receivePresentationNavigationCommand(command);
 		}
+
+
 	}
 }
