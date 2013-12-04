@@ -1,1 +1,1 @@
-{"version":3,"file":"Models.js","sourceRoot":"","sources":["Models.ts"],"names":[],"mappings":""}
+{"version":3,"file":"Models.js","sourceRoot":"","sources":["Models.ts"],"names":["Models","Models.Poll","Models.Poll.constructor"],"mappings":"AACA,SAAS;AACT,IAAO,MAAM;AAyBZ,CAzBD,UAAO,MAAM;IAYTA;QAAAC;;AAKCA,QAADA;AAACA,IAADA,CAACA,IAAAD;IALDA,mBAKCA;AAQLA,CAACA,2BAAA"}
