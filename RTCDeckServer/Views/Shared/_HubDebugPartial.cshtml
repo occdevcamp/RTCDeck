@@ -3,14 +3,17 @@
     <div class="row">
         <div id="SetCurrentSlide" class="col-md-6">
             <h4>Set Current Slide</h4>
-            <input type="number" id="setCurrentSlidePart1" /><input type="number" id="setCurrentSlidePart2" />
+            <label>Index H: <input type="number" id="setCurrentSlide_indexh" /></label><br />
+            <label>Index V: <input type="number" id="setCurrentSlide_indexv" /></label><br />
+            <label>Index F: <input type="number" id="setCurrentSlide_indexf" /></label> (for fragments? not yet supported by Reveal)<br />
+            <label>Speaker Notes: <input type="text" id="setCurrentSlide_speakerNotes" /></label><br />
+            <label>Supplementary Content: <input type="text" id="setCurrentSlide_supplementaryContent" /></label><br />
             <input type="button" id="setCurrentSlideButton" value="Set" />
         </div>
         <div id="RequestCurrentSlide" class="col-md-6">
             <h4>Request Current Slide</h4>
             <ul>
-                <li id="getCurrentSlidePart1"></li>
-                <li id="getCurrentSlidePart2"></li>
+                <li id="getCurrentSlide"></li>
             </ul>
         </div>
     </div>
@@ -29,23 +32,23 @@
     <div class="row">
         <div class="col-md-4">
             <h4>Server Side Methods</h4>
+            <p>Remember lower case first initial in Javascript</p>
             <dl>
-                <dt>SetCurrentSlide(int, int) (setCurrentSlide from JS)</dt>
-                <dd>Sets the indices for the current slide; broadcast to all at present via notifyCurrentSlide</dd>
+                <dt>SetCurrentSlide(CurrentSlide)</dt>
+                <dd>Tells the server what the current slide state is. CurrentSlide is defined in RTCDeckState\CurrentSlide.cs</dd>
 
-                <dt>RequestCurrentSlide() (requestCurrentSlide from JS)</dt>
-                <dd>Gets the indices for the current slide; expected to be used when connecting to a presentation to get initial state. Calls back to notifyCurrentSlide.</dd>
+                <dt>RequestCurrentSlide()</dt>
+                <dd>Asks the hub to broadcast the current slide state. Calls back to notifyCurrentSlide. For new or dropped connections.</dd>
 
-                <dt>SendPresentationNavigationCommand(command) (sendPresentationNavigationCommand from JS)</dt>
+                <dt>SendPresentationNavigationCommand(command)</dt>
                 <dd>Passes a navigation command from a client device to the main presentation. Not yet sure how only the presenter will interpret the message. Probably they'll be the only one listening.</dd>
-
             </dl>
         </div>
         <div class="col-md-4">
             <h4>Expected Client Side methods</h4>
             <dl>
-                <dt>notifyCurrentSlide</dt>
-                <dd>Informs a client what the current slide is</dd>
+                <dt>notifyCurrentSlide(CurrentSlide)</dt>
+                <dd>Informs a client what the current slide is. CurrentSlide is defined in RTCDeckState\CurrentSlide.cs</dd>
 
                 <dt>receivePresentationNavigationCommand(command)</dt>
                 <dd>Receives a navigation command for action.</dd>
@@ -55,7 +58,7 @@
             <h4>Server-side persistence</h4>
             <dl>
                 <dt>CurrentSlide</dt>
-                <dd>The current slide's indices are persisted.</dd>
+                <dd>The current slide's properties are persisted. CurrentSlide is defined in RTCDeckState\CurrentSlide.cs</dd>
             </dl>
             <p>NavigationCommands are transient: they are expected to cause a CurrentSlide update.</p>
         </div>

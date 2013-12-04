@@ -7,6 +7,7 @@ using System.Web;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
 using RTCDeckServer.Hubs;
+using RTCDeckState;
 
 namespace RTCDeckServer.Models
 {
@@ -20,23 +21,6 @@ namespace RTCDeckServer.Models
 			get { return _instance.Value; }
 		}
 
-		private int[] CurrentSlide { get; set; }
-
-		public void UpdateCurrentSlide(int part1, int part2)
-		{
-			if (CurrentSlide == null)
-				CurrentSlide = new int[] { 1, 0 };
-			else
-				CurrentSlide = new int[] { part1, part2 };
-		}
-
-		public int[] GetCurrentSlide()
-		{
-			if (CurrentSlide == null)
-				CurrentSlide = new int[] { 1, 0 };
-
-			return CurrentSlide;
-		}
-
+		public CurrentSlide CurrentSlide { get; set; }
 	}
 }
