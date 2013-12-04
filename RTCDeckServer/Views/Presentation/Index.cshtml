@@ -15,16 +15,16 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link rel="stylesheet" href="/Content/reveal/reveal.min.css">
-    <link rel="stylesheet" href="/Content/reveal/theme/source/occ.css" id="theme">
+    <link rel="stylesheet" href="@Url.Content("~/Content/reveal/reveal.min.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Content/reveal/theme/source/occ.css")" id="theme">
     <!-- For syntax highlighting -->
-    <link rel="stylesheet" href="/Content/reveal/lib/zenburn.css">
+    <link rel="stylesheet" href="@Url.Content("~/Content/reveal/lib/zenburn.css")">
     <!-- If the query includes 'print-pdf', use the PDF print sheet -->
     <script>
-        document.write('<link rel="stylesheet" href="/Content/reveal/print/' + (window.location.search.match(/print-pdf/gi) ? 'pdf' : 'paper') + '.css" type="text/css" media="print">');
+        document.write('<link rel="stylesheet" href="@Url.Content("~/Content/reveal/print/")' + (window.location.search.match(/print-pdf/gi) ? 'pdf' : 'paper') + '.css" type="text/css" media="print">');
     </script>
     <!--[if lt IE 9]>
-    <script src="lib/js/html5shiv.js"></script>
+    <script src="@Url.Content("~/Scripts/reveal/lib/js/html5shiv.js")"></script>
     <![endif]-->
 </head>
 <body ng-app="slideView">
@@ -34,7 +34,7 @@
     <div class="reveal" ng-controller="Controllers.SlideViewCtrl">
         <!-- Any section element inside of this container is displayed as a slide -->
         <div class=" slides">
-            <section class="title" data-background="/Content/reveal/theme/images/occbackground.png">
+            <section class="title" data-background="@Url.Content("~/Content/reveal/theme/images/occbackground.png")">
                 <h2>Show &amp; tell</h2>
                 <h1>Clear and engaging writing</h1>
             </section>
@@ -308,9 +308,9 @@
     </div>
 
 
-    <script src="/Scripts/reveal/lib/js/head.min.js"></script>
-    <script src="/Scripts/reveal/reveal.js"></script>
-    <script src="/Scripts/reveal/occtheme.js"></script>
+    <script src="@Url.Content("~/Scripts/reveal/lib/js/head.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/reveal/reveal.js")"></script>
+    <script src="@Url.Content("~/Scripts/reveal/occtheme.js")"></script>
     <script>
 
         // Full list of configuration options available here:
@@ -332,22 +332,22 @@
 
             // Optional libraries used to extend on reveal.js
             dependencies: [
-                { src: '/Scripts/reveal/lib/js/classList.js', condition: function () { return !document.body.classList; } },
-                { src: '/Scripts/reveal/plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
-                { src: '/Scripts/reveal/plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
-                { src: '/Scripts/reveal/plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } },
-                { src: '/Scripts/reveal/plugin/zoom-js/zoom.js', async: true, condition: function () { return !!document.body.classList; } },
-                { src: '/Scripts/reveal/plugin/notes/notes.js', async: true, condition: function () { return !!document.body.classList; } }
+                { src: '@Url.Content("~/Scripts/reveal/lib/js/classList.js")', condition: function () { return !document.body.classList; } },
+                { src: '@Url.Content("~/Scripts/reveal/plugin/markdown/marked.js")', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                { src: '@Url.Content("~/Scripts/reveal/plugin/markdown/markdown.js")', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                { src: '@Url.Content("~/Scripts/reveal/plugin/highlight/highlight.js")', async: true, callback: function () { hljs.initHighlightingOnLoad(); } },
+                { src: '@Url.Content("~/Scripts/reveal/plugin/zoom-js/zoom.js")', async: true, condition: function () { return !!document.body.classList; } },
+                { src: '@Url.Content("~/Scripts/reveal/plugin/notes/notes.js")', async: true, condition: function () { return !!document.body.classList; } }
             ]
         });
 
-        OccTheme.initialize();
+        OccTheme.initialize('@Url.Content("~/Content/")');
 
     </script>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/signalR")
     @Scripts.Render("~/bundles/angular")
-    <script src="/Scripts/RTCDeckAppCode/Presentation.js"></script>
+    <script src="@Url.Content("~/Scripts/RTCDeckAppCode/Presentation.js")"></script>
 
 
 </body>
