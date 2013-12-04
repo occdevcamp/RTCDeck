@@ -1,19 +1,25 @@
 /// <reference path="../typings/signalr/signalr.d.ts" />
 var Services;
 (function (Services) {
-    var SignalRService = (function () {
-        function SignalRService($, $rootScope, $window) {
-            var connection = $.hubConnection($window.HUB_URL);
-            this.proxy = connection.createHubProxy($window.HUB_NAME);
+    var RTCDeckHubService = (function () {
+        function RTCDeckHubService($, $rootScope) {
+            var connection = $.hubConnection();
+            this.proxy = connection.createHubProxy("RTCDeckHub");
             connection.start();
 
-            this.proxy.on("notifyCurrentSlide", function (indexh, indexv) {
-                $rootScope.$emit("acceptCurrentSlideIndex", { h: indexh, v: indexv });
-            });
-
+            //sending
             this.sendCurrentSlideIndex = function (slideData) {
                 this.proxy.invoke('SetCurrentSlide', slideData.h, slideData.v);
             };
+
+            this.sendCurrentSlideData = function (indexh, indexv, notesData) {
+                this.proxy.invoke('SetCurrentSlide', indexh, indexv, notesData);
+            };
+
+            //receiving
+            this.proxy.on("notifyCurrentSlide", function (indexh, indexv) {
+                $rootScope.$emit("acceptCurrentSlideIndex", { h: indexh, v: indexv });
+            });
 
             this.proxy.on("receivePresentationNavigationCommand", function (command) {
                 $rootScope.$emit("receivePresentationNavigationCommand", command);
@@ -22,9 +28,9 @@ var Services;
             //    this.proxy.invoke('SendPresentationNavigationCommand', command);
             //};
         }
-        return SignalRService;
+        return RTCDeckHubService;
     })();
-    Services.SignalRService = SignalRService;
+    Services.RTCDeckHubService = RTCDeckHubService;
 })(Services || (Services = {}));
 
 var Controllers;
@@ -35,8 +41,13 @@ var Controllers;
         function SlideViewCtrl($scope, SignalRService, $window) {
             this.$scope = $scope;
             this.SignalRService = SignalRService;
+            this.$window = $window;
             $scope.sendCurrentSlideIndex = function (slideData) {
                 SignalRService.sendCurrentSlideIndex(slideData);
+            };
+
+            $scope.sendCurrentSlideIndex = function (indexh, indexv, notesData) {
+                SignalRService.sendCurrentSlideData(indexh, indexv, notesData);
             };
 
             //bind to events from server
@@ -73,6 +84,14 @@ var Controllers;
                 $scope.sendCurrentSlideIndex({ h: event.indexh, v: event.indexv });
             });
         }
+        SlideViewCtrl.prototype.getAsideContent = function (tag) {
+            var slideElement = this.$window.Reveal.getCurrentSlide();
+
+            //the casting here is to avoid problems with incorrect types in the core def file - Element.innerHtml does not exist, but should.
+            var content = slideElement.querySelector('aside.' + tag);
+            var contenthtml = content ? content.innerHTML : '';
+            return JSON.stringify(contenthtml);
+        };
         return SlideViewCtrl;
     })();
     Controllers.SlideViewCtrl = SlideViewCtrl;
@@ -92,7 +111,7 @@ var app = angular.module("slideView", []);
 //});
 app.value('$', $);
 app.factory('SignalRService', function ($, $rootScope) {
-    return new Services.SignalRService($, $rootScope, window);
+    return new Services.RTCDeckHubService($, $rootScope);
 });
 app.controller('Controllers.SlideViewCtrl', Controllers.SlideViewCtrl);
 //# sourceMappingURL=Presentation.js.map
