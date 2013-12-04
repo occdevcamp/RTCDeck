@@ -71,15 +71,6 @@ namespace OxfordCC.DevCamp2013.AndroidDeckUI
             hubProxy.Invoke(SharedConstants.REQUEST_CURRENT_SLIDE);
             #endregion
 
-            //Get the latest state
-            //hubProxy.Invoke(SharedConstants.REQUEST_CURRENT_SLIDE);
-        }
-
-
-        protected override void OnResume()
-        {
-            base.OnRestart();
-            hubProxy.Invoke(SharedConstants.REQUEST_CURRENT_SLIDE);
         }
 
         void BindSlideCommand(IHubProxy hubProxy, Button button, string command)
