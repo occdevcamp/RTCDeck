@@ -11,10 +11,11 @@ using Android.Views.InputMethods;
 using Oxfordcc.DevCamp2013.AndroidDeckUI;
 using Android.Webkit;
 using RTCDeckState;
+using Android.Content.PM;
 
 namespace OxfordCC.DevCamp2013.AndroidDeckUI
 {
-    [Activity(Label = "Slide Control Application", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "Slide Control Application", MainLauncher = true, Icon = "@drawable/icon", ScreenOrientation = ScreenOrientation.Portrait, ConfigurationChanges=Android.Content.PM.ConfigChanges.Orientation)]
     public class MainActivity : Activity
     {
         /// <summary>
@@ -22,24 +23,27 @@ namespace OxfordCC.DevCamp2013.AndroidDeckUI
         /// </summary>
         private const string HUB_URL = "http://129.67.34.159/RTCDeckServer/signalr";
 
+        IHubProxy hubProxy;
+
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
 
             SetContentView(Resource.Layout.Main);
 
+            #region Get the Controls from the Layout
             var slideNumberText = FindViewById<TextView>(Resource.Id.slideNumberText);
             var upButton = FindViewById<Button>(Resource.Id.slideUp);
             var downButton = FindViewById<Button>(Resource.Id.slideDown);
             var leftButton = FindViewById<Button>(Resource.Id.slideLeft);
             var rightButton = FindViewById<Button>(Resource.Id.slideRight);
             var speakerNotes = FindViewById<WebView>(Resource.Id.speakerNotes);
-
+            #endregion
 
             #region Configure the SignalR bindings
             //Create the Hub Proxy connection
             HubConnection connection = new HubConnection(HUB_URL);
-            IHubProxy hubProxy = connection.CreateHubProxy(SharedConstants.HUB_NAME);
+            hubProxy = connection.CreateHubProxy(SharedConstants.HUB_NAME);
 
             //Receive slide numbers
             hubProxy.On<CurrentSlide>(
@@ -51,7 +55,7 @@ namespace OxfordCC.DevCamp2013.AndroidDeckUI
                     RunOnUiThread(() =>
                     {
                         slideNumberText.Text = String.Format("Slide {0}/{1}:{2}", currentSlide.indexh, currentSlide.indexv, currentSlide.indexf);
-                        speakerNotes.LoadData(currentSlide.speakerNotes, "text/html", null);
+                        speakerNotes.LoadData(String.Format("<html><body>{0}</body></html>",currentSlide.speakerNotes), "text/html", null);
                     });
                 }
             );
@@ -64,9 +68,19 @@ namespace OxfordCC.DevCamp2013.AndroidDeckUI
 
             ////Start the link with the hub
             connection.Start().Wait();
+            hubProxy.Invoke(SharedConstants.REQUEST_CURRENT_SLIDE);
             #endregion
+
+            //Get the latest state
+            //hubProxy.Invoke(SharedConstants.REQUEST_CURRENT_SLIDE);
         }
 
+
+        protected override void OnResume()
+        {
+            base.OnRestart();
+            hubProxy.Invoke(SharedConstants.REQUEST_CURRENT_SLIDE);
+        }
 
         void BindSlideCommand(IHubProxy hubProxy, Button button, string command)
         {
