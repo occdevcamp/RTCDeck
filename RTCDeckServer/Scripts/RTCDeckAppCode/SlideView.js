@@ -21,7 +21,14 @@ var Controllers;
                 return contenthtml;
             };
 
-            $scope.getQuestions = function () {
+            $scope.getPolls = function () {
+                var slideElement = $window.Reveal.getCurrentSlide();
+                var content = slideElement.querySelector('aside.polls');
+                var polls = $(content).data("polls");
+                if (!polls || typeof polls === "string") {
+                    return [];
+                }
+                return polls;
             };
 
             //bind to events from server
@@ -57,7 +64,13 @@ var Controllers;
                 event.preventDefault();
                 var notesHtml = $scope.getAsideContent("notes");
                 var supplementaryContentHtml = $scope.getAsideContent("supplementary");
-                $scope.sendCurrentSlideData({ indexh: event.indexh, indexv: event.indexv, speakerNotes: notesHtml, supplementaryContent: supplementaryContentHtml });
+                var polls = $scope.getPolls();
+                $scope.sendCurrentSlideData({ indexh: event.indexh, indexv: event.indexv, speakerNotes: notesHtml, supplementaryContent: supplementaryContentHtml, polls: polls });
+            });
+
+            //initialise
+            $scope.$parent.$on("connectionStarted", function (e) {
+                RTCDeckHubService.requestCurrentSlide();
             });
         }
         return SlideViewCtrl;

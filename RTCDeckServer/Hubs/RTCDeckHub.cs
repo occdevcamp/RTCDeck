@@ -53,9 +53,9 @@ namespace RTCDeckServer.Hubs
 			// presenter has logged in and "started" the presentation.
 			if (_presentationState.CurrentSlide == null)
 			{
-				// Initialise a started slide: always with indices 1,0,0
+				// Initialise a started slide: always with indices 0,0,0
 				CurrentSlide cs = new CurrentSlide();
-				cs.indexh = 1;
+				cs.indexh = 0;
 				cs.indexv = cs.indexf = 0;
 				_presentationState.CurrentSlide = cs;
 			}
