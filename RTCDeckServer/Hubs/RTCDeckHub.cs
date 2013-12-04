@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using Microsoft.AspNet.SignalR;
@@ -30,11 +31,13 @@ namespace RTCDeckServer.Hubs
 		/// </summary>
 		public void SetCurrentSlide(CurrentSlide currentSlide)
 		{
+            Debug.WriteLine(String.Format("Received Current Slide Request: {0}/{1}:{2}", _presentationState.CurrentSlide.indexf, _presentationState.CurrentSlide.indexh, _presentationState.CurrentSlide.indexv));
             _presentationState.CurrentSlide = currentSlide;
 
 			// do we continue to broadcast the whole slide object? or do we broadcast 
 			// individual pieces for more granularity? E.g. "Audience View" is just listening for "supplementary content" updates
 			// do we want to send partial updates?
+            Debug.WriteLine(String.Format("Notifying Current Slide to All: {0}/{1}:{2}", _presentationState.CurrentSlide.indexf, _presentationState.CurrentSlide.indexh, _presentationState.CurrentSlide.indexv));
             Clients.All.notifyCurrentSlide(_presentationState.CurrentSlide);
 		}
 		
@@ -44,6 +47,7 @@ namespace RTCDeckServer.Hubs
 		/// </summary>
 		public void RequestCurrentSlide()
 		{
+            Debug.WriteLine(String.Format("Received Request for Current Slide"));
 			// if we haven't yet got a current slide state, we'd better start the presentation
 			// MAY REWORK LATER: we might choose to leave this totally blank until the
 			// presenter has logged in and "started" the presentation.
@@ -57,7 +61,8 @@ namespace RTCDeckServer.Hubs
 			}
 
 			// tell anyone who cares what the current slide state is now
-			Clients.Caller.notifyCurrentSlide(_presentationState.CurrentSlide);
+            Debug.WriteLine(String.Format("Notifying Current Slide to Caller: {0}/{1}:{2}", _presentationState.CurrentSlide.indexf, _presentationState.CurrentSlide.indexh, _presentationState.CurrentSlide.indexv));
+            Clients.Caller.notifyCurrentSlide(_presentationState.CurrentSlide);
 		}
 
 		/// <summary>
@@ -67,7 +72,10 @@ namespace RTCDeckServer.Hubs
 		/// </summary>
 		public void SendPresentationNavigationCommand(string command)
 		{
-			Clients.All.receivePresentationNavigationCommand(command);
+            Debug.WriteLine(String.Format("Received Presentation Navigation Command: {0}", command));
+
+            Debug.WriteLine(String.Format("Transmitting Presentation Navigation Command to All: {0}", command));
+            Clients.All.receivePresentationNavigationCommand(command);
 		}
 	}
 }
