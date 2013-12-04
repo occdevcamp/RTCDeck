@@ -1,16 +1,13 @@
 /// <reference path='HubCommunications.ts'/>
 
-interface AudienceViewModel extends ng.IScope {
-    slideData: AudienceSlideData;
 
-    updateSlideIndex(slideData: AudienceSlideData);
+
+module Models {
+
+export interface AudienceViewModel extends ng.IScope {
+    slideData: Models.SlideData;
+    updateSlideIndex(slideData: Models.SlideData): void;
 }
-
-interface AudienceSlideData extends Models.SlideData {
-    indexh: number;
-    indexv: number;
-    speakerNotes: string;
-
 }
 
 module Controllers {
@@ -19,21 +16,27 @@ module Controllers {
     // Class
     export class AudienceViewCtrl {
         // Constructor
-        constructor(private $scope: AudienceViewModel, private RTCDeckHubService: Services.RTCDeckHubService, private $window) {
+        constructor(private $scope: Models.AudienceViewModel, private RTCDeckHubService: Services.RTCDeckHubService, private $window) {
 
-            $scope.updateSlideIndex = function (slideData: AudienceSlideData) {
-                $scope.slideData = slideData;
+
+            $scope.slideData = { indexh: 0, indexv: 0, supplementaryContent: "" };
+
+            $scope.updateSlideIndex = function (slideData: Models.SlideData) {
+                $scope.$apply(function () {
+                    $scope.slideData = slideData;
+                });
             };
+
             
             //bind to events from server
             $scope.$parent.$on("acceptCurrentSlideIndex", function (e, slideData: Models.SlideData) {
-                $scope.$apply(function () {
                     $scope.updateSlideIndex(slideData)
-                });
             });
 
-            
-
+            //initialise
+            $scope.$parent.$on("connectionStarted", function (e) {
+                RTCDeckHubService.requestCurrentSlide();
+            });
 
         }
 
@@ -42,7 +45,7 @@ module Controllers {
 
 }
 
-var app = angular.module("audienceView", []);
+var app = angular.module("audienceView", ["ngSanitize"]);
 
 
 app.value('$', $);

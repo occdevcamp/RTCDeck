@@ -8,15 +8,22 @@ var Controllers;
             this.$scope = $scope;
             this.RTCDeckHubService = RTCDeckHubService;
             this.$window = $window;
+            $scope.slideData = { indexh: 0, indexv: 0, supplementaryContent: "" };
+
             $scope.updateSlideIndex = function (slideData) {
-                $scope.slideData = slideData;
+                $scope.$apply(function () {
+                    $scope.slideData = slideData;
+                });
             };
 
             //bind to events from server
             $scope.$parent.$on("acceptCurrentSlideIndex", function (e, slideData) {
-                $scope.$apply(function () {
-                    $scope.updateSlideIndex(slideData);
-                });
+                $scope.updateSlideIndex(slideData);
+            });
+
+            //initialise
+            $scope.$parent.$on("connectionStarted", function (e) {
+                RTCDeckHubService.requestCurrentSlide();
             });
         }
         return AudienceViewCtrl;
@@ -24,7 +31,7 @@ var Controllers;
     Controllers.AudienceViewCtrl = AudienceViewCtrl;
 })(Controllers || (Controllers = {}));
 
-var app = angular.module("audienceView", []);
+var app = angular.module("audienceView", ["ngSanitize"]);
 
 app.value('$', $);
 app.factory('RTCDeckHubService', function ($, $rootScope) {

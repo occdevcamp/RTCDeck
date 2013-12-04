@@ -1,4 +1,4 @@
-@charset "UTF-8";
+﻿@charset "UTF-8";
 
 /*!
  * reveal.js
@@ -1844,7 +1844,9 @@ body {
 .reveal aside.notes {
 	display: none;
 }
-
+.reveal aside.supplementary {
+	display: none;
+}
 
 /*********************************************
  * ZOOM PLUGIN
