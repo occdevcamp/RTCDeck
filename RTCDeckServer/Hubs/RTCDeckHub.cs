@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using Microsoft.AspNet.SignalR;
@@ -30,12 +31,14 @@ namespace RTCDeckServer.Hubs
 		/// </summary>
 		public void SetCurrentSlide(CurrentSlide currentSlide)
 		{
+            Debug.WriteLine(String.Format("Received Current Slide Request: {0}/{1}:{2}", _presentationState.CurrentSlide.indexf, _presentationState.CurrentSlide.indexh, _presentationState.CurrentSlide.indexv));
 			_presentationState.CurrentSlide = currentSlide;
 
 			// do we continue to broadcast the whole slide object? or do we broadcast 
 			// individual pieces for more granularity? E.g. "Audience View" is just listening for "supplementary content" updates
 			// do we want to send partial updates?
-			Clients.Others.notifyCurrentSlide(_presentationState.CurrentSlide);
+            Debug.WriteLine(String.Format("Notifying Current Slide to All: {0}/{1}:{2}", _presentationState.CurrentSlide.indexf, _presentationState.CurrentSlide.indexh, _presentationState.CurrentSlide.indexv));
+            Clients.Others.notifyCurrentSlide(_presentationState.CurrentSlide);
 		}
 
 		/// <summary>
@@ -44,19 +47,21 @@ namespace RTCDeckServer.Hubs
 		/// </summary>
 		public void RequestCurrentSlide()
 		{
+            Debug.WriteLine(String.Format("Received Request for Current Slide"));
 			// if we haven't yet got a current slide state, we'd better start the presentation
 			// MAY REWORK LATER: we might choose to leave this totally blank until the
 			// presenter has logged in and "started" the presentation.
 			if (_presentationState.CurrentSlide == null)
 			{
-				// Initialise a started slide: always with indices 1,0,0
+				// Initialise a started slide: always with indices 0,0,0
 				CurrentSlide cs = new CurrentSlide();
-				cs.indexh = 1;
+				cs.indexh = 0;
 				cs.indexv = cs.indexf = 0;
 				_presentationState.CurrentSlide = cs;
 			}
 
 			// tell anyone who cares what the current slide state is now
+            Debug.WriteLine(String.Format("Notifying Current Slide to Caller: {0}/{1}:{2}", _presentationState.CurrentSlide.indexf, _presentationState.CurrentSlide.indexh, _presentationState.CurrentSlide.indexv));
 			Clients.Caller.notifyCurrentSlide(_presentationState.CurrentSlide);
 		}
 
@@ -67,7 +72,10 @@ namespace RTCDeckServer.Hubs
 		/// </summary>
 		public void SendPresentationNavigationCommand(string command)
 		{
-			Clients.Others.receivePresentationNavigationCommand(command);
+            Debug.WriteLine(String.Format("Received Presentation Navigation Command: {0}", command));
+
+            Debug.WriteLine(String.Format("Transmitting Presentation Navigation Command to All: {0}", command));
+            Clients.Others.receivePresentationNavigationCommand(command);
 		}
 
 		#region Polls

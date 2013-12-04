@@ -10,9 +10,9 @@ using Microsoft.AspNet.SignalR.Client;
 using Android.Views.InputMethods;
 using Oxfordcc.DevCamp2013.AndroidDeckUI;
 using Android.Webkit;
-using RTCDeckState;
 using Android.Content.PM;
 using Android.Util;
+using Oxfordcc.DevCamp2013.RTCHubClient;
 
 namespace OxfordCC.DevCamp2013.AndroidDeckUI
 {
@@ -24,7 +24,7 @@ namespace OxfordCC.DevCamp2013.AndroidDeckUI
         /// </summary>
         private const string HUB_URL = "http://129.67.34.159/RTCDeckServer/signalr";
 
-        IHubProxy hubProxy;
+        RTCHubProxy hubProxy;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -45,13 +45,12 @@ namespace OxfordCC.DevCamp2013.AndroidDeckUI
             //Create the Hub Proxy connection
             Log.Warn("AndroidDeckUI", String.Format("Creating Hub Connection to {0}", HUB_URL));
             HubConnection connection = new HubConnection(HUB_URL);
-            hubProxy = connection.CreateHubProxy(SharedConstants.HUB_NAME);
+            hubProxy = new RTCHubProxy(connection);
             Log.Warn("AndroidDeckUI", String.Format("Created Hub Connection to {0}", HUB_URL));
 
             //Receive slide numbers
-            hubProxy.On<CurrentSlide>(
-                SharedConstants.RECEIVE_CURRENT_SLIDE,
-                (currentSlide) =>
+            hubProxy.OnReceiveCurrentSlide(
+                currentSlide =>
                 {
                     Log.Warn("AndroidDeckUI", String.Format("Received slide: {0}/{1}:{2}", currentSlide.indexf, currentSlide.indexh, currentSlide.indexv));
                     //Need to ensure the changes are in the UI thread, 
@@ -59,7 +58,7 @@ namespace OxfordCC.DevCamp2013.AndroidDeckUI
                     RunOnUiThread(() =>
                     {
                         slideNumberText.Text = String.Format("Slide {0}/{1}:{2}", currentSlide.indexh, currentSlide.indexv, currentSlide.indexf);
-                        speakerNotes.LoadData(String.Format("<html><body>{0}</body></html>",currentSlide.speakerNotes), "text/html", null);
+                        speakerNotes.LoadData(String.Format("<html><head><style>body {{ font-size: 1.2em; }}</style></head><body>{0}</body></html>",currentSlide.speakerNotes), "text/html", null);
                         Log.Warn("AndroidDeckUI", String.Format("Processed slide: {0}/{1}:{2}", currentSlide.indexf, currentSlide.indexh, currentSlide.indexv));
                     });
                 }
@@ -71,25 +70,24 @@ namespace OxfordCC.DevCamp2013.AndroidDeckUI
             BindSlideCommand(hubProxy, leftButton, "left");
             BindSlideCommand(hubProxy, rightButton, "right");
 
-            ////Start the link with the hub
+            //Start the link with the hub
+            //Need to wait for this so that none of the events happen before we're ready
             connection.Start().Wait();
-            hubProxy.Invoke(SharedConstants.REQUEST_CURRENT_SLIDE);
+
+            //Get the current details
+            hubProxy.RequestCurrentSlide();
             #endregion
 
         }
 
-        void BindSlideCommand(IHubProxy hubProxy, Button button, string command)
+        void BindSlideCommand(RTCHubProxy hubProxy, Button button, string command)
         {
             button.Click += (sender, e) =>
             {
                 Log.Warn("AndroidDeckUI", String.Format("Invoking command: {0}", command));
-                hubProxy.Invoke<String[]>(SharedConstants.SEND_SLIDE_COMMAND, command).Wait();
-                Log.Warn("AndroidDeckUI",String.Format("Invoked command: {0}", command));
+                hubProxy.SendSlideCommand(command);
             };
 
-        }
-
-        public void SendSlideCommand(string command) {
         }
     }
 }

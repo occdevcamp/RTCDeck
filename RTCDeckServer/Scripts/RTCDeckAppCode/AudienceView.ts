@@ -4,10 +4,10 @@
 
 module Models {
 
-export interface AudienceViewModel extends ng.IScope {
-    slideData: Models.SlideData;
-    updateSlideIndex(slideData: Models.SlideData): void;
-}
+    export interface AudienceViewModel extends ng.IScope {
+        slideData: Models.SlideData;
+        updateSlideIndex(slideData: Models.SlideData): void;
+    }
 }
 
 module Controllers {
@@ -30,7 +30,7 @@ module Controllers {
             
             //bind to events from server
             $scope.$parent.$on("acceptCurrentSlideIndex", function (e, slideData: Models.SlideData) {
-                    $scope.updateSlideIndex(slideData)
+                $scope.updateSlideIndex(slideData);
             });
 
             //initialise

@@ -164,6 +164,10 @@
       <Project>{69e45995-9d4f-41b0-b09b-4ad1c44cd8d7}</Project>
       <Name>RTCDeckState</Name>
     </ProjectReference>
+    <ProjectReference Include="..\RTCHubProxy\RTCHubClient.csproj">
+      <Project>{4495d87f-2a9c-4f36-b0b3-9feea5a6e7d9}</Project>
+      <Name>RTCHubClient</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
