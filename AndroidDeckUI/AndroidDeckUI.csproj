@@ -59,6 +59,82 @@
     <None Include="Assets\AboutAssets.txt" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidResource Include="Resources\drawable-hdpi\down_on.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\down.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\down_button.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable-hdpi\Icon.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\left_on.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\left.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\left_button.xml" />
+    <AndroidResource Include="Resources\drawable-hdpi\right_on.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\right.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\right_button.xml" />
+    <AndroidResource Include="Resources\drawable-hdpi\up_on.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\up.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\up_button.xml" />
+    <AndroidResource Include="Resources\drawable-ldpi\down_on.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\down.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\down_button.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable-ldpi\Icon.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\left_on.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\left.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\left_button.xml" />
+    <AndroidResource Include="Resources\drawable-ldpi\right_on.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\right.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\right_button.xml" />
+    <AndroidResource Include="Resources\drawable-ldpi\up_on.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\up.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\up_button.xml" />
+    <AndroidResource Include="Resources\drawable-mdpi\down_on.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\down.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\down_button.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable-mdpi\Icon.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\left_on.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\left.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\left_button.xml" />
+    <AndroidResource Include="Resources\drawable-mdpi\right_on.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\right.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\right_button.xml" />
+    <AndroidResource Include="Resources\drawable-mdpi\up_on.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\up.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\up_button.xml" />
+    <AndroidResource Include="Resources\drawable-xhdpi\down_on.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\down.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\down_button.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable-xhdpi\Icon.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\left_on.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\left.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\left_button.xml" />
+    <AndroidResource Include="Resources\drawable-xhdpi\right_on.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\right.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\right_button.xml" />
+    <AndroidResource Include="Resources\drawable-xhdpi\up_on.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\up.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\up_button.xml" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\down_on.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\down.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\down_button.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable-xxhdpi\Icon.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\left_on.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\left.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\left_button.xml" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\right_on.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\right.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\right_button.xml" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\up_on.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\up.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\up_button.xml" />
+    <AndroidResource Include="Resources\drawable\Icon.png" />
     <AndroidResource Include="Resources\layout\Main.axml" />
   </ItemGroup>
   <ItemGroup>
@@ -67,15 +143,27 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Icon.png" />
+    <Content Include="Properties\AndroidManifest.xml" />
+    <AndroidResource Include="Resources\drawable\down_on.png" />
+    <AndroidResource Include="Resources\drawable\down.png" />
+    <AndroidResource Include="Resources\drawable\down_button.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable\left_on.png" />
+    <AndroidResource Include="Resources\drawable\left.png" />
+    <AndroidResource Include="Resources\drawable\left_button.xml" />
+    <AndroidResource Include="Resources\drawable\right_on.png" />
+    <AndroidResource Include="Resources\drawable\right.png" />
+    <AndroidResource Include="Resources\drawable\right_button.xml" />
+    <AndroidResource Include="Resources\drawable\up_on.png" />
+    <AndroidResource Include="Resources\drawable\up.png" />
+    <AndroidResource Include="Resources\drawable\up_button.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Properties\AndroidManifest.xml" />
-    <AndroidResource Include="Resources\drawable-hdpi\Icon.png" />
-    <AndroidResource Include="Resources\drawable-ldpi\Icon.png" />
-    <AndroidResource Include="Resources\drawable-mdpi\Icon.png" />
-    <AndroidResource Include="Resources\drawable-xhdpi\Icon.png" />
-    <AndroidResource Include="Resources\drawable-xxhdpi\Icon.png" />
+    <ProjectReference Include="..\RTCDeckState\RTCDeckState.csproj">
+      <Project>{69e45995-9d4f-41b0-b09b-4ad1c44cd8d7}</Project>
+      <Name>RTCDeckState</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

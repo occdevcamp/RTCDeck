@@ -37,10 +37,9 @@
             android:layout_height="match_parent">
             <Button
                 android:text="@string/slideUp"
+                android:background="@drawable/up_button"
                 android:layout_column="1"
-                android:id="@+id/slideUp"
-                android:layout_height="72dip"
-                android:layout_width="72dip" />
+                android:id="@+id/slideUp" />
         </TableRow>
         <TableRow
             android:id="@+id/tableRow2"
@@ -48,16 +47,14 @@
             android:layout_height="match_parent">
             <Button
                 android:text="@string/slideLeft"
+                android:background="@drawable/left_button"
                 android:layout_column="0"
-                android:id="@+id/slideLeft"
-                android:layout_height="72dip"
-                android:layout_width="72dip" />
+                android:id="@+id/slideLeft" />
             <Button
                 android:text="@string/slideRight"
+                android:background="@drawable/right_button"
                 android:layout_column="2"
-                android:id="@+id/slideRight"
-                android:layout_height="72dip"
-                android:layout_width="72dip" />
+                android:id="@+id/slideRight" />
         </TableRow>
         <TableRow
             android:id="@+id/tableRow3"
@@ -65,10 +62,9 @@
             android:layout_height="match_parent">
             <Button
                 android:text="@string/slideDown"
+                android:background="@drawable/down_button"
                 android:layout_column="1"
-                android:id="@+id/slideDown"
-                android:layout_width="72dip"
-                android:layout_height="72dip" />
+                android:id="@+id/slideDown" />
         </TableRow>
     </TableLayout>
     <LinearLayout
