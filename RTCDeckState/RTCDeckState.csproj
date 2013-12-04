@@ -39,7 +39,6 @@
     <Compile Include="PollAnswer.cs" />
     <Compile Include="CurrentSlide.cs" />
     <Compile Include="Poll.cs" />
-    <Compile Include="PollAnswerSummary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SharedConstants.cs" />
   </ItemGroup>

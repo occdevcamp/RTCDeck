@@ -11,7 +11,7 @@ namespace RTCDeckState
 		/// <summary>
 		/// unique ID for poll answer 
 		/// </summary>
-		public Guid AnswerID { get { return Guid.NewGuid(); } }
+		public Guid AnswerID = Guid.NewGuid();
 
 		/// <summary>
 		/// The poll's identifier; defined in slide config, and 
