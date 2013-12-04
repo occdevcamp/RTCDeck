@@ -8,7 +8,7 @@ var Services;
 
             //sending
             this.sendCurrentSlideIndex = function (slideData) {
-                this.proxy.invoke('SetCurrentSlide', slideData.h, slideData.v);
+                this.proxy.invoke('SetCurrentSlide', slideData.indexh, slideData.v);
             };
 
             this.sendCurrentSlideData = function (indexh, indexv, notesData) {
