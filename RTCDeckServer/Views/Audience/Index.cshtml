@@ -23,8 +23,24 @@
 <body ng-controller="Controllers.AudienceViewCtrl">
     <div>
         Slide ({{slideData.indexh}} , {{slideData.indexv}})
-
         <div ng-bind-html="slideData.supplementaryContent"></div>
+
+        <div>
+            <ul ng-repeat="poll in slideData.polls">
+                <li>
+                        {{poll.Question}}
+                        <ul>
+                            <li ng-repeat="option in poll.Options">
+                                <a href="#" ng-click="selectAnswer(poll,option)"> @*ng-class="{selected : isSelected(poll,option)}">*@
+                                    <img src="{{option.OptionImagePath}}" alt="{{option.OptionText}}">
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
     </div>
 </body>
 </html>

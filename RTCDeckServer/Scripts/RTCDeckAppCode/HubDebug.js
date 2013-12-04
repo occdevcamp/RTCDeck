@@ -17,8 +17,8 @@ $(function () {
 		$('#setCurrentSlide_indexh').val(currentSlide.indexh);
 		$('#setCurrentSlide_indexv').val(currentSlide.indexv);
 		$('#setCurrentSlide_indexf').val(currentSlide.indexf);
-		$('#setCurrentSlide_speakerNotes').val(currentSlide.speakerNotes.replace(/\<br \/\>/gi, '\n'));
-		$('#setCurrentSlide_supplementaryContent').val(currentSlide.supplementaryContent.replace(/\<br \/\>/gi, '\n'));
+		$('#setCurrentSlide_speakerNotes').val(currentSlide.speakerNotes ? currentSlide.speakerNotes.replace(/\<br \/\>/gi, '\n'): "");
+		$('#setCurrentSlide_supplementaryContent').val(currentSlide.supplementaryContent ? currentSlide.supplementaryContent.replace(/\<br \/\>/gi, '\n') : "");
 	};
 
 	// Function that the hub can call back to display a new navigation command
