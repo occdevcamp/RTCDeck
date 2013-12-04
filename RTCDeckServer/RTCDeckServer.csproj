@@ -589,6 +589,12 @@
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\signalr\signalr.d.ts" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RTCDeckState\RTCDeckState.csproj">
+      <Project>{69e45995-9d4f-41b0-b09b-4ad1c44cd8d7}</Project>
+      <Name>RTCDeckState</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
