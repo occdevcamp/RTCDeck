@@ -2,7 +2,7 @@
 
 	function initialize() {
 		var wrapper = document.querySelector( '.reveal' );
-		var logo = createSingletonNode(wrapper, 'div', 'logo', '<img src="css/theme/images/occlogo.png" alt="OCC Logo" />');
+		var logo = createSingletonNode(wrapper, 'div', 'logo', '<img src="../Content/reveal/theme/images/occlogo.png" alt="OCC Logo" />');
 		var border = createSingletonNode(wrapper, 'div', 'bottom-border', '');
 	}
 
