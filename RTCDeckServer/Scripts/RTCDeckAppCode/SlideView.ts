@@ -1,7 +1,7 @@
 
 /// <reference path='HubCommunications.ts'/>
 
-/// <reference path='Models.ts'/>
+
 
 module Controllers {
 
@@ -11,12 +11,9 @@ module Controllers {
             constructor(private $scope, private SignalRService: Services.RTCDeckHubService, private $window) {
 
                 $scope.sendCurrentSlideIndex = function (slideData: Models.SlideData) {
-                    SignalRService.sendCurrentSlideIndex(slideData);
+                    SignalRService.sendCurrentSlideData(slideData);
                 };
 
-                $scope.sendCurrentSlideIndex = function (indexh :number, indexv:number, notesData :string) {
-                    SignalRService.sendCurrentSlideData(indexh , indexv, notesData);
-                };
 
                 //bind to events from server
                 $scope.$parent.$on("acceptCurrentSlideIndex", function (e, slideData: Models.SlideData) {
@@ -49,7 +46,7 @@ module Controllers {
                 //slide change event
                 $window.Reveal.addEventListener('slidechanged', function (event) {
                     event.preventDefault();
-                    $scope.sendCurrentSlideIndex({ h: event.indexh, v: event.indexv });
+                    $scope.sendCurrentSlideIndex({ indexh: event.indexh, indexv: event.indexv });
                 });
 
 

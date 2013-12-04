@@ -1,3 +1,6 @@
+
+/// <reference path='Models.ts'/>
+
 module Services {
 
     export class RTCDeckHubService {
@@ -13,16 +16,16 @@ module Services {
 
             //sending
             this.sendCurrentSlideIndex = function (slideData: Models.SlideData) {
-                this.proxy.invoke('SetCurrentSlide', slideData.indexh, slideData.v);
+                this.proxy.invoke('SetCurrentSlide', slideData.indexh);
             };
 
-            this.sendCurrentSlideData = function (indexh: number, indexv: number, notesData: string) {
-                this.proxy.invoke('SetCurrentSlide', indexh, indexv, notesData);
+            this.sendCurrentSlideData = function (slideData: Models.SlideData) {
+                this.proxy.invoke('SetCurrentSlide', slideData);
             }
 
             //receiving
-            this.proxy.on("notifyCurrentSlide", function (indexh: number, indexv: number) {
-                $rootScope.$emit("acceptCurrentSlideIndex", { h: indexh, v: indexv });
+            this.proxy.on("notifyCurrentSlide", function (slideData: Models.SlideData) {
+                $rootScope.$emit("acceptCurrentSlideIndex", slideData);
             });
 
             this.proxy.on("receivePresentationNavigationCommand", function (command: string) {

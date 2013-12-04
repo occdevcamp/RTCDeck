@@ -3,6 +3,7 @@
   <metadata>
     <id>jquery.TypeScript.DefinitelyTyped</id>
     <version>0.4.2</version>
+    <title>jquery.TypeScript.DefinitelyTyped</title>
     <authors>Jason Jarrett</authors>
     <owners>Jason Jarrett</owners>
     <licenseUrl>https://github.com/DefinitelyTyped/NugetAutomation/blob/master/LICENSE.MIT</licenseUrl>
@@ -12,6 +13,7 @@
     <description>TypeScript Definitions (d.ts) for jquery. Generated based off the DefinitelyTyped repository [git commit: 7f90ac8db394d9c3096c071ad0b1418bcb391fb4]. http://github.com/DefinitelyTyped</description>
     <releaseNotes />
     <copyright>Copyright 2013</copyright>
+    <language />
     <tags>TypeScript JavaScript</tags>
   </metadata>
 </package>

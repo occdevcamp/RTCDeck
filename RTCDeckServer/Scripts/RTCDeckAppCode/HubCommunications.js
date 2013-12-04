@@ -1,3 +1,4 @@
+/// <reference path='Models.ts'/>
 var Services;
 (function (Services) {
     var RTCDeckHubService = (function () {
@@ -8,16 +9,16 @@ var Services;
 
             //sending
             this.sendCurrentSlideIndex = function (slideData) {
-                this.proxy.invoke('SetCurrentSlide', slideData.indexh, slideData.v);
+                this.proxy.invoke('SetCurrentSlide', slideData.indexh);
             };
 
-            this.sendCurrentSlideData = function (indexh, indexv, notesData) {
-                this.proxy.invoke('SetCurrentSlide', indexh, indexv, notesData);
+            this.sendCurrentSlideData = function (slideData) {
+                this.proxy.invoke('SetCurrentSlide', slideData);
             };
 
             //receiving
-            this.proxy.on("notifyCurrentSlide", function (indexh, indexv) {
-                $rootScope.$emit("acceptCurrentSlideIndex", { h: indexh, v: indexv });
+            this.proxy.on("notifyCurrentSlide", function (slideData) {
+                $rootScope.$emit("acceptCurrentSlideIndex", slideData);
             });
 
             this.proxy.on("receivePresentationNavigationCommand", function (command) {

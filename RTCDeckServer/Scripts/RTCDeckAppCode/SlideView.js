@@ -1,5 +1,4 @@
 /// <reference path='HubCommunications.ts'/>
-/// <reference path='Models.ts'/>
 var Controllers;
 (function (Controllers) {
     // Class
@@ -10,11 +9,7 @@ var Controllers;
             this.SignalRService = SignalRService;
             this.$window = $window;
             $scope.sendCurrentSlideIndex = function (slideData) {
-                SignalRService.sendCurrentSlideIndex(slideData);
-            };
-
-            $scope.sendCurrentSlideIndex = function (indexh, indexv, notesData) {
-                SignalRService.sendCurrentSlideData(indexh, indexv, notesData);
+                SignalRService.sendCurrentSlideData(slideData);
             };
 
             //bind to events from server
@@ -48,7 +43,7 @@ var Controllers;
             //slide change event
             $window.Reveal.addEventListener('slidechanged', function (event) {
                 event.preventDefault();
-                $scope.sendCurrentSlideIndex({ h: event.indexh, v: event.indexv });
+                $scope.sendCurrentSlideIndex({ indexh: event.indexh, indexv: event.indexv });
             });
         }
         SlideViewCtrl.prototype.getAsideContent = function (tag) {

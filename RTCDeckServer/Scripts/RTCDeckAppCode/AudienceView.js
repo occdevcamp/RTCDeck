@@ -1,5 +1,4 @@
 /// <reference path='HubCommunications.ts'/>
-/// <reference path='Models.ts'/>
 var Controllers;
 (function (Controllers) {
     // Class

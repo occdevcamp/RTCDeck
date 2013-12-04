@@ -1,5 +1,4 @@
 /// <reference path='HubCommunications.ts'/>
-/// <reference path='Models.ts'/>
 
 interface AudienceViewModel extends ng.IScope {
     slideData: AudienceSlideData;
@@ -7,10 +6,10 @@ interface AudienceViewModel extends ng.IScope {
     updateSlideIndex(slideData: AudienceSlideData);
 }
 
-interface AudienceSlideData {
+interface AudienceSlideData extends Models.SlideData {
     indexh: number;
     indexv: number;
-    notesHtml: string;
+    speakerNotes: string;
 
 }
 
