@@ -17,8 +17,8 @@ $(function () {
 		$('#setCurrentSlide_indexh').val(currentSlide.indexh);
 		$('#setCurrentSlide_indexv').val(currentSlide.indexv);
 		$('#setCurrentSlide_indexf').val(currentSlide.indexf);
-		$('#setCurrentSlide_speakerNotes').val(currentSlide.speakerNotes);
-		$('#setCurrentSlide_supplementaryContent').val(currentSlide.supplementaryContent);
+		$('#setCurrentSlide_speakerNotes').val(currentSlide.speakerNotes.replace(/\<br \/\>/gi, '\n'));
+		$('#setCurrentSlide_supplementaryContent').val(currentSlide.supplementaryContent.replace(/\<br \/\>/gi, '\n'));
 	};
 
 	// Function that the hub can call back to display a new navigation command
@@ -37,12 +37,18 @@ $(function () {
 				indexh: $('#setCurrentSlide_indexh').val(),
 				indexv: $('#setCurrentSlide_indexv').val(),
 				indexf: $('#setCurrentSlide_indexf').val(),
-				speakerNotes: $('#setCurrentSlide_speakerNotes').val().replace(/\n/gi, ''),
-				supplementaryContent: $('#setCurrentSlide_supplementaryContent').val().replace(/\n/gi, ''),
+				speakerNotes: $('#setCurrentSlide_speakerNotes').val().replace(/\n/gi, '<br />'),
+				supplementaryContent: $('#setCurrentSlide_supplementaryContent').val().replace(/\n/gi, '<br />'),
 				polls: [
 					{
 						Identifier: "PollForSlide1",
 						Question: "Is this slide helpful?",
+						Style: "ThumbsUpThumbsDown",
+						Options: [{ OptionID: 1, OptionText: "Yes" }, { OptionID: 2, OptionText: "No" }]
+					},
+					{
+						Identifier: "AnotherPollForSlide1",
+						Question: "Do you like bananas?",
 						Style: "ThumbsUpThumbsDown",
 						Options: [{ OptionID: 1, OptionText: "Yes" }, { OptionID: 2, OptionText: "No" }]
 					}
@@ -59,6 +65,27 @@ $(function () {
 			rtc.server.sendPresentationNavigationCommand($('#navigationCommand').val());
 			$('#navigationCommand').val('');
 		});
+		// send a poll answer
+		$('#pollAnswer_send').click(function () {
+			if (!$('#pollAnswer_yesno').is(':checked')) {
+				pollAnswer = {
+					PollIdentifier: $('#pollAnswer_pollIdentifier').val(),
+					ASASDSelectedOptions: [{ OptionID: 1, OptionText: "Yes" }]
+				}
+			}
+			else {
+				pollAnswer = {
+					PollIdentifier: $('#pollAnswer_pollIdentifier').val(),
+					ASDASDSelectedOptions: [{ OptionID: 2, OptionText: "No" }]
+				}
+			}
+			rtc.server.addPollAnswer(pollAnswer).fail(function (e) {
+				if (e.source === 'HubException') {
+					console.log(e.message + ' : ' + e.data);
+					alert(JSON.stringify(e));
+				}
+			});
+		})
 
 		// call for initial state: someone else might already be watching/driving the presentation so don't assume 1,0
 		rtc.server.requestCurrentSlide();
