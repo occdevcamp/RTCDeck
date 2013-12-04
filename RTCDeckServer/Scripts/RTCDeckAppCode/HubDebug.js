@@ -1,3 +1,4 @@
+
 ﻿$(function () {
 	// Reference the auto-generated proxy for the hub.
 	var rtc = $.connection.RTCDeckHub;

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Owin;
 using Owin;
+using Microsoft.AspNet.SignalR;
 
 [assembly: OwinStartupAttribute(typeof(RTCDeckServer.Startup))]
 namespace RTCDeckServer
@@ -9,7 +10,13 @@ namespace RTCDeckServer
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
-			app.MapSignalR();
+
+            var hubConfiguration = new HubConfiguration();
+#if DEBUG
+            hubConfiguration.EnableDetailedErrors = true;
+#endif
+            app.MapSignalR(hubConfiguration);
+
         }
     }
 }

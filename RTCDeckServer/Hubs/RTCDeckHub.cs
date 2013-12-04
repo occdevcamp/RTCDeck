@@ -37,7 +37,7 @@ namespace RTCDeckServer.Hubs
 			// do we want to send partial updates?
 			Clients.All.notifyCurrentSlide(_presentationState.CurrentSlide);
 		}
-
+		
 		/// <summary>
 		/// can be requested at any time by any device for a current slide state
 		/// expected to be used when a device starts up

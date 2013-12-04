@@ -1,0 +1,196 @@
+/**
+ * An OCC theme for reveal.js presentations, similar to the simple theme.
+ *
+ * This theme is Copyright (C) 2013 Oxford Computer Consultants Ltd.
+ * reveal.js is Copyright (C) 2011-2012 Hakim El Hattab, http://hakim.se
+ */
+
+
+// Default mixins and settings -----------------
+@import "../template/mixins";
+@import "../template/settings";
+// ---------------------------------------------
+
+
+// OCC colours
+$darkblue: rgb(0,91,164);
+$midblue: rgb(2,145,211);
+$lightblue: rgb(132, 208, 244);
+$red: #ff2c2d;
+$green: rgb(0,176,80);
+
+// Background of the presentation
+$backgroundColor: #fff;
+
+// Primary/body text
+$mainFont: Arial, sans-serif;
+$mainFontSize: 48px;
+$mainColor: #000;
+
+// Headings
+$headingMargin: 0 0 20px 0;
+$headingFont: Arial, sans-serif;
+$headingColor: rgb(0, 92, 161);
+$headingLineHeight: 0.9em;
+$headingLetterSpacing: -0.03em;
+$headingTextTransform: none;
+$headingTextShadow: none;
+$heading1TextShadow: $headingTextShadow;
+
+// Links and actions
+$linkColor: $midblue;
+//$linkColorHover: lighten( $linkColor, 20% );
+
+// Text selection
+$selectionBackgroundColor: rgba(0, 0, 0, 0.99);
+//$selectionColor: #fff;
+
+
+// Theme template ------------------------------
+@import "../template/theme";
+// ---------------------------------------------
+
+
+.reveal {
+	// Headings --------------------------------
+	h1 { font-size: 2.3em; }
+	h2 { font-size: 1.5em; }
+	h3 { font-size: 1.1em; }
+	h4 { font-size: 1.0em; }
+
+	h1, h2, h3, h4 {
+		font-weight: bold;
+	}
+
+	section.title {
+		h1 {
+			line-height: 1.1em;
+		}
+		h2 {
+			margin-top: 2em;
+			text-transform: uppercase;
+			font-size: 0.8em;
+			font-weight: normal;
+			color: $lightblue;
+		}
+	}
+
+	// Lists -----------------------------------
+	ul {
+		list-style: none;
+		margin: 0;
+		padding-left: 1em; 
+		text-indent: -1em;
+		&>li:before {
+			content: "\002022";
+			font-size: 1.1em;
+			color: $midblue;
+			margin-right: 0.5em;
+		}
+		ul {
+			list-style: none;
+			&>li:before {
+				color: $lightblue;
+			}
+			ul {
+				list-style: none;
+				&>li:before {
+					color: $darkblue;
+				}
+			}
+		}
+	}
+
+	ol {
+		text-indent: 0;
+	}
+
+	ul ul,
+	ol ol,
+	ol ul {
+		margin-left: 0;
+		font-size: 0.85em;
+	}
+
+	ul ol {
+		margin-left: 1.2em;
+		font-size: 0.85em;
+	}
+
+	// Quotes ----------------------------------
+	blockquote {
+		box-shadow: none;
+		text-align: center;
+		font-style: normal;
+		font-size: 1.5em;
+		line-height: 1.1em;
+	}
+
+	.blockquote-attribution {
+		text-align: center;
+		font-size: 0.7em;
+		margin-top: 1em;
+		&:before {
+			content: "\002014";
+			margin-right: 0.2em;
+		}
+		&:after {
+			content: "\002014";
+			margin-left: 0.2em;
+		}
+	}
+
+	// General ---------------------------------
+	letter-spacing: 0em;
+
+	.slides {
+		text-align: left;
+		section {
+			line-height: 1.3em;
+		}
+	}
+
+	.separate {
+		margin-top: 1em;
+	}
+
+	.indent {
+		text-indent: 1em;
+	}
+
+	.correct {
+		color: $green;
+	}
+
+	.incorrect {
+		color: $red;
+	}
+
+	.smaller {
+		font-size: 0.85em;
+		line-height: 1.4em;
+	}
+
+	// Logo in the bottom left of the slides
+	&>.logo {
+		position: absolute;
+		bottom: 17px;
+		left: 10px;
+	}
+
+	// Gradient bar at the bottom of the slides
+	&>.bottom-border {
+		position: absolute;
+		bottom: 3px;
+		height: 12px;
+		width: 100%;
+		background: none; // Old browsers
+		background: -moz-linear-gradient(left, $darkblue 0%, $midblue 50%, rgb(132,208,244) 100%); // FF3.6+
+		background: -webkit-gradient(linear, left top, right top, color-stop(0%,$darkblue), color-stop(50%,$midblue), color-stop(100%,rgb(132,208,244))); // Chrome, Safari4+
+		background: -webkit-linear-gradient(left, $darkblue 0%, $midblue 50%, rgb(132,208,244) 100%); // Chrome10+, Safari5.1+
+		background: -o-linear-gradient(left, $darkblue 0%, $midblue 50%, rgb(132,208,244) 100%); // Opera 11.10+
+		background: -ms-linear-gradient(left, $darkblue 0%, $midblue 50%, rgb(132,208,244) 100%); // IE10+
+		background: linear-gradient(to right, $darkblue 0%, $midblue 50%, rgb(132,208,244) 100%); // W3C
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#005ba4', endColorstr='#84d0f4',GradientType=1 ); // IE6-9
+	}
+}
