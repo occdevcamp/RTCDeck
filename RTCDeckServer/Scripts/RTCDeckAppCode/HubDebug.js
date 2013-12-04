@@ -27,6 +27,28 @@ $(function () {
 		$('#receivePresentationNavigationCommandCommand').text(command);
 	}
 
+	// gets a set of raw poll data for debug purposes
+	rtc.client.debug_RawPollAnswers = function (pollAnswers) {
+		$('#pollAnswers_rawdata').empty();
+		for (answer in pollAnswers) {
+			li = '<li><strong>' + pollAnswers[answer].PollIdentifier + '</strong> <em>' + pollAnswers[answer].AnswerID + '</em> '
+				+ pollAnswers[answer].SelectedOptions[0].OptionText + '</li>';
+			$('#pollAnswers_rawdata').append(li);
+		}
+	}
+
+	rtc.client.updatePollAnswers = function (poll_with_answers) {
+		content = '<ul>';
+		for (optionindex in poll_with_answers.Options) {
+			option = poll_with_answers.Options[optionindex];
+			content += '<li><strong>' + option.OptionText + '</strong>: ' + option.Count + '</li>';
+		}
+		content += '</ul>';
+		$('#PollName').text(poll_with_answers.Question);
+		$('#PollAnswersInner').empty();
+		$('#PollAnswersInner').append(content);
+	}
+
 	// Start the connection.
 	$.connection.hub.start().done(function () {
 
@@ -54,11 +76,13 @@ $(function () {
 					}
 				]
 			}
-			if(!$('#setCurrentSlide_simplepoll').is(':checked')) {
+			if (!$('#setCurrentSlide_simplepoll').is(':checked')) {
 				currentSlide.polls = null;
 			}
 			// Call the Send method on the hub.
 			rtc.server.setCurrentSlide(currentSlide);
+			// internal notify for debug UI purposes because we don't get this back from the server anymore
+			rtc.client.notifyCurrentSlide(currentSlide);
 		});
 		// send a "navigation command" request
 		$('#sendNavigationCommand').click(function () {
@@ -67,22 +91,21 @@ $(function () {
 		});
 		// send a poll answer
 		$('#pollAnswer_send').click(function () {
-			if (!$('#pollAnswer_yesno').is(':checked')) {
+			if ($('#pollAnswer_yesno').is(':checked')) {
 				pollAnswer = {
 					PollIdentifier: $('#pollAnswer_pollIdentifier').val(),
-					ASASDSelectedOptions: [{ OptionID: 1, OptionText: "Yes" }]
+					SelectedOptions: [{ OptionID: 1, OptionText: "Yes" }]
 				}
 			}
 			else {
 				pollAnswer = {
 					PollIdentifier: $('#pollAnswer_pollIdentifier').val(),
-					ASDASDSelectedOptions: [{ OptionID: 2, OptionText: "No" }]
+					SelectedOptions: [{ OptionID: 2, OptionText: "No" }]
 				}
 			}
 			rtc.server.addPollAnswer(pollAnswer).fail(function (e) {
 				if (e.source === 'HubException') {
-					console.log(e.message + ' : ' + e.data);
-					alert(JSON.stringify(e));
+					console.log(e.message);
 				}
 			});
 		})

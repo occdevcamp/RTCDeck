@@ -44,6 +44,7 @@ namespace RTCDeckState
 		public int OptionID { get; set; }
 		public string OptionImagePath {get; set;}
 		public string OptionText {get; set;}
+		public int Count { get; set; }
 	}
 
 	public enum PollStyle
