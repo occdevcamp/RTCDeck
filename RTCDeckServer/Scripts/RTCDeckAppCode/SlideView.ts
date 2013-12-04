@@ -22,6 +22,10 @@ module Controllers {
                     return JSON.stringify(contenthtml);
                 };
 
+                $scope.getQuestions = function () {
+
+                }
+
 
                 //bind to events from server
                 $scope.$parent.$on("acceptCurrentSlideIndex", function (e, slideData: Models.SlideData) {
@@ -55,7 +59,7 @@ module Controllers {
                 $window.Reveal.addEventListener('slidechanged', function (event) {
                     event.preventDefault();
                     var notesHtml = $scope.getAsideContent("notes");
-                    var supplementaryContentHtml = $scope.getAsideContent("supplementary-content");
+                    var supplementaryContentHtml = $scope.getAsideContent("supplementary");
                     $scope.sendCurrentSlideData({ indexh: event.indexh, indexv: event.indexv, speakerNotes: notesHtml, supplementaryContent: supplementaryContentHtml });
                 });
 
