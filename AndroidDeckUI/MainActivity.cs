@@ -12,6 +12,7 @@ using Oxfordcc.DevCamp2013.AndroidDeckUI;
 using Android.Webkit;
 using RTCDeckState;
 using Android.Content.PM;
+using Android.Util;
 
 namespace OxfordCC.DevCamp2013.AndroidDeckUI
 {
@@ -42,20 +43,24 @@ namespace OxfordCC.DevCamp2013.AndroidDeckUI
 
             #region Configure the SignalR bindings
             //Create the Hub Proxy connection
+            Log.Warn("AndroidDeckUI", String.Format("Creating Hub Connection to {0}", HUB_URL));
             HubConnection connection = new HubConnection(HUB_URL);
             hubProxy = connection.CreateHubProxy(SharedConstants.HUB_NAME);
+            Log.Warn("AndroidDeckUI", String.Format("Created Hub Connection to {0}", HUB_URL));
 
             //Receive slide numbers
             hubProxy.On<CurrentSlide>(
                 SharedConstants.RECEIVE_CURRENT_SLIDE,
                 (currentSlide) =>
                 {
+                    Log.Warn("AndroidDeckUI", String.Format("Received slide: {0}/{1}:{2}", currentSlide.indexf, currentSlide.indexh, currentSlide.indexv));
                     //Need to ensure the changes are in the UI thread, 
                     //since SignalR can fire the events from a different thread
                     RunOnUiThread(() =>
                     {
                         slideNumberText.Text = String.Format("Slide {0}/{1}:{2}", currentSlide.indexh, currentSlide.indexv, currentSlide.indexf);
                         speakerNotes.LoadData(String.Format("<html><body>{0}</body></html>",currentSlide.speakerNotes), "text/html", null);
+                        Log.Warn("AndroidDeckUI", String.Format("Processed slide: {0}/{1}:{2}", currentSlide.indexf, currentSlide.indexh, currentSlide.indexv));
                     });
                 }
             );
@@ -71,24 +76,20 @@ namespace OxfordCC.DevCamp2013.AndroidDeckUI
             hubProxy.Invoke(SharedConstants.REQUEST_CURRENT_SLIDE);
             #endregion
 
-            //Get the latest state
-            //hubProxy.Invoke(SharedConstants.REQUEST_CURRENT_SLIDE);
-        }
-
-
-        protected override void OnResume()
-        {
-            base.OnRestart();
-            hubProxy.Invoke(SharedConstants.REQUEST_CURRENT_SLIDE);
         }
 
         void BindSlideCommand(IHubProxy hubProxy, Button button, string command)
         {
             button.Click += (sender, e) =>
             {
-                hubProxy.Invoke<String[]>(SharedConstants.SEND_SLIDE_COMMAND, command);
+                Log.Warn("AndroidDeckUI", String.Format("Invoking command: {0}", command));
+                hubProxy.Invoke<String[]>(SharedConstants.SEND_SLIDE_COMMAND, command).Wait();
+                Log.Warn("AndroidDeckUI",String.Format("Invoked command: {0}", command));
             };
 
+        }
+
+        public void SendSlideCommand(string command) {
         }
     }
 }
