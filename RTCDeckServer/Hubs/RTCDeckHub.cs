@@ -30,14 +30,14 @@ namespace RTCDeckServer.Hubs
 		/// </summary>
 		public void SetCurrentSlide(CurrentSlide currentSlide)
 		{
-            _presentationState.CurrentSlide = currentSlide;
+			_presentationState.CurrentSlide = currentSlide;
 
 			// do we continue to broadcast the whole slide object? or do we broadcast 
 			// individual pieces for more granularity? E.g. "Audience View" is just listening for "supplementary content" updates
 			// do we want to send partial updates?
-            Clients.All.notifyCurrentSlide(_presentationState.CurrentSlide);
+			Clients.All.notifyCurrentSlide(_presentationState.CurrentSlide);
 		}
-		
+
 		/// <summary>
 		/// can be requested at any time by any device for a current slide state
 		/// expected to be used when a device starts up
@@ -69,5 +69,23 @@ namespace RTCDeckServer.Hubs
 		{
 			Clients.All.receivePresentationNavigationCommand(command);
 		}
+
+		#region Polls
+
+		public void AddPollAnswer(PollAnswer pollAnswer)
+		{
+			try
+			{
+				// add answer to stash of answers
+				_presentationState.AddPollAnswer(pollAnswer);
+
+				Clients.All.debug_RawPollAnswers(_presentationState.PollAnswers);
+			}
+			catch
+			{
+				throw new HubException("He slimed me.");
+			}
+		}
+		#endregion
 	}
 }

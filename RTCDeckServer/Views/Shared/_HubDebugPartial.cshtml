@@ -8,6 +8,12 @@
             <label>Index F: <input type="number" id="setCurrentSlide_indexf" /></label> (for fragments? not yet supported by Reveal)<br />
             <label>Speaker Notes: <textarea id="setCurrentSlide_speakerNotes" rows="3" cols="30"></textarea></label><br />
             <label>Supplementary Content: <textarea id="setCurrentSlide_supplementaryContent" rows="3" cols="30"></textarea></label><br />
+            <label>Poll? <input type="checkbox" id="setCurrentSlide_simplepoll" /></label>
+            <p>
+                [Note, the model allows much more complicated polls, and indeed multiple polls per slide,
+                but for debug I just want to allow you to choose whether a simple thumbsup/thumbsdown poll
+                applies to this slide; largely so I don't have to write UI for it]
+            </p>
             <input type="button" id="setCurrentSlideButton" value="Set" />
         </div>
         <div id="RequestCurrentSlide" class="col-md-6">
@@ -26,6 +32,20 @@
         <div id="receivePresentationNavigationCommand" class="col-md-6">
             <h4>Receive Presentation Navigation Command</h4>
             <p>Last command received: <span id="receivePresentationNavigationCommandCommand"></span></p>
+        </div>
+    </div>
+    <div class="row">
+        <div id="AddPollAnswerDebug" class="col-md-6">
+            <h4>Send hub a poll answer</h4>
+            <p>All answers tracked via the poll's identifier</p>
+            <input type="text" id="pollAnswer_pollIdentifier" value="PollForSlide1" />
+            <input type="checkbox" id="pollAnswer_yesno" />
+            <input type="button" id="pollAnswer_send" value="Send answer"/>
+        </div>
+        <div id="RawPollAnswers" class="col-md-6">
+            <h4>What answers have been sent in?</h4>
+            <p>All answers below</p>
+            <ul id="pollAnswers_rawdata"></ul>
         </div>
     </div>
     <h3>Hub Documentation</h3>
