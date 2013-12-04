@@ -16,7 +16,7 @@
     <AssemblyName>RTCDeckServer</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -168,6 +168,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AudienceController.cs" />
     <Compile Include="Controllers\PresentationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -566,6 +567,7 @@
     <Content Include="Scripts\reveal\plugin\markdown\example.md" />
     <Content Include="Views\Presentation\Index.cshtml" />
     <Content Include="Views\Shared\_HubDebugPartial.cshtml" />
+    <Content Include="Views\Audience\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -578,7 +580,10 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="Scripts\RTCDeckAppCode\Presentation.ts" />
+    <TypeScriptCompile Include="Scripts\RTCDeckAppCode\AudienceView.ts" />
+    <TypeScriptCompile Include="Scripts\RTCDeckAppCode\HubCommunications.ts" />
+    <TypeScriptCompile Include="Scripts\RTCDeckAppCode\Models.ts" />
+    <TypeScriptCompile Include="Scripts\RTCDeckAppCode\SlideView.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-cookies.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-mocks.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-resource.d.ts" />
@@ -614,7 +619,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>51160</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/RTCDeckServer</IISUrl>
+          <IISUrl>http://localhost:51160/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

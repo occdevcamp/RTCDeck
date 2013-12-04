@@ -30,12 +30,12 @@ namespace RTCDeckServer.Hubs
 		/// </summary>
 		public void SetCurrentSlide(CurrentSlide currentSlide)
 		{
-			_presentationState.CurrentSlide = currentSlide;
+            _presentationState.CurrentSlide = currentSlide;
 
 			// do we continue to broadcast the whole slide object? or do we broadcast 
 			// individual pieces for more granularity? E.g. "Audience View" is just listening for "supplementary content" updates
 			// do we want to send partial updates?
-			Clients.All.notifyCurrentSlide(_presentationState.CurrentSlide);
+            Clients.All.notifyCurrentSlide(_presentationState.CurrentSlide);
 		}
 		
 		/// <summary>
