@@ -1,79 +1,27 @@
 
-/// <reference path="../typings/signalr/signalr.d.ts" />
+/// <reference path='HubCommunications.ts'/>
 
-
-module Services {
-
-    export class SignalRService {
-        private proxy: HubProxy;
-        public sendCurrentSlideIndex: Function;
-        SendPresentationNavigationCommand: Function;
-        constructor($, $rootScope) {
-            var connection: HubConnection = $.hubConnection();
-            this.proxy = connection.createHubProxy("RTCDeckHub");
-            connection.start();
-
-            this.proxy.on("notifyCurrentSlide", function (indexh: number, indexv: number) {
-                $rootScope.$emit("acceptCurrentSlideIndex", { h: indexh, v: indexv });
-            });
-
-            this.sendCurrentSlideIndex = function (slideData: Models.SlideData) {
-                this.proxy.invoke('SetCurrentSlide', slideData.h, slideData.v);
-            };
-
-
-            this.proxy.on("receivePresentationNavigationCommand", function (command:string) {
-                $rootScope.$emit("receivePresentationNavigationCommand", command);
-            });
-
-            //this.SendPresentationNavigationCommand = function (command: string) {
-            //    this.proxy.invoke('SendPresentationNavigationCommand', command);
-            //};
-        }
-    }
-
-    
-
-
-}
-
-// Module
-module Models {
-
-    // Class
-    //export class ViewModel {
-    //    constructor(public components: SlideComponent[]) { }
-    //}
-
-    export interface SlideData {
-        h :number;
-        v :number;
-    }
-
-    //export interface SlideComponent {
-    //    name: string;
-    //    changeSlide(slideData: SlideData);
-    //}
-
-
-
-}
+/// <reference path='Models.ts'/>
 
 module Controllers {
 
         // Class
         export class SlideViewCtrl {
             // Constructor
-            constructor(private $scope, private SignalRService: Services.SignalRService, $window) {
+            constructor(private $scope, private SignalRService: Services.RTCDeckHubService, private $window) {
 
                 $scope.sendCurrentSlideIndex = function (slideData: Models.SlideData) {
                     SignalRService.sendCurrentSlideIndex(slideData);
                 };
 
+                $scope.sendCurrentSlideIndex = function (indexh :number, indexv:number, notesData :string) {
+                    SignalRService.sendCurrentSlideData(indexh , indexv, notesData);
+                };
+
                 //bind to events from server
                 $scope.$parent.$on("acceptCurrentSlideIndex", function (e, slideData: Models.SlideData) {
                     $scope.$apply(function () {
-                        $window.Reveal.slide(slideData.h, slideData.v);
+                        $window.Reveal.slide(slideData.indexh, slideData.indexv);
                     });
                 });
 
@@ -107,6 +55,14 @@ module Controllers {
 
             }
 
+            getAsideContent(tag: string) {
+                var slideElement : HTMLElement = this.$window.Reveal.getCurrentSlide();
+                //the casting here is to avoid problems with incorrect types in the core def file - Element.innerHtml does not exist, but should.
+                var content :any = slideElement.querySelector('aside.' + tag);
+                var contenthtml = content ? content.innerHTML : '';
+                return JSON.stringify(contenthtml);
+            }
+
         }
 
     
@@ -137,6 +93,6 @@ var app = angular.module("slideView", []);
     //});
 
 app.value('$', $);
-app.factory('SignalRService', function ($, $rootScope) {return new Services.SignalRService($, $rootScope) });
+app.factory('SignalRService', function ($, $rootScope) {return new Services.RTCDeckHubService($, $rootScope) });
 app.controller('Controllers.SlideViewCtrl', Controllers.SlideViewCtrl);
 
