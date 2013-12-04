@@ -19,7 +19,7 @@ module Controllers {
                     //the casting here is to avoid problems with incorrect types in the core def file - Element.innerHtml does not exist, but should.
                     var content: any = slideElement.querySelector('aside.' + tag);
                     var contenthtml = content ? content.innerHTML : '';
-                    return JSON.stringify(contenthtml);
+                    return contenthtml;
                 };
 
                 $scope.getQuestions = function () {

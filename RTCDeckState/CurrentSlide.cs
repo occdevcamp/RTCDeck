@@ -13,5 +13,6 @@ namespace RTCDeckState
 		//public string slideContent { get; set; } // not necessary: any presenter view is based on the main page
 		public string speakerNotes { get; set; }
 		public string supplementaryContent { get; set; }
+		public List<Poll> polls { get; set; }
     }
 }
