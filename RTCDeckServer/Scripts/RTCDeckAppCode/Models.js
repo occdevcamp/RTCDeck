@@ -1,11 +1,13 @@
 // Module
 var Models;
 (function (Models) {
-    var Poll = (function () {
-        function Poll() {
+    var PollAnswer = (function () {
+        function PollAnswer(poll, option) {
+            this.PollIdentifier = poll.Identifier;
+            this.SelectedOptions = [option];
         }
-        return Poll;
+        return PollAnswer;
     })();
-    Models.Poll = Poll;
+    Models.PollAnswer = PollAnswer;
 })(Models || (Models = {}));
 //# sourceMappingURL=Models.js.map

@@ -12,7 +12,7 @@ module Models {
         polls?: Poll[];
     }
 
-    export class Poll {
+    export interface Poll {
         Identifier: string;
         Question: string;
         Style: string;
@@ -23,6 +23,14 @@ module Models {
         OptionID: number;
         OptionImagePath: string;
         OptionText: string;
+    }
+    export class PollAnswer {
+        constructor(poll: Poll, option: PollOption) {
+            this.PollIdentifier = poll.Identifier;
+            this.SelectedOptions = [option];
+        }
+        public PollIdentifier: string;
+        public SelectedOptions: PollOption[];
     }
 
 }

@@ -8,6 +8,7 @@ module Services {
         public sendCurrentSlideData: Function;
         public SendPresentationNavigationCommand: Function;
         public requestCurrentSlide: Function;
+        public sendPollAnswer: Function;
 
         constructor($, $rootScope, $window) {
             var connection: HubConnection = $.hubConnection($window.HUB_URL);
@@ -26,6 +27,10 @@ module Services {
 
             this.SendPresentationNavigationCommand = function (command: string) {
                 this.proxy.invoke('SendPresentationNavigationCommand', command);
+            };
+
+            this.sendPollAnswer = function (answer : Models.PollAnswer) {
+                this.proxy.invoke('AddPollAnswer', answer);
             };
 
             this.requestCurrentSlide = function () {

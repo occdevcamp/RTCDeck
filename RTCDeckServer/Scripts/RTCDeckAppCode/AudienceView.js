@@ -17,11 +17,7 @@ var Controllers;
             };
 
             $scope.selectAnswer = function (poll, option) {
-                $scope.sendPollAnswer(poll.Identifier, option.OptionID);
-            };
-
-            $scope.sendPollAnswer = function (pollID, optionID) {
-                $window.alert("answer to " + pollID + " is " + optionID);
+                RTCDeckHubService.sendPollAnswer(new Models.PollAnswer(poll, option));
             };
 
             //bind to events from server

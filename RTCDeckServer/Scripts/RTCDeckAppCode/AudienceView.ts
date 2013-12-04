@@ -7,7 +7,6 @@ module Models {
     export interface AudienceViewModel extends ng.IScope {
         slideData: Models.SlideData;
         updateSlideIndex(slideData: Models.SlideData): void;
-        sendPollAnswer(pollID: string, optionID: number);
         selectAnswer(poll: Models.Poll,option: Models.PollOption)
     }
 }
@@ -30,11 +29,7 @@ module Controllers {
             };
 
             $scope.selectAnswer = function (poll : Models.Poll, option: Models.PollOption) {
-                $scope.sendPollAnswer(poll.Identifier, option.OptionID);
-            }
-
-            $scope.sendPollAnswer = function (pollID: string, optionID: number) {
-                $window.alert("answer to " + pollID + " is " + optionID);
+                RTCDeckHubService.sendPollAnswer(new Models.PollAnswer(poll, option));
             }
             
             //bind to events from server
@@ -60,31 +55,3 @@ var app = angular.module("audienceView", ["ngSanitize"]);
 app.value('$', $);
 app.factory('RTCDeckHubService', function ($, $rootScope) {return new Services.RTCDeckHubService($, $rootScope,window) });
 app.controller('Controllers.AudienceViewCtrl', Controllers.AudienceViewCtrl);
-app.directive("question", function () {
-    return {
-        restrict: 'E',
-        transclude: false,
-        scope: {},
-        controller: function ($scope, $element: Element) {
-            var poll = $scope.poll = $scope.$parent.poll;
-
-            $scope.select = function (option: Models.PollOption) {
-                $scope.$parent.$parent.sendPollAnswer(poll.Identifier, option.OptionID);
-            }
-        },
-        template:
-        '<div>' +
-        '<a href="" ng-click="select(option)">  </a>'+
-        '{{poll.Question}}' +
-        '<ul>' +
-        '<li ng-repeat="option in poll.Options">' +
-        '<a href="#" ng-click="select(option)">' +
-        '<img src="{{option.OptionImagePath}}" alt="{{option.OptionText}}">' +
-        '</a > ' +
-        '</li>' +
-        '</ul>' +
-        '</div>',
-        replace: true
-    };
-});
-

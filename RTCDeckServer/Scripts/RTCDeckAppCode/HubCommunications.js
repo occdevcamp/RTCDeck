@@ -19,6 +19,10 @@ var Services;
                 this.proxy.invoke('SendPresentationNavigationCommand', command);
             };
 
+            this.sendPollAnswer = function (answer) {
+                this.proxy.invoke('AddPollAnswer', answer);
+            };
+
             this.requestCurrentSlide = function () {
                 this.proxy.invoke('RequestCurrentSlide');
             };
