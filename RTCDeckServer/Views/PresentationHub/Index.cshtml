@@ -81,6 +81,18 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="col-md-6">
+                <!-- Poll Answer div: will be graph-->
+                <div ng-show="latestPollAnswers"> <!-- taking a punt on this evaluating to false when empty and true when results.-->
+                    <h4>{{latestPollAnswers.Question}}</h4>
+                    <ul ng-repeat="option in latestPollAnswers.Options">
+                        <li>{{option.OptionText}}: {{option.Count}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
     </div>
 </body>
 </html>

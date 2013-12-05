@@ -20,6 +20,7 @@ var Services;
             };
 
             this.sendPollAnswer = function (answer) {
+                console.log(answer);
                 this.proxy.invoke('AddPollAnswer', answer);
             };
 
@@ -34,6 +35,10 @@ var Services;
 
             this.proxy.on("receivePresentationNavigationCommand", function (command) {
                 $rootScope.$emit("receivePresentationNavigationCommand", command);
+            });
+
+            this.proxy.on("updatePollAnswers", function (pollIdentifier, pollAnswers) {
+                $rootScope.$emit("updatePollAnswers", pollIdentifier, pollAnswers);
             });
         }
         return RTCDeckHubService;

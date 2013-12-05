@@ -97,7 +97,7 @@ namespace RTCDeckServer.Hubs
 				Clients.All.debug_RawPollAnswers(_presentationState.PollAnswers);
 
 				// send poll back (?to presenters ultimately) with answers
-				Clients.All.updatePollAnswers(_presentationState.Polls[pollAnswer.PollIdentifier]);
+				Clients.All.updatePollAnswers(pollAnswer.PollIdentifier, _presentationState.Polls[pollAnswer.PollIdentifier]);
 			}
 			catch
 			{
