@@ -175,6 +175,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\HtmlHelpers.cs" />
     <Compile Include="Hubs\RTCDeckHub.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -185,6 +186,14 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\app-bg.png" />
+    <Content Include="Content\Images\arrow1.png" />
+    <Content Include="Content\Images\arrow2.png" />
+    <Content Include="Content\Images\intro01.png" />
+    <Content Include="Content\Images\intro02.png" />
+    <Content Include="Content\Images\intro03.png" />
+    <Content Include="Content\Images\item-01.png" />
+    <Content Include="Content\Images\mobile.png" />
     <Content Include="Content\reveal\print\paper.css" />
     <Content Include="Content\reveal\print\pdf.css" />
     <Content Include="Content\reveal\reveal.css" />
@@ -201,6 +210,7 @@
     <Content Include="Content\reveal\theme\sky.css" />
     <Content Include="Content\reveal\theme\solarized.css" />
     <Content Include="Content\reveal\theme\source\occ.css" />
+    <Content Include="Content\theme.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
