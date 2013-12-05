@@ -86,6 +86,11 @@ module Controllers {
             };
 
             $scope.selectAnswer = function (poll: Models.Poll, option: Models.PollOption) {
+                //mark answer as selected
+                angular.forEach(poll.Options, function (pollOption : Models.PollOption) {
+                    pollOption.selected = false;
+                });
+                option.selected = true;
                 RTCDeckHubService.sendPollAnswer(new Models.PollAnswer(poll, option));
             };
             

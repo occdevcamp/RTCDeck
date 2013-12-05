@@ -28,6 +28,7 @@ module Models {
         OptionID: number;
         OptionImagePath: string;
         OptionText: string;
+        selected?: boolean;
     }
     export class PollAnswer {
         constructor(poll: Poll, option: PollOption) {
