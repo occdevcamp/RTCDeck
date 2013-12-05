@@ -12,6 +12,11 @@ module Models {
         polls?: Poll[];
     }
 
+    export interface SlideIndices {
+        indexh: number;
+        indexv: number;
+    }
+
     export interface Poll {
         Identifier: string;
         Question: string;

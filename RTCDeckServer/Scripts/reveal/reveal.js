@@ -1518,13 +1518,14 @@ var Reveal = (function(){
 		// Store references to the previous and current slides
 		currentSlide = currentVerticalSlides[ indexv ] || currentHorizontalSlide;
 
+		var slideChanged = (indexh !== indexhBefore || indexv !== indexvBefore);
+
 		// Show fragment, if specified
 		if( typeof f !== 'undefined' ) {
-			navigateFragment( f );
+		    navigateFragment(f, null, slideChanged);
 		}
 
 		// Dispatch an event if the slide changed
-		var slideChanged = ( indexh !== indexhBefore || indexv !== indexvBefore );
 		if( slideChanged ) {
 			dispatchEvent( 'slidechanged', {
 				'indexh': indexh,
@@ -2327,11 +2328,13 @@ var Reveal = (function(){
 	 * should be shown, -1 means all are invisible
 	 * @param {Number} offset Integer offset to apply to the
 	 * fragment index
-	 *
+	 * @param {Boolean} donotnotify if true do not send the 
+	 * fragmentschanged event
+     *
 	 * @return {Boolean} true if a change was made in any
 	 * fragments visibility as part of this call
 	 */
-	function navigateFragment( index, offset ) {
+	function navigateFragment( index, offset, donotnotify ) {
 
 		if( currentSlide && config.fragments ) {
 
@@ -2393,6 +2396,17 @@ var Reveal = (function(){
 				}
 
 				updateControls();
+
+			    //addition by occ 5/12/2013 to notify fragment changes
+				var fragmentsChanged = (!!(fragmentsShown.length || fragmentsHidden.length));
+				if (!donotnotify && fragmentsChanged) {
+				    dispatchEvent('fragmentschanged', {
+				        'currentSlide': currentSlide,
+				        'index': index,
+				        'offset': offset
+				    });
+				}
+                //end addition
 
 				return !!( fragmentsShown.length || fragmentsHidden.length );
 

@@ -8,7 +8,8 @@ var Controllers;
             this.$scope = $scope;
             this.RTCDeckHubService = RTCDeckHubService;
             this.$window = $window;
-            $scope.sendCurrentSlideData = function (slideData) {
+            $scope.sendCurrentSlideData = function () {
+                var slideData = $scope.getSlideData();
                 RTCDeckHubService.sendCurrentSlideData(slideData);
             };
 
@@ -34,7 +35,7 @@ var Controllers;
             //bind to events from server
             $scope.$parent.$on("acceptCurrentSlideIndex", function (e, slideData) {
                 $scope.$apply(function () {
-                    $window.Reveal.slide(slideData.indexh, slideData.indexv);
+                    $window.Reveal.slide(slideData.indexh, slideData.indexv, slideData.indexf);
                 });
             });
 
@@ -59,13 +60,25 @@ var Controllers;
                 });
             });
 
-            //slide change event
-            $window.Reveal.addEventListener('slidechanged', function (event) {
-                event.preventDefault();
+            $scope.getSlideData = function () {
+                var indices = $window.Reveal.getIndices();
                 var notesHtml = $scope.getAsideContent("notes");
                 var supplementaryContentHtml = $scope.getAsideContent("supplementary");
                 var polls = $scope.getPolls();
-                $scope.sendCurrentSlideData({ indexh: event.indexh, indexv: event.indexv, speakerNotes: notesHtml, supplementaryContent: supplementaryContentHtml, polls: polls });
+                var slideData = { indexh: indices.h, indexv: indices.v, indexf: indices.f, speakerNotes: notesHtml, supplementaryContent: supplementaryContentHtml, polls: polls };
+                return slideData;
+            };
+
+            //slide change event
+            $window.Reveal.addEventListener('slidechanged', function (event) {
+                event.preventDefault();
+                $scope.sendCurrentSlideData();
+            });
+
+            //fragment change event
+            $window.Reveal.addEventListener('fragmentschanged', function (event) {
+                event.preventDefault();
+                $scope.sendCurrentSlideData();
             });
 
             //initialise
