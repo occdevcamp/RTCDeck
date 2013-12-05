@@ -555,9 +555,6 @@
     <TypeScriptCompile Include="Scripts\RTCDeckAppCode\PollGraphView.ts" />
     <TypeScriptCompile Include="Scripts\RTCDeckAppCode\HubView.ts" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Views\Examples\index.html" />
-    <Content Include="Views\Examples\index_example.html" />
-    <Content Include="Views\Presentation\index.html" />
     <Content Include="Web.config" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
