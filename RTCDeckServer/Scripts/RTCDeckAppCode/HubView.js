@@ -52,6 +52,13 @@ var Controllers;
                     $scope.navigationCommandOut = command;
                 });
             });
+            $scope.$parent.$on("updatePollAnswers", function (e, pollIdentifier, pollAnswers) {
+                console.log(pollIdentifier);
+                console.log(pollAnswers);
+                $scope.$apply(function () {
+                    $scope.latestPollAnswers = pollAnswers;
+                });
+            });
 
             //initialise
             $scope.$parent.$on("connectionStarted", function (e) {

@@ -29,7 +29,8 @@ module Services {
                 this.proxy.invoke('SendPresentationNavigationCommand', command);
             };
 
-            this.sendPollAnswer = function (answer : Models.PollAnswer) {
+            this.sendPollAnswer = function (answer: Models.PollAnswer) {
+                console.log(answer);
                 this.proxy.invoke('AddPollAnswer', answer);
             };
 
@@ -46,6 +47,9 @@ module Services {
                 $rootScope.$emit("receivePresentationNavigationCommand", command);
             });
 
+            this.proxy.on("updatePollAnswers", function (pollIdentifier: string, pollAnswers: Models.Poll) {
+                $rootScope.$emit("updatePollAnswers", pollIdentifier, pollAnswers);
+            });
         }
     }
 

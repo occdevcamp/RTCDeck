@@ -6,12 +6,14 @@ module Models {
         slideData: Models.SlideData;
         slideDataForForm: Models.SlideData;
 		navigationCommandIn: string;
-		navigationCommandOut: string;
+        navigationCommandOut: string;
+        latestPollAnswers: Models.Poll; // transitory debug data only here
 
 		// methods
         updateSlideIndex(slideData: Models.SlideData): void;
 		sendSlideUpdate(): void;
-		sendNavigationCommand(): void;
+        sendNavigationCommand(): void;
+
     }
 }
 
@@ -67,6 +69,11 @@ module Controllers {
                     $scope.navigationCommandOut = command;
                 });
 			});
+            $scope.$parent.$on("updatePollAnswers", function (e, pollIdentifier: string, pollAnswers: Models.Poll) {
+                $scope.$apply(function () {
+                    $scope.latestPollAnswers = pollAnswers;
+                });
+            });
 
             //initialise
             $scope.$parent.$on("connectionStarted", function (e) {

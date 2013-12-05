@@ -28,6 +28,7 @@ module Models {
         OptionID: number;
         OptionImagePath: string;
         OptionText: string;
+        Count?: number;
     }
     export class PollAnswer {
         constructor(poll: Poll, option: PollOption) {
