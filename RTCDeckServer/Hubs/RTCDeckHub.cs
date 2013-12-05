@@ -79,7 +79,7 @@ namespace RTCDeckServer.Hubs
 			Clients.Others.receivePresentationNavigationCommand(command);
 		}
 
-        #region Presentation meta data
+        #region Presentation metadata
 
         public void StartPresentationTimer()
         {
@@ -93,10 +93,11 @@ namespace RTCDeckServer.Hubs
             {
                 TimeElapsed = new TimeSpan(0);
             }
-
-            // tell anyone who cares what the current slide state is now
-            Debug.WriteLine(String.Format("Notifying Current Slide to Caller: {0}/{1}:{2}", _presentationState.CurrentSlide.indexf, _presentationState.CurrentSlide.indexh, _presentationState.CurrentSlide.indexv));
-            Clients.Caller.notifyCurrentSlide(_presentationState.CurrentSlide);
+            else
+            {
+                TimeElapsed = _presentationState.Timer.TimeElapsed;
+            }
+            Clients.Caller.notifyTimeElapsed(TimeElapsed.TotalSeconds);
         }
 
         #endregion

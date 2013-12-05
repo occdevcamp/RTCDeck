@@ -11,6 +11,7 @@ module Services {
         public sendPollAnswer: Function;
         public RequestPollAnswers: Function;
         public sendDraw: Function;
+        public requestPresentationTimeElapsed: Function;
 
         constructor($, $rootScope, $window) {
             var connection: HubConnection = $.hubConnection($window.HUB_URL);
@@ -42,7 +43,10 @@ module Services {
 
             this.requestCurrentSlide = function () {
                 this.proxy.invoke('RequestCurrentSlide');
-            }
+            };
+            this.requestPresentationTimeElapsed = function () {
+                this.proxy.invoke('RequestPresentationTimeElapsed');
+            };
 
             this.RequestPollAnswers = function (pollIdentifier: string) {
                 this.proxy.invoke('RequestPollAnswers', pollIdentifier);
@@ -67,6 +71,10 @@ module Services {
 
             this.proxy.on("updatePollAnswers", function (pollIdentifier: string, pollAnswers: Models.Poll) {
                 $rootScope.$broadcast("updatePollAnswers", pollIdentifier, pollAnswers);
+            });
+
+            this.proxy.on("notifyTimeElapsed", function (secondsElapsed : number) {
+                $rootScope.$broadcast("acceptTimeElapsed", secondsElapsed);
             });
         }
     }

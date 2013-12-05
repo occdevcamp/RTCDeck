@@ -32,6 +32,9 @@ var Services;
             this.requestCurrentSlide = function () {
                 this.proxy.invoke('RequestCurrentSlide');
             };
+            this.requestPresentationTimeElapsed = function () {
+                this.proxy.invoke('RequestPresentationTimeElapsed');
+            };
 
             this.RequestPollAnswers = function (pollIdentifier) {
                 this.proxy.invoke('RequestPollAnswers', pollIdentifier);
@@ -56,6 +59,10 @@ var Services;
 
             this.proxy.on("updatePollAnswers", function (pollIdentifier, pollAnswers) {
                 $rootScope.$broadcast("updatePollAnswers", pollIdentifier, pollAnswers);
+            });
+
+            this.proxy.on("notifyTimeElapsed", function (secondsElapsed) {
+                $rootScope.$broadcast("acceptTimeElapsed", secondsElapsed);
             });
         }
         return RTCDeckHubService;
