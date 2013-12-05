@@ -185,6 +185,10 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\thumbsDownActive.png" />
+    <Content Include="Content\images\thumbsDownInactive.png" />
+    <Content Include="Content\images\thumbsUpActive.png" />
+    <Content Include="Content\images\thumbsUpInactive.png" />
     <Content Include="Content\reveal\print\paper.css" />
     <Content Include="Content\reveal\print\pdf.css" />
     <Content Include="Content\reveal\reveal.css" />
@@ -532,6 +536,8 @@
     <Content Include="Scripts\reveal\plugin\zoom-js\zoom.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Views\Presentation\Secondary.cshtml" />
+    <TypeScriptCompile Include="Scripts\RTCDeckAppCode\SecondaryView.ts" />
     <Content Include="Views\PresentationHub\PollDashboard.cshtml" />
     <Content Include="Views\Shared\_PollGraphsPartial.cshtml" />
     <TypeScriptCompile Include="Scripts\RTCDeckAppCode\PollGraphView.ts" />

@@ -29,25 +29,24 @@
             <div ng-hide="!isCurrentSlide(slideData)">
                 <div class="col-md-4">
                     <h2>Slide ({{slideData.indexh}} , {{slideData.indexv}}, {{slideData.indexf}})</h2>
+                    <button ng-click="navPrev()">Prev</button><button ng-click="navNext()">Next</button><button ng-hide="!paused" ng-click="goToCurrentServerSlide()">Go to current slide</button>
                 </div>
                 <div ng-bind-html="slideData.supplementaryContent" class="col-md-4"></div>
 
-                <div class="col-md-4">
-                    <ul class="poll" ng-class="poll.Style" ng-repeat="poll in slideData.polls">
-                        <li>
+                <div class="col-md-4" >
+                    <ul class="polls" ng-repeat="poll in slideData.polls" ng-hide="!isCurrentServerSlide(slideData)">
+                        <li class="poll" ng-class="poll.Style">
                             <p class="poll-text">{{poll.Question}}</p>
                             <ul>
                                 <li class="poll-option" ng-repeat="option in poll.Options">
                                     <a href="#" ng-click="selectAnswer(poll,option)" ng-class="{selected : option.selected}">
                                         <img src="{{option.OptionImagePath}}" alt="{{option.OptionText}}">
+                                        <span>{{option.OptionText}}</span>
                                     </a>
                                 </li>
                             </ul>
                         </li>
                     </ul>
-                </div>
-                <div class="col-md-4">
-                    <button ng-click="navLeft()">Left</button><button ng-click="navRight()">Right</button><button ng-click="navUp()">Up</button><button ng-click="navDown()">Down</button>
                 </div>
             </div>
         </div>
