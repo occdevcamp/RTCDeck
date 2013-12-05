@@ -55,8 +55,9 @@ namespace RTCDeckServer.Hubs
 			{
 				// Initialise a started slide: always with indices 0,0,0
 				CurrentSlide cs = new CurrentSlide();
-				cs.indexh = 0;
-				cs.indexv = cs.indexf = 0;
+				cs.indexh = cs.indexv = cs.indexf = -1;
+				cs.speakerNotes = "The presentation has not yet started. Please hold. Your call is very important to us.";
+				cs.supplementaryContent = "The presentation has not yet started. Please hold. Your call is very important to us.";
 				_presentationState.CurrentSlide = cs;
 			}
 
