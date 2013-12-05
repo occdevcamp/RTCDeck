@@ -5,9 +5,20 @@
 module Models {
 
     export interface AudienceViewModel extends ng.IScope {
-        slideData: Models.SlideData;
-        updateSlideIndex(slideData: Models.SlideData): void;
-        selectAnswer(poll: Models.Poll,option: Models.PollOption)
+        slides: Models.SlideData[];
+        currentSlide: Models.SlideIndices;
+        updateSlideIndex(indices: Models.SlideIndices);
+        addSlideData(slideData: Models.SlideData);
+        selectAnswer(poll: Models.Poll, option: Models.PollOption);
+        slideExists(indices: Models.SlideIndices): boolean;
+        isCurrentSlide(indices: Models.SlideIndices): boolean;
+        updateSlide(slideData: Models.SlideData);
+        moveSlide(hMove: number, vMove: number);
+        navLeft();
+        navUp();
+        navDown();
+        navRight();
+
     }
 }
 
@@ -19,22 +30,70 @@ module Controllers {
         // Constructor
         constructor(private $scope: Models.AudienceViewModel, private RTCDeckHubService: Services.RTCDeckHubService, private $window) {
 
+            $scope.slides = [];
 
-            $scope.slideData = { indexh: 0, indexv: 0, supplementaryContent: "" };
-
-            $scope.updateSlideIndex = function (slideData: Models.SlideData) {
-                $scope.$apply(function () {
-                    $scope.slideData = slideData;
-                });
+            $scope.updateSlideIndex = function (indices: Models.SlideIndices) {
+                $scope.currentSlide = indices;
             };
 
-            $scope.selectAnswer = function (poll : Models.Poll, option: Models.PollOption) {
-                RTCDeckHubService.sendPollAnswer(new Models.PollAnswer(poll, option));
+            $scope.addSlideData = function (slideData: Models.SlideData) {
+                if (!$scope.slideExists(slideData)) {
+                    $scope.slides.push(slideData);
+                }
+            };
+
+            $scope.moveSlide = function (hMove : number, vMove : number) {
+                if ($scope.currentSlide) {
+                    var indices: Models.SlideIndices = { indexh: $scope.currentSlide.indexh + hMove, indexv: $scope.currentSlide.indexv + vMove };
+                    if ($scope.slideExists(indices)) {
+                        $scope.updateSlideIndex(indices);
+                    }
+                }
             }
+
+            //navigation
+
+            $scope.navLeft = function () {
+                $scope.moveSlide(-1, 0);
+            };
+            $scope.navRight = function () {
+                $scope.moveSlide(1, 0);
+            };
+            $scope.navUp = function () {
+                $scope.moveSlide(0, 1);
+            };
+            $scope.navDown = function () {
+                $scope.moveSlide(0, -1);
+            };
+
+            $scope.slideExists = function (indices: Models.SlideIndices) {
+                var filteredSlides = $.grep($scope.slides, function (elem, i) {
+                    return (elem.indexh === indices.indexh && elem.indexv === indices.indexv)
+                });
+                return (filteredSlides.length != 0);
+            };
+
+            $scope.updateSlide = function (slideData: Models.SlideData) {
+                $scope.addSlideData(slideData);
+                $scope.updateSlideIndex(slideData);
+            };
+
+            $scope.isCurrentSlide = function (indices: Models.SlideIndices) {
+                if (!$scope.currentSlide) {
+                    return false;
+                }
+                return ($scope.currentSlide.indexh === indices.indexh && $scope.currentSlide.indexv === indices.indexv);
+            };
+
+            $scope.selectAnswer = function (poll: Models.Poll, option: Models.PollOption) {
+                RTCDeckHubService.sendPollAnswer(new Models.PollAnswer(poll, option));
+            };
             
             //bind to events from server
-            $scope.$parent.$on("acceptCurrentSlideIndex", function (e, slideData: Models.SlideData) {
-                $scope.updateSlideIndex(slideData);
+            $scope.$parent.$on("acceptCurrentSlideIndex", function(e, slideData: Models.SlideData) {
+                $scope.$apply(function () {
+                    $scope.updateSlide(slideData);
+                });
             });
 
             //initialise

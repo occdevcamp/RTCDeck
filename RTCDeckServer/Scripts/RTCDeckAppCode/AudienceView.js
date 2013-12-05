@@ -8,12 +8,58 @@ var Controllers;
             this.$scope = $scope;
             this.RTCDeckHubService = RTCDeckHubService;
             this.$window = $window;
-            $scope.slideData = { indexh: 0, indexv: 0, supplementaryContent: "" };
+            $scope.slides = [];
 
-            $scope.updateSlideIndex = function (slideData) {
-                $scope.$apply(function () {
-                    $scope.slideData = slideData;
+            $scope.updateSlideIndex = function (indices) {
+                $scope.currentSlide = indices;
+            };
+
+            $scope.addSlideData = function (slideData) {
+                if (!$scope.slideExists(slideData)) {
+                    $scope.slides.push(slideData);
+                }
+            };
+
+            $scope.moveSlide = function (hMove, vMove) {
+                if ($scope.currentSlide) {
+                    var indices = { indexh: $scope.currentSlide.indexh + hMove, indexv: $scope.currentSlide.indexv + vMove };
+                    if ($scope.slideExists(indices)) {
+                        $scope.updateSlideIndex(indices);
+                    }
+                }
+            };
+
+            //navigation
+            $scope.navLeft = function () {
+                $scope.moveSlide(-1, 0);
+            };
+            $scope.navRight = function () {
+                $scope.moveSlide(1, 0);
+            };
+            $scope.navUp = function () {
+                $scope.moveSlide(0, 1);
+            };
+            $scope.navDown = function () {
+                $scope.moveSlide(0, -1);
+            };
+
+            $scope.slideExists = function (indices) {
+                var filteredSlides = $.grep($scope.slides, function (elem, i) {
+                    return (elem.indexh === indices.indexh && elem.indexv === indices.indexv);
                 });
+                return (filteredSlides.length != 0);
+            };
+
+            $scope.updateSlide = function (slideData) {
+                $scope.addSlideData(slideData);
+                $scope.updateSlideIndex(slideData);
+            };
+
+            $scope.isCurrentSlide = function (indices) {
+                if (!$scope.currentSlide) {
+                    return false;
+                }
+                return ($scope.currentSlide.indexh === indices.indexh && $scope.currentSlide.indexv === indices.indexv);
             };
 
             $scope.selectAnswer = function (poll, option) {
@@ -22,7 +68,9 @@ var Controllers;
 
             //bind to events from server
             $scope.$parent.$on("acceptCurrentSlideIndex", function (e, slideData) {
-                $scope.updateSlideIndex(slideData);
+                $scope.$apply(function () {
+                    $scope.updateSlide(slideData);
+                });
             });
 
             //initialise
