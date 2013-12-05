@@ -33,6 +33,7 @@ function createCanvasOverlay() {
             aCanvas.style.left = '0';
             aCanvas.style.zIndex = "1000000";
             aCanvas.style.visibility = 'hidden';
+            aCanvas.style.pointerEvents = 'none';
 
             var context = aCanvas.getContext('2d');
             context.fillStyle = 'rgba(0,0,0,0.5)';
@@ -87,14 +88,13 @@ function createCanvasOverlay() {
     eventCanvas.style.transform = 'translate(-50%, -50%)';
     eventCanvas.style.WebkitTransform = 'translate(-50%, -50%)';
     eventCanvas.style.zIndex = "2000000";
+    eventCanvas.style.visibility = 'hidden';
 
     slide.appendChild(eventCanvas);
 
     eventCanvas.addEventListener("pointermove", onMouseMove, false);
     eventCanvas.addEventListener("pointerdown", onMouseDown, false);
     eventCanvas.addEventListener("pointerup", onMouseUp, false);
-
-    joinHub();
 }
 
 function onMouseMove(event) {
@@ -173,21 +173,15 @@ function showHideCanvas() {
     if (presentCanvas()) {
         presentCanvas().style.visibility = (presentCanvas().style.visibility == 'visible') ? 'hidden' : 'visible';
     }
-}
-
-function drawOnCanvas() {
-    if (presentCanvas()) {
-        presentCanvas().style.pointerEvents = (presentCanvas().style.pointerEvents == "none") ? "auto" : "none";
+    if (eventCanvas) {
+        eventCanvas.style.visibility = presentCanvas().style.visibility;
     }
 }
 
-function joinHub() {
-    annotateHub = $.connection.annotateHub;
-    annotateHub.client.handleDraw = function (message, connectionId) {
-        var drawObject = jQuery.parseJSON(message)
-        DrawIt(drawObject, false, connectionId);
-    };
-    $.connection.hub.start();
+function drawOnCanvas() {
+    if (eventCanvas) {
+        eventCanvas.style.pointerEvents = (eventCanvas.style.pointerEvents == "none") ? "auto" : "none";
+    }
 }
 
 function presentCanvas() {
