@@ -186,6 +186,8 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\annotation.png" />
+    <Content Include="Content\Images\annotationInactive.png" />
     <Content Include="Content\Images\app-bg.png" />
     <Content Include="Content\Images\arrow1.png" />
     <Content Include="Content\Images\arrow2.png" />
@@ -193,7 +195,13 @@
     <Content Include="Content\Images\intro02.png" />
     <Content Include="Content\Images\intro03.png" />
     <Content Include="Content\Images\item-01.png" />
+    <Content Include="Content\Images\menu.png" />
+    <Content Include="Content\Images\menuInactive.png" />
     <Content Include="Content\Images\mobile.png" />
+    <Content Include="Content\Images\pen.png" />
+    <Content Include="Content\Images\penInactive.png" />
+    <Content Include="Content\Images\secondScreen.png" />
+    <Content Include="Content\Images\secondScreenInactive.png" />
     <Content Include="Content\images\thumbsDownActive.png" />
     <Content Include="Content\images\thumbsDownInactive.png" />
     <Content Include="Content\images\thumbsUpActive.png" />
