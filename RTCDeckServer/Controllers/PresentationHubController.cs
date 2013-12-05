@@ -14,5 +14,12 @@ namespace RTCDeckServer.Controllers
         {
             return View();
         }
+
+		public ActionResult PollDashboard()
+		{
+			ViewBag.Message = "Poll dashboard page.";
+
+			return View();
+		}
 	}
 }

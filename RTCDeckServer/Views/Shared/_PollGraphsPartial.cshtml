@@ -1,0 +1,8 @@
+﻿<div ng-repeat="poll in pollAnswers" ng-show="pollAnswers" class="ng-hide">
+    <div>
+        <p>{{poll.Question}}</p>
+        <ul ng-repeat="option in poll.Options">
+            <li><strong>{{option.OptionText}}</strong>: {{option.Count}}</li>
+        </ul>
+    </div>
+</div>

@@ -65,6 +65,11 @@ var Controllers;
                 });
             });
 
+            $scope.$parent.$on("receiveDrawing", function (e, message) {
+                var drawObject = jQuery.parseJSON(message);
+                $window.drawIt(drawObject, false);
+            });
+
             $scope.getSlideData = function () {
                 var indices = $window.Reveal.getIndices();
                 var notesHtml = $scope.getAsideContent("notes");
@@ -84,6 +89,11 @@ var Controllers;
             $window.Reveal.addEventListener('fragmentschanged', function (event) {
                 event.preventDefault();
                 $scope.sendCurrentSlideData();
+            });
+
+            //fragment change event
+            $window.addEventListener('drawing', function (event) {
+                RTCDeckHubService.sendDraw(event.detail.message);
             });
 
             //initialise
@@ -109,8 +119,8 @@ var app = angular.module("slideView", []);
 //    }
 //});
 app.value('$', $);
-app.factory('RTCDeckHubService', function ($, $rootScope) {
-    return new Services.RTCDeckHubService($, $rootScope, window);
-});
-app.controller('Controllers.SlideViewCtrl', Controllers.SlideViewCtrl);
+app.factory('RTCDeckHubService', ["$", "$rootScope", function ($, $rootScope) {
+        return new Services.RTCDeckHubService($, $rootScope, window);
+    }]);
+app.controller('Controllers.SlideViewCtrl', ["$scope", "RTCDeckHubService", "$window", Controllers.SlideViewCtrl]);
 //# sourceMappingURL=SlideView.js.map

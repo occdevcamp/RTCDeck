@@ -27,9 +27,11 @@
                     <li>@Html.MenuLink("Home", "Index", "Home")</li>
                     <li>@Html.MenuLink("Presentation", "Index", "Presentation")</li>
                     <li>@Html.MenuLink("Audience", "Index", "Audience")</li>
+                    <li>@Html.MenuLink("Second-Screen", "Secondary", "Presentation")</li>
+                    <li>@Html.MenuLink("Polls", "PollDashboard", "PresentationHub")</li>
                     <li>@Html.MenuLink("Debug", "Index", "PresentationHub")</li>
-                    <li>@Html.MenuLink("About", "About", "Home")</li>
-                    <li>@Html.MenuLink("Contact", "Contact", "Home")</li>
+                    @*<li>@Html.MenuLink("About", "About", "Home")</li>
+                    <li>@Html.MenuLink("Contact", "Contact", "Home")</li>*@
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

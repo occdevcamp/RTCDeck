@@ -1,0 +1,39 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+
+<html ng-app="secondaryView">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Audience</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/signalR")
+    @Scripts.Render("~/bundles/angular")
+    <script>
+        window.BASE_URL = "@Html.Raw(Url.Content("~"))";
+        window.HUB_URL = "@Html.Raw(Url.Content("~/signalr/"))";
+        window.HUB_NAME = "RTCDeckHub";
+    </script>
+    <script src="~/Scripts/RTCDeckAppCode/Models.js"></script>
+    <script src="~/Scripts/RTCDeckAppCode/HubCommunications.js"></script>
+    <script src="~/Scripts/RTCDeckAppCode/SecondaryView.js"></script>
+</head>
+<body ng-controller="Controllers.SecondaryViewCtrl">
+    <div class="row">
+
+        <div class="col-md-4">
+            <h2>Slide ({{currentSlide.indexh}} , {{currentSlide.indexv}}, {{currentSlide.indexf}})</h2>
+        </div>
+        <div ng-bind-html="currentSlide.speakerNotes" class="col-md-4"></div>
+
+
+    </div>
+</body>
+</html>
+
