@@ -536,6 +536,8 @@
     <Content Include="Scripts\reveal\plugin\zoom-js\zoom.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Views\Presentation\Secondary.cshtml" />
+    <TypeScriptCompile Include="Scripts\RTCDeckAppCode\SecondaryView.ts" />
     <TypeScriptCompile Include="Scripts\RTCDeckAppCode\HubView.ts" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Views\Examples\index.html" />

@@ -142,8 +142,8 @@ var Controllers;
 var app = angular.module("audienceView", ["ngSanitize"]);
 
 app.value('$', $);
-app.factory('RTCDeckHubService', function ($, $rootScope) {
-    return new Services.RTCDeckHubService($, $rootScope, window);
-});
-app.controller('Controllers.AudienceViewCtrl', Controllers.AudienceViewCtrl);
+app.factory('RTCDeckHubService', ["$", "$rootScope", function ($, $rootScope) {
+        return new Services.RTCDeckHubService($, $rootScope, window);
+    }]);
+app.controller('Controllers.AudienceViewCtrl', ["$scope", "RTCDeckHubService", "$window", Controllers.AudienceViewCtrl]);
 //# sourceMappingURL=AudienceView.js.map
