@@ -1,34 +1,10 @@
 ﻿@{
-    Layout = null;
+    ViewBag.Title = "Polls";
 }
 
-<!DOCTYPE html>
-
-<html ng-app="pollGraphView">
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Hub Debug</title>
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/signalR")
-    @Scripts.Render("~/bundles/angular")
-    @Styles.Render("~/Content/css")
-    <script>
-        window.BASE_URL = "@Html.Raw(Url.Content("~"))";
-        window.HUB_URL = "@Html.Raw(Url.Content("~/signalr/"))";
-        window.HUB_NAME = "RTCDeckHub";
-    </script>
-    <script src="~/Scripts/RTCDeckAppCode/Models.js"></script>
-    <script src="~/Scripts/RTCDeckAppCode/HubCommunications.js"></script>
-    <script src="~/Scripts/RTCDeckAppCode/PollGraphView.js"></script>
-
-</head>
-@{
-    ViewBag.Title = "Home Page";
-}
-
-<body>
+<div class="container" ng-app="pollGraphView">
+    <h2>Polls.</h2>
     <!--
-    <h1>Latest Poll</h1>
     <div class="row">
         <div class="col-md-6">
             <!-- Poll Answer div: will be graph- ->
@@ -45,5 +21,16 @@
         @Html.Partial("_PollGraphsPartial")
         <input type="checkbox" ng-model="allPollsView" />
     </div>
-</body>
-</html>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/angular")
+    <script>
+            window.BASE_URL = "@Html.Raw(Url.Content("~"))";
+            window.HUB_URL = "@Html.Raw(Url.Content("~/signalr/"))";
+            window.HUB_NAME = "RTCDeckHub";
+    </script>
+    <script src="~/Scripts/RTCDeckAppCode/Models.js"></script>
+    <script src="~/Scripts/RTCDeckAppCode/HubCommunications.js"></script>
+    <script src="~/Scripts/RTCDeckAppCode/PollGraphView.js"></script>
+}
