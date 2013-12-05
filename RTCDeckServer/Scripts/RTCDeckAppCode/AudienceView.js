@@ -69,6 +69,7 @@ var Controllers;
             //bind to events from server
             $scope.$parent.$on("acceptCurrentSlideIndex", function (e, slideData) {
                 $scope.$apply(function () {
+                    //TODO: if current slide is null (i.e. the hub has no idea what the slide is), send up data.
                     $scope.updateSlide(slideData);
                 });
             });

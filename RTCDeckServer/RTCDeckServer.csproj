@@ -16,7 +16,7 @@
     <AssemblyName>RTCDeckServer</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -168,6 +168,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\PresentationHubController.cs" />
     <Compile Include="Controllers\AudienceController.cs" />
     <Compile Include="Controllers\PresentationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -531,7 +532,7 @@
     <Content Include="Scripts\reveal\plugin\zoom-js\zoom.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\RTCDeckAppCode\HubDebug.js" />
+    <TypeScriptCompile Include="Scripts\RTCDeckAppCode\HubView.ts" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Views\Examples\index.html" />
     <Content Include="Views\Examples\index_example.html" />
@@ -566,11 +567,11 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Scripts\reveal\plugin\markdown\example.md" />
     <Content Include="Views\Presentation\Index.cshtml" />
-    <Content Include="Views\Shared\_HubDebugPartial.cshtml" />
     <Content Include="Views\Audience\Index.cshtml" />
     <Content Include="Scripts\reveal\reveal.min.js.map">
       <DependentUpon>reveal.js</DependentUpon>
     </Content>
+    <Content Include="Views\PresentationHub\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -622,7 +623,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>51160</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/RTCDeckServer</IISUrl>
+          <IISUrl>http://localhost:51160/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

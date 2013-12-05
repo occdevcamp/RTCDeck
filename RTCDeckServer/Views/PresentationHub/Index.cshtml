@@ -1,0 +1,86 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html ng-app="hubView">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Hub Debug</title>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/signalR")
+    @Scripts.Render("~/bundles/angular")
+    @Styles.Render("~/Content/css")
+    <script>
+        window.BASE_URL = "@Html.Raw(Url.Content("~"))";
+        window.HUB_URL = "@Html.Raw(Url.Content("~/signalr/"))";
+        window.HUB_NAME = "RTCDeckHub";
+    </script>
+    <script src="~/Scripts/RTCDeckAppCode/Models.js"></script>
+    <script src="~/Scripts/RTCDeckAppCode/HubCommunications.js"></script>
+    <script src="~/Scripts/RTCDeckAppCode/HubView.js"></script>
+</head>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<body ng-controller="Controllers.HubViewCtrl">
+    <div>
+        <h3>Hub Debug Methods</h3>
+
+        <div class="row">
+
+            <div class="col-md-6">
+                <form ng-submit="sendSlideUpdate()">
+                    <h4>Set Current Slide</h4>
+                    <label>Index H: <input type="number" ng-model="slideDataForForm.indexh" /></label><br />
+                    <label>Index V: <input type="number" ng-model="slideDataForForm.indexv" /></label><br />
+                    <label>Index F: <input type="number" ng-model="slideDataForForm.indexf" /></label><br />
+                    <label>Speaker Notes: <textarea rows="3" cols="30" ng-model="slideDataForForm.speakerNotes"></textarea></label><br />
+                    <label>Supplementary Content: <textarea rows="3" cols="30" ng-model="slideDataForForm.supplementaryContent"></textarea></label><br />
+                    <label>Poll? <input type="checkbox" id="setCurrentSlide_simplepoll" /></label>
+                    <p>
+                        [Note, the model allows much more complicated polls, and indeed multiple polls per slide,
+                        but for debug I just want to allow you to choose whether a simple thumbsup/thumbsdown poll
+                        applies to this slide; largely so I don't have to write UI for it]
+                    </p>
+                    <input type="submit" value="Send" />
+                </form>
+            </div>
+
+            <div class="col-md-6">
+                <h4>Request Current Slide</h4>
+                <ul>
+                    <li>{{slideData.indexh}}</li>
+                    <li>{{slideData.indexv}}</li>
+                    <li>{{slideData.indexf}}</li>
+                </ul>
+                <h5>Speaker Notes</h5>
+                <div ng-bind-html="slideData.speakerNotes"></div>
+                <h5>Supplementary Content</h5>
+                <div ng-bind-html="slideData.supplementaryContent"></div>
+                <h5>Polls config</h5>
+                <div>{{slideData.polls}}</div>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-6">
+                <form ng-submit="sendNavigationCommand()">
+                    <h4>Send Presentation Navigation Command</h4>
+                    <input type="text" ng-model="navigationCommandOut" />
+                    <input type="submit" value="Send" />
+                </form>
+            </div>
+
+            <div class="col-md-6">
+                <h4>Receive Presentation Navigation Command</h4>
+                <p>Last command received: <span>{{navigationCommandIn}}</span></p>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
