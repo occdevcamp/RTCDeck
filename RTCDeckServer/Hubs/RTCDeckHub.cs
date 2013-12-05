@@ -34,6 +34,13 @@ namespace RTCDeckServer.Hubs
 			Debug.WriteLine(String.Format("Received Current Slide Request: {0}/{1}:{2}", currentSlide.indexf, currentSlide.indexh, currentSlide.indexv));
 			_presentationState.CurrentSlide = currentSlide;
 
+            foreach(Poll poll in currentSlide.polls) {
+                foreach (string connectionID in _presentationState.GetAndRemoveUnansweredPollAnswerRequests(poll.Identifier))
+                {
+                    Clients.User(connectionID).updatePollAnswers(poll.Identifier, _presentationState.Polls[poll.Identifier]);
+                }
+            }
+
 			// do we continue to broadcast the whole slide object? or do we broadcast 
 			// individual pieces for more granularity? E.g. "Audience View" is just listening for "supplementary content" updates
 			// do we want to send partial updates?
@@ -114,8 +121,11 @@ namespace RTCDeckServer.Hubs
 			// send poll back (?to presenters ultimately) with answers
 			if (_presentationState.Polls.ContainsKey(pollIdentifier))
 				Clients.All.updatePollAnswers(pollIdentifier, _presentationState.Polls[pollIdentifier]);
-			else
-				throw new HubException("Poll requested is not known to the hub. Have a nice day.");
+            else
+            {
+                //Store the fact we were interested for later broadcast to this client
+                _presentationState.StoreUnansweredPollAnswerRequest(pollIdentifier, this.Context.ConnectionId);
+            }
 		}
 
 		#endregion
