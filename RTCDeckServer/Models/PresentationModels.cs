@@ -30,6 +30,11 @@ namespace RTCDeckServer.Models
 			}
 			set
 			{
+                //if this is the first time we've heard from the presentation, it must have just started
+                if (_currentSlide == null)
+                {
+                    StartTime = DateTime.Now;
+                }
 				_currentSlide = value;
 
 				// may contain a new poll we need to register
@@ -83,5 +88,13 @@ namespace RTCDeckServer.Models
 				}
 			}
 		}
+
+        public PresentationTimer Timer { get;internal set; }
+
+        public void StartTimer()
+        {
+            Timer = new PresentationTimer();
+        }
+
 	}
 }
