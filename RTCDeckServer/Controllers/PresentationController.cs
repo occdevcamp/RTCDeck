@@ -13,5 +13,9 @@ namespace RTCDeckServer.Controllers
         {
             return View();
         }
+        public ActionResult Secondary()
+        {
+            return View("Secondary");
+        }
 	}
 }

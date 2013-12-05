@@ -1,0 +1,49 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html ng-app="pollGraphView">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Hub Debug</title>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/signalR")
+    @Scripts.Render("~/bundles/angular")
+    @Styles.Render("~/Content/css")
+    <script>
+        window.BASE_URL = "@Html.Raw(Url.Content("~"))";
+        window.HUB_URL = "@Html.Raw(Url.Content("~/signalr/"))";
+        window.HUB_NAME = "RTCDeckHub";
+    </script>
+    <script src="~/Scripts/RTCDeckAppCode/Models.js"></script>
+    <script src="~/Scripts/RTCDeckAppCode/HubCommunications.js"></script>
+    <script src="~/Scripts/RTCDeckAppCode/PollGraphView.js"></script>
+
+</head>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<body>
+    <!--
+    <h1>Latest Poll</h1>
+    <div class="row">
+        <div class="col-md-6">
+            <!-- Poll Answer div: will be graph- ->
+            <div ng-show="latestPollAnswers"> <!-- taking a punt on this evaluating to false when empty and true when results.-- >
+                <h4>{{latestPollAnswers.Question}}</h4>
+                <ul ng-repeat="option in latestPollAnswers.Options">
+                    <li>{{option.OptionText}}: {{option.Count}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    -->
+    <div ng-controller="PGV_Controllers.PollGraphViewCtrl" ng-init="init(false);">
+        @Html.Partial("_PollGraphsPartial")
+        <input type="checkbox" ng-model="allPollsView" />
+    </div>
+</body>
+</html>

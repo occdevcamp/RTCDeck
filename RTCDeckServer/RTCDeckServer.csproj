@@ -175,6 +175,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\HtmlHelpers.cs" />
     <Compile Include="Hubs\RTCDeckHub.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -185,6 +186,18 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\app-bg.png" />
+    <Content Include="Content\Images\arrow1.png" />
+    <Content Include="Content\Images\arrow2.png" />
+    <Content Include="Content\Images\intro01.png" />
+    <Content Include="Content\Images\intro02.png" />
+    <Content Include="Content\Images\intro03.png" />
+    <Content Include="Content\Images\item-01.png" />
+    <Content Include="Content\Images\mobile.png" />
+    <Content Include="Content\images\thumbsDownActive.png" />
+    <Content Include="Content\images\thumbsDownInactive.png" />
+    <Content Include="Content\images\thumbsUpActive.png" />
+    <Content Include="Content\images\thumbsUpInactive.png" />
     <Content Include="Content\reveal\print\paper.css" />
     <Content Include="Content\reveal\print\pdf.css" />
     <Content Include="Content\reveal\reveal.css" />
@@ -201,6 +214,7 @@
     <Content Include="Content\reveal\theme\sky.css" />
     <Content Include="Content\reveal\theme\solarized.css" />
     <Content Include="Content\reveal\theme\source\occ.css" />
+    <Content Include="Content\theme.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -249,6 +263,7 @@
     <Content Include="Content\reveal\theme\template\settings.scss" />
     <Content Include="Content\reveal\theme\template\theme.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\hand-1.2.2.js" />
     <Content Include="Scripts\i18n\angular-locale_af-na.js" />
     <Content Include="Scripts\i18n\angular-locale_af-za.js" />
     <Content Include="Scripts\i18n\angular-locale_af.js" />
@@ -532,6 +547,12 @@
     <Content Include="Scripts\reveal\plugin\zoom-js\zoom.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\RTCDeckAppCode\Annotate.js" />
+    <Content Include="Views\Presentation\Secondary.cshtml" />
+    <TypeScriptCompile Include="Scripts\RTCDeckAppCode\SecondaryView.ts" />
+    <Content Include="Views\PresentationHub\PollDashboard.cshtml" />
+    <Content Include="Views\Shared\_PollGraphsPartial.cshtml" />
+    <TypeScriptCompile Include="Scripts\RTCDeckAppCode\PollGraphView.ts" />
     <TypeScriptCompile Include="Scripts\RTCDeckAppCode\HubView.ts" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Views\Examples\index.html" />

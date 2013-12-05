@@ -31,14 +31,14 @@ namespace RTCDeckServer.Hubs
 		/// </summary>
 		public void SetCurrentSlide(CurrentSlide currentSlide)
 		{
-            Debug.WriteLine(String.Format("Received Current Slide Request: {0}/{1}:{2}", currentSlide.indexf, currentSlide.indexh, currentSlide.indexv));
+			Debug.WriteLine(String.Format("Received Current Slide Request: {0}/{1}:{2}", currentSlide.indexf, currentSlide.indexh, currentSlide.indexv));
 			_presentationState.CurrentSlide = currentSlide;
 
 			// do we continue to broadcast the whole slide object? or do we broadcast 
 			// individual pieces for more granularity? E.g. "Audience View" is just listening for "supplementary content" updates
 			// do we want to send partial updates?
-            Debug.WriteLine(String.Format("Notifying Current Slide to All: {0}/{1}:{2}", _presentationState.CurrentSlide.indexf, _presentationState.CurrentSlide.indexh, _presentationState.CurrentSlide.indexv));
-            Clients.Others.notifyCurrentSlide(_presentationState.CurrentSlide);
+			Debug.WriteLine(String.Format("Notifying Current Slide to All: {0}/{1}:{2}", _presentationState.CurrentSlide.indexf, _presentationState.CurrentSlide.indexh, _presentationState.CurrentSlide.indexv));
+			Clients.Others.notifyCurrentSlide(_presentationState.CurrentSlide);
 		}
 
 		/// <summary>
@@ -47,7 +47,7 @@ namespace RTCDeckServer.Hubs
 		/// </summary>
 		public void RequestCurrentSlide()
 		{
-            Debug.WriteLine(String.Format("Received Request for Current Slide"));
+			Debug.WriteLine(String.Format("Received Request for Current Slide"));
 			// if we haven't yet got a current slide state, we'd better start the presentation
 			// MAY REWORK LATER: we might choose to leave this totally blank until the
 			// presenter has logged in and "started" the presentation.
@@ -62,7 +62,7 @@ namespace RTCDeckServer.Hubs
 			}
 
 			// tell anyone who cares what the current slide state is now
-            Debug.WriteLine(String.Format("Notifying Current Slide to Caller: {0}/{1}:{2}", _presentationState.CurrentSlide.indexf, _presentationState.CurrentSlide.indexh, _presentationState.CurrentSlide.indexv));
+			Debug.WriteLine(String.Format("Notifying Current Slide to Caller: {0}/{1}:{2}", _presentationState.CurrentSlide.indexf, _presentationState.CurrentSlide.indexh, _presentationState.CurrentSlide.indexv));
 			Clients.Caller.notifyCurrentSlide(_presentationState.CurrentSlide);
 		}
 
@@ -73,10 +73,10 @@ namespace RTCDeckServer.Hubs
 		/// </summary>
 		public void SendPresentationNavigationCommand(string command)
 		{
-            Debug.WriteLine(String.Format("Received Presentation Navigation Command: {0}", command));
+			Debug.WriteLine(String.Format("Received Presentation Navigation Command: {0}", command));
 
-            Debug.WriteLine(String.Format("Transmitting Presentation Navigation Command to All: {0}", command));
-            Clients.Others.receivePresentationNavigationCommand(command);
+			Debug.WriteLine(String.Format("Transmitting Presentation Navigation Command to All: {0}", command));
+			Clients.Others.receivePresentationNavigationCommand(command);
 		}
 
 		#region Polls
@@ -104,6 +104,34 @@ namespace RTCDeckServer.Hubs
 				throw new HubException("He slimed me.");
 			}
 		}
+
+		/// <summary>
+		/// Ask for the current set of results for a poll.
+		/// </summary>
+		/// <param name="pollIdentifier"></param>
+		public void RequestPollAnswers(string pollIdentifier)
+		{
+			// send poll back (?to presenters ultimately) with answers
+			if (_presentationState.Polls.ContainsKey(pollIdentifier))
+				Clients.All.updatePollAnswers(pollIdentifier, _presentationState.Polls[pollIdentifier]);
+			else
+				throw new HubException("Poll requested is not known to the hub. Have a nice day.");
+		}
+
 		#endregion
-	}
+
+        #region Annotate
+
+        /// <summary>
+        /// Passes the drawing event to other clients.
+        /// Co-ordinates are scaled for a 1024x768 canvas, as used by reveal for slides.
+        /// </summary>
+        /// <param name="drawObject"></param>
+        public void SendDraw(string drawObject)
+        {
+            Clients.Others.receiveDrawing(drawObject);
+        }
+
+        #endregion
+    }
 }

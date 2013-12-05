@@ -1,15 +1,18 @@
-﻿<!DOCTYPE html>
+﻿@using RTCDeckServer.Helpers
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title &ndash; RTCDeck</title>
     @Styles.Render("~/Content/css")
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic' rel='stylesheet'>
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet'>
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -17,27 +20,29 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", null, new { @class = "navbar-brand" })
+                @Html.ActionLink("RTCDeck", "Index", "Home", null, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Presentation", "Index", "Presentation")</li>
-                    <li>@Html.ActionLink("Audience", "Index", "Audience")</li>
-                    <li>@Html.ActionLink("Hub Debug", "Index", "PresentationHub")</li>
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.MenuLink("Home", "Index", "Home")</li>
+                    <li>@Html.MenuLink("Presentation", "Index", "Presentation")</li>
+                    <li>@Html.MenuLink("Audience", "Index", "Audience")</li>
+                    <li>@Html.MenuLink("Second-Screen", "Secondary", "Presentation")</li>
+                    <li>@Html.MenuLink("Polls", "PollDashboard", "PresentationHub")</li>
+                    <li>@Html.MenuLink("Debug", "Index", "PresentationHub")</li>
+                    @*<li>@Html.MenuLink("About", "About", "Home")</li>
+                    <li>@Html.MenuLink("Contact", "Contact", "Home")</li>*@
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+    @RenderBody()
+    <footer id="c">
+        <div class="container">
+            <p>&copy; @DateTime.Now.Year &ndash; <a href="http://www.oxfordcc.co.uk/">Oxford Computer Consultants</a></p>
+        </div>
+    </footer>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
