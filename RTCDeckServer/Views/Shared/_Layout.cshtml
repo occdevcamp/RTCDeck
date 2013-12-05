@@ -17,7 +17,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", null, new { @class = "navbar-brand" })
+                @Html.ActionLink("RTC Deck", "Index", "Home", null, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -25,9 +25,10 @@
                     <li>@Html.ActionLink("Secondary View", "Secondary", "Presentation")</li>
                     <li>@Html.ActionLink("Audience", "Index", "Audience")</li>
                     <li>@Html.ActionLink("Hub Debug", "Index", "PresentationHub")</li>
+                    <li>@Html.ActionLink("Poll Dashboard", "PollDashboard", "PresentationHub")</li>
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <!--<li>@Html.ActionLink("About", "About", "Home")</li>-->
+                    <!--<li>@Html.ActionLink("Contact", "Contact", "Home")</li>-->
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
