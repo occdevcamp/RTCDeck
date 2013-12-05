@@ -79,7 +79,31 @@ namespace RTCDeckServer.Hubs
 			Clients.Others.receivePresentationNavigationCommand(command);
 		}
 
-		#region Polls
+        #region Presentation metadata
+
+        public void StartPresentationTimer()
+        {
+            _presentationState.StartTimer();
+        }
+
+        public void RequestPresentationTimeElapsed()
+        {
+            TimeSpan TimeElapsed;
+            if (_presentationState.Timer == null)
+            {
+                TimeElapsed = new TimeSpan(0);
+            }
+            else
+            {
+                TimeElapsed = _presentationState.Timer.TimeElapsed;
+            }
+            Clients.Caller.notifyTimeElapsed(TimeElapsed.TotalSeconds);
+        }
+
+        #endregion
+
+        #region Polls
+
 
 		public void AddPollAnswer(PollAnswer pollAnswer)
 		{
@@ -119,19 +143,5 @@ namespace RTCDeckServer.Hubs
 		}
 
 		#endregion
-
-        #region Annotate
-
-        /// <summary>
-        /// Passes the drawing event to other clients.
-        /// Co-ordinates are scaled for a 1024x768 canvas, as used by reveal for slides.
-        /// </summary>
-        /// <param name="drawObject"></param>
-        public void SendDraw(string drawObject)
-        {
-            Clients.Others.receiveDrawing(drawObject);
-        }
-
-        #endregion
-    }
+	}
 }
