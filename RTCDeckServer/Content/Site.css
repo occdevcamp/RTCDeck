@@ -41,10 +41,35 @@ input[type="checkbox"].input-validation-error {
     display: none;
 }
 
-li.poll-option a.selected {
+.poll li.poll-option a.selected {
 	background-color: red;
 }
 
+ul.polls {
+	list-style:none;
+    padding-left:0;
+	padding-bottom:10px;
+}
+
+.poll ul {
+	list-style:none;
+    padding-left:0;
+}
+
 .poll.ThumbsUpThumbsDown p.poll-text{
+	display:none;
+}
+
+.poll.ThumbsUpThumbsDown li.poll-option span{
+	display:none;
+}
+
+.poll.ThumbsUpThumbsDown li.poll-option{
+	display: inline;
+    padding-right:5px;
+}
+
+
+.poll.MultiChoice li.poll-option img{
 	display:none;
 }

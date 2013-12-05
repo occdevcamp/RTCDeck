@@ -25,7 +25,7 @@ namespace RTCDeckState
 		/// Anticipate using this to select a display template that is 
 		/// different for ThumbsUpThumbsDown / Radio / Multchoice etc
 		/// </summary>
-		public PollStyle Style { get; set; }
+		public string Style { get; set; }
 
 		/// <summary>
 		/// Poll options.
@@ -47,9 +47,9 @@ namespace RTCDeckState
 		public int Count { get; set; }
 	}
 
-	public enum PollStyle
+	public static class PollStyle
 	{
-		ThumbsUpThumbsDown,
+        public const string ThumbsUpThumbsDown = "ThumbsUpThumbsDown";
 		// no further options yet but we'll probably want to 
 		// add support for Radio options / Multiple choice
 		// Radio,

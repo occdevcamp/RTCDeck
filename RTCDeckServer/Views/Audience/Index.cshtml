@@ -33,13 +33,14 @@
                 <div ng-bind-html="slideData.supplementaryContent" class="col-md-4"></div>
 
                 <div class="col-md-4">
-                    <ul class="poll" ng-class="poll.Style" ng-repeat="poll in slideData.polls">
-                        <li>
+                    <ul class="polls" ng-repeat="poll in slideData.polls">
+                        <li class="poll" ng-class="poll.Style">
                             <p class="poll-text">{{poll.Question}}</p>
                             <ul>
                                 <li class="poll-option" ng-repeat="option in poll.Options">
                                     <a href="#" ng-click="selectAnswer(poll,option)" ng-class="{selected : option.selected}">
                                         <img src="{{option.OptionImagePath}}" alt="{{option.OptionText}}">
+                                        <span>{{option.OptionText}}</span>
                                     </a>
                                 </li>
                             </ul>
