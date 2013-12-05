@@ -50,10 +50,13 @@ module PGV_Controllers {
                     var pollIndex;
                     for (pollIndex in slideData.polls) {
                         $scope.pollAnswers[$scope.pollAnswers.length] = slideData.polls[pollIndex];
-                        // get initial state for the poll answers from the hub on new page load.
-                        RTCDeckHubService.RequestPollAnswers(slideData.polls[pollIndex].Identifier);
                     }
                 });
+                var pollIndex;
+                for (pollIndex in slideData.polls) {
+                    // get initial state for the poll answers from the hub on new page load.
+                    RTCDeckHubService.RequestPollAnswers(slideData.polls[pollIndex].Identifier);
+                }
             };
 
             $scope.$parent.$on("slideChangedForPollGraph", function (e, slideData: Models.SlideData) {

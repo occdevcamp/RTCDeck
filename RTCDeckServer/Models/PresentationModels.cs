@@ -113,5 +113,13 @@ namespace RTCDeckServer.Models
 				}
 			}
 		}
+
+        public PresentationTimer Timer { get;internal set; }
+
+        public void StartTimer()
+        {
+            Timer = new PresentationTimer();
+        }
+
 	}
 }
