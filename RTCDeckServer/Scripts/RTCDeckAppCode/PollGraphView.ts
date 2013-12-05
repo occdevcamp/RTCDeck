@@ -55,7 +55,7 @@ module PGV_Controllers {
                 var pollIndex;
                 for (pollIndex in slideData.polls) {
                     // get initial state for the poll answers from the hub on new page load.
-                    RTCDeckHubService.RequestPollAnswers(slideData.polls[pollIndex].Identifier);
+                    //RTCDeckHubService.RequestPollAnswers(slideData.polls[pollIndex].Identifier);
                 }
             };
 
@@ -66,16 +66,36 @@ module PGV_Controllers {
                 $scope.applyslide(slideData);
             });
 
+            $scope.$parent.$on("notifyPollData", function (e, polls: Models.Poll[]) {
+                $scope.$apply(function () {
+                    $scope.pollAnswers = [];
+                    var pollIndex;
+                    for (pollIndex in polls) {
+                        $scope.pollAnswers[$scope.pollAnswers.length] = polls[pollIndex];
+                    }
+                });
+            });
+
             $scope.$parent.$on("updatePollAnswers", function (e, pollIdentifier: string, pollAnswers: Models.Poll) {
                 // find poll in $scope.pollAnswers and update it
                 $scope.$apply(function () {
-                    var pollIndex;
-                    for (pollIndex in $scope.pollAnswers) {
-                        if (pollIdentifier == $scope.pollAnswers[pollIndex].Identifier) {
-                            $scope.pollAnswers[pollIndex] = pollAnswers;
+                    //var filteredPolls = $scope.pollAnswers.filter(function (elem, index, array) {
+                    //    return elem.Identifier === pollAnswers.Identifier;
+                    //})
+
+                    //if (filteredPolls.length == 0) {
+                    //    //$scope.pollAnswers[$scope.pollAnswers.length] = pollAnswers;
+                    //}
+                    //else {
+                    //    filteredPolls[0] = pollAnswers;
+                    //}
+                        var pollIndex;
+                        for (pollIndex in $scope.pollAnswers) {
+                            if (pollIdentifier == $scope.pollAnswers[pollIndex].Identifier) {
+                                $scope.pollAnswers[pollIndex] = pollAnswers;
+                            }
                         }
-                    }
-                });
+                    });
             });
 
             //initialise

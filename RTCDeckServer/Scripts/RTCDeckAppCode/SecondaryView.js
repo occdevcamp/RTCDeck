@@ -12,6 +12,11 @@ var Controllers;
                 $scope.currentSlide = slideData;
             };
 
+            $scope.startTimer = function () {
+                $window.startTimer(0);
+                RTCDeckHubService.startPresentationTimer();
+            };
+
             //bind to events from server
             $scope.$parent.$on("acceptCurrentSlideIndex", function (e, slideData) {
                 $scope.$apply(function () {
@@ -19,9 +24,18 @@ var Controllers;
                 });
             });
 
+            $scope.$parent.$on("acceptTimeElapsed", function (e, secondsElapsed) {
+                if (secondsElapsed != 0) {
+                    $scope.$apply(function () {
+                        $window.startTimer(secondsElapsed);
+                    });
+                }
+            });
+
             //initialise
             $scope.$parent.$on("connectionStarted", function (e) {
                 RTCDeckHubService.requestCurrentSlide();
+                RTCDeckHubService.requestPresentationTimeElapsed();
             });
         }
         return SecondaryViewCtrl;

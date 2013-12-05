@@ -23,12 +23,26 @@
     <script src="~/Scripts/RTCDeckAppCode/Models.js"></script>
     <script src="~/Scripts/RTCDeckAppCode/HubCommunications.js"></script>
     <script src="~/Scripts/RTCDeckAppCode/SecondaryView.js"></script>
+    <script type="text/javascript">
+        function pad(val) { return val > 9 ? val.toFixed(0) : "0" + val.toFixed(0); };
+
+        function startTimer(sec) {
+            setInterval(function () {
+                $("#seconds").html(pad(++sec % 60));
+                $("#minutes").html(pad(parseInt(sec / 60, 10)));
+            }, 1000);
+        };
+    </script>
+
 </head>
 <body ng-controller="Controllers.SecondaryViewCtrl">
     <div class="row">
 
         <div class="col-md-4">
             <h2>Slide ({{currentSlide.indexh}} , {{currentSlide.indexv}}, {{currentSlide.indexf}})</h2>
+        </div>
+        <div class="col-md-4">
+            <label id="minutes">00</label>:<label id="seconds">00</label> <button ng-click="startTimer()">Start</button>
         </div>
         <div ng-bind-html="currentSlide.speakerNotes" class="col-md-4"></div>
 

@@ -7,7 +7,8 @@ module Models {
     export interface SecondaryViewModel extends ng.IScope {
         currentSlide: Models.SlideData;
 
-        updateSlide(indices: Models.SlideData) : void;
+        updateSlide(indices: Models.SlideData): void;
+        startTimer(): void;
     }
 }
 
@@ -22,7 +23,11 @@ module Controllers {
             $scope.updateSlide = function (slideData: Models.SlideData) {
                 $scope.currentSlide = slideData;
             };
-                                    
+
+            $scope.startTimer = function () {
+                $window.startTimer(0);
+                RTCDeckHubService.startPresentationTimer();
+            };      
                       
             //bind to events from server
             $scope.$parent.$on("acceptCurrentSlideIndex", function(e, slideData: Models.SlideData) {
@@ -31,10 +36,20 @@ module Controllers {
                 });
             });
 
+            $scope.$parent.$on("acceptTimeElapsed", function (e, secondsElapsed: number) {
+                if (secondsElapsed != 0) {
+                    $scope.$apply(function () {
+                        $window.startTimer(secondsElapsed);
+                    });
+                }
+            });
+
             //initialise
             $scope.$parent.$on("connectionStarted", function (e) {
                 RTCDeckHubService.requestCurrentSlide();
+                RTCDeckHubService.requestPresentationTimeElapsed();
             });
+
 
         }
 
