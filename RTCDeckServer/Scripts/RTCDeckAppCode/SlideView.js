@@ -35,7 +35,12 @@ var Controllers;
             //bind to events from server
             $scope.$parent.$on("acceptCurrentSlideIndex", function (e, slideData) {
                 $scope.$apply(function () {
-                    $window.Reveal.slide(slideData.indexh, slideData.indexv, slideData.indexf);
+                    if (slideData.indexh >= 0 && slideData.indexv >= 0) {
+                        $window.Reveal.slide(slideData.indexh, slideData.indexv, slideData.indexf);
+                    } else {
+                        //hub doesn't know what the current slide is, so tell it.
+                        $scope.sendCurrentSlideData();
+                    }
                 });
             });
 

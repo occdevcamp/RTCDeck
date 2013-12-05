@@ -23,20 +23,22 @@
     <script src="~/Scripts/RTCDeckAppCode/AudienceView.js"></script>
 </head>
 <body ng-controller="Controllers.AudienceViewCtrl">
-    <div>
+    <div class ="row">
+
         <div ng-repeat="slideData in slides">
             <div ng-hide="!isCurrentSlide(slideData)">
-                Slide ({{slideData.indexh}} , {{slideData.indexv}}, {{slideData.indexf}})
-                <div ng-bind-html="slideData.supplementaryContent"></div>
+                <div class="col-md-4">
+                    <h2>Slide ({{slideData.indexh}} , {{slideData.indexv}}, {{slideData.indexf}})</h2>
+                </div>
+                <div ng-bind-html="slideData.supplementaryContent" class="col-md-4"></div>
 
-                <div>
-                    <ul ng-repeat="poll in slideData.polls">
+                <div class="col-md-4">
+                    <ul class="poll" ng-class="poll.Style" ng-repeat="poll in slideData.polls">
                         <li>
-                            {{poll.Question}}
+                            <p class="poll-text">{{poll.Question}}</p>
                             <ul>
-                                <li ng-repeat="option in poll.Options">
-                                    <a href="#" ng-click="selectAnswer(poll,option)">
-                                        @*ng-class="{active : isSelected(poll,option)}">*@
+                                <li class="poll-option" ng-repeat="option in poll.Options">
+                                    <a href="#" ng-click="selectAnswer(poll,option)" ng-class="{selected : option.selected}">
                                         <img src="{{option.OptionImagePath}}" alt="{{option.OptionText}}">
                                     </a>
                                 </li>
@@ -44,9 +46,11 @@
                         </li>
                     </ul>
                 </div>
+                <div class="col-md-4">
+                    <button ng-click="navLeft()">Left</button><button ng-click="navRight()">Right</button><button ng-click="navUp()">Up</button><button ng-click="navDown()">Down</button>
+                </div>
             </div>
         </div>
-        <button ng-click="navLeft()">Left</button><button ng-click="navRight()">Right</button><button ng-click="navUp()">Up</button><button ng-click="navDown()">Down</button>
 
     </div>
 </body>

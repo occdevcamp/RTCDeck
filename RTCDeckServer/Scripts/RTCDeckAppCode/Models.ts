@@ -28,6 +28,7 @@ module Models {
         OptionID: number;
         OptionImagePath: string;
         OptionText: string;
+        selected?: boolean;
         Count?: number;
     }
     export class PollAnswer {
