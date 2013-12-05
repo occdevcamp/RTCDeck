@@ -568,6 +568,9 @@
     <Content Include="Views\Presentation\Index.cshtml" />
     <Content Include="Views\Shared\_HubDebugPartial.cshtml" />
     <Content Include="Views\Audience\Index.cshtml" />
+    <Content Include="Scripts\reveal\reveal.min.js.map">
+      <DependentUpon>reveal.js</DependentUpon>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
