@@ -28,6 +28,10 @@ var Services;
                 this.proxy.invoke('RequestCurrentSlide');
             };
 
+            this.sendDraw = function (message) {
+                this.proxy.invoke('SendDraw', message);
+            };
+
             //receiving
             this.proxy.on("notifyCurrentSlide", function (slideData) {
                 $rootScope.$emit("acceptCurrentSlideIndex", slideData);
@@ -35,6 +39,10 @@ var Services;
 
             this.proxy.on("receivePresentationNavigationCommand", function (command) {
                 $rootScope.$emit("receivePresentationNavigationCommand", command);
+            });
+
+            this.proxy.on("receiveDrawing", function (message) {
+                $rootScope.$emit("receiveDrawing", message);
             });
 
             this.proxy.on("updatePollAnswers", function (pollIdentifier, pollAnswers) {
