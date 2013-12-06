@@ -48,7 +48,8 @@ module PGV_Controllers {
                         // set up data for graph
                         var data = [];
                         var total = 0;
-                        var percentageValue, optionname, barlabel;
+                        var percentageValue, optionname, barlabel,
+                            optionsaretruncated: boolean = false, optionslabels: string = "";
                         // work out total so we can calc percentages
                         for (var optionIndex in pollData) total += pollData[optionIndex].Count;
 
@@ -57,10 +58,23 @@ module PGV_Controllers {
                             optionname = pollData[optionIndex].OptionText;
                             if (optionname == "Dislike")
                                 barlabel = "Dislike";
-                            else 
-                                barlabel = (optionname.length > 5) ? optionname.substring(0, 1) : optionname;
+                            else {
+                                if (optionname.length > 5) {
+                                    barlabel = optionname.substring(0, 1);
+                                    optionsaretruncated = true;
+                                }
+                                else
+                                    barlabel = optionname;
+                            }
 
                             data[optionIndex] = { name: barlabel, value: percentageValue, count: pollData[optionIndex].Count };
+                        }
+                        if (optionsaretruncated) {
+                            optionslabels = "<ul>";
+                            for (var optionIndex in pollData) {
+                                optionslabels += "<li>" + pollData[optionIndex].OptionText + "</li>";
+                            }
+                            optionslabels += "</ul>";
                         }
 
                         // if total == 0 we don't yet attempt to create a graph
@@ -68,16 +82,23 @@ module PGV_Controllers {
                             // common attributes whether creating new or updat
                             var graphdivID = "graphforpoll" + pollIdentifier.trim();
                             var graphdivselector = '#' + graphdivID;
-                            var graphtags = "";
-                            if ($scope.allPollsView) graphtags = "<h2>" + polls[pollIndex].Question + "</h2>";
-                            graphtags += '<svg id="' + graphdivID + '" class="chart"></svg>';
-                            var margin = { top: 20, right: 30, bottom: 30, left: 40 },
-                                width = 200 - margin.left - margin.right,
-                                height = 300 - margin.top - margin.bottom;
+                            var graphtags = '<svg id="' + graphdivID + '" class="chart"></svg>';
+                            if ($scope.allPollsView) {
+                                graphtags += "<p>" + polls[pollIndex].Question;
+                                if (optionsaretruncated) graphtags += optionslabels;
+                                graphtags += "</p>";
+                            }
+
+                            var height = 300,
+                                barWidth = 50,
+                                barMargin = 5,
+                                marginBottom = 30,
+                                marginTop = 30;
+
                             // Set up the axes
                             var x = d3.scale.ordinal()
-                                .rangeRoundBands([0, width], .1)
-                                .domain(data.map(function (d) { return d.name; }));
+                                .domain(data.map(function (d) { return d.name; }))
+                                .rangeBands([0, data.length * (barWidth + barMargin)]);
 
                             var y = d3.scale.linear()
                                 .domain([0, 100])
@@ -93,36 +114,36 @@ module PGV_Controllers {
                                 // Chart size
                                 // Create the chart container
                                 var chart = d3.select(graphdivselector)
-                                    .attr("width", width + margin.left + margin.right)
-                                    .attr("height", height + margin.top + margin.bottom)
+                                    .attr("width", data.length * (barWidth + barMargin))
+                                    .attr("height", height + marginBottom + marginTop)
                                     .append("g")
-                                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+                                    .attr("transform", "translate(0," + marginTop + ")");;
 
                                 // Create the bar and bar-label containers
                                 var bar = chart.selectAll("g")
                                     .data(data)
                                     .enter().append("g")
                                     .attr("class", "bar")
-                                    .attr("transform", function (d) { return "translate(" + x(d.name) + ",0)"; });
+                                    .attr("width", barWidth + barMargin)
+                                    .attr("transform", function (d, i) { return "translate(" + i * (barWidth + barMargin) + ",0)"; });
 
                                 // Create the bars
                                 bar.append("rect")
                                     .attr("y", function (d) { return y(0); })
                                     .attr("height", function (d) { return height - y(0); })
-                                    .attr("width", x.rangeBand());
+                                    .attr("width", barWidth);
 
                                 // Create the bar labels
                                 bar.append("text")
-                                    .attr("x", x.rangeBand() / 2)
+                                    .attr("x", barWidth / 2)
                                     .attr("y", function (d) { return y(0) - 3; })
-                                    .text(function (d) { return 0 /*+ '%'*/; });
+                                    .text(function (d) { return 0; });
 
                                 // Add the x-axis labels
                                 chart.append("g")
                                     .attr("class", "x axis")
                                     .attr("transform", "translate(0," + height + ")")
                                     .call(xAxis);
-
 
                                 $scope.graphs[pollIdentifier] = polls[pollIndex];
                             }
@@ -141,7 +162,7 @@ module PGV_Controllers {
                                 .transition()
                                 .duration(1000)
                                 .attr("y", function (d) { return y(d.value) - 3; })
-                                .text(function (d) { return d.count /*+ '%'*/; });
+                                .text(function (d) { return d.count; });
                             $scope.graphs[pollIdentifier] = polls[pollIndex];
 
                         }
