@@ -70,6 +70,7 @@
 </div>
 
 @section scripts {
+    @Scripts.Render("~/bundles/d3")
     @Scripts.Render("~/bundles/angular")
     <script>
             window.BASE_URL = "@Html.Raw(Url.Content("~"))";
