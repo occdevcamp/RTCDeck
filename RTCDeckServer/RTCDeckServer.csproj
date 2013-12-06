@@ -206,6 +206,7 @@
     <Content Include="Content\Images\previous.png" />
     <Content Include="Content\Images\secondScreen.png" />
     <Content Include="Content\Images\secondScreenInactive.png" />
+    <Content Include="Content\Images\secondScreenSmall.png" />
     <Content Include="Content\Images\stopwatch.png" />
     <Content Include="Content\images\thumbsDownActive.png" />
     <Content Include="Content\images\thumbsDownInactive.png" />
