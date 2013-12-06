@@ -1,4 +1,5 @@
-﻿@{
+﻿@model RTCDeckServer.Models.PresentationModel
+@{
     Layout = null;
 }
 
@@ -64,7 +65,7 @@
                         <li>List item 2</li>
                     </ol>
                 </aside>
-                <aside class="polls" data-polls='[{"Identifier": " pollforslide1","question" : "Is this slide helpful?" ,"style" : "ThumbsUpThumbsDown" ,"options" : [{ "optionid": 1, "optiontext": "Yes" },{ "optionid": 2, "optiontext": "No" }] },{"Identifier": " pollforslide2","question" : "Does this work?" ,"style" : "ThumbsUpThumbsDown" ,"options" : [{ "optionid": 1, "optiontext": "Maybe" },{ "optionid": 2, "optiontext": "No" }] }]'></aside>
+                <aside class="polls" data-polls='[{"Identifier": " pollforslide1","question" : "Is this slide helpful?" ,"style" : "ThumbsUpThumbsDown" ,"options" : [{ "optionid": 1, "optiontext": "Yes", "optionstyle" : "ThumbsUp" },{ "optionid": 2, "optiontext": "No", "optionstyle" : "ThumbsDown" }] },{"Identifier": " pollforslide2","question" : "Does this work?" ,"style" : "ThumbsUpThumbsDown" ,"options" : [{ "optionid": 1, "optiontext": "Maybe","optionstyle" : "ThumbsUp" },{ "optionid": 2, "optiontext": "No" ,"optionstyle" : "ThumbsDown"}] }]'></aside>
             </section>
             <section>
                 <blockquote>The most valuable of all talents is that of never using two words when one will do</blockquote>
@@ -385,7 +386,13 @@
     </script>
     <script src="~/Scripts/RTCDeckAppCode/Models.js"></script>
     <script src="~/Scripts/RTCDeckAppCode/HubCommunications.js"></script>
-    <script src="~/Scripts/RTCDeckAppCode/SlideView.js"></script>
+    <script src="~/Scripts/RTCDeckAppCode/SlideViewCtrl.js"></script>
+    @if (Model.IsPrimaryPresentation) 
+    {
+        <script src="~/Scripts/RTCDeckAppCode/PrimarySlideView.js"></script>
+    } else{
+        <script src="~/Scripts/RTCDeckAppCode/SlideView.js"></script>
+    }
     <script src="~/Scripts/RTCDeckAppCode/PollGraphView.js"></script>
     <script src="@Url.Content("~/Scripts/RTCDeckAppCode/Annotate.js")"></script>
     <script src="@Url.Content("~/Scripts/hand-1.2.2.js")"></script>

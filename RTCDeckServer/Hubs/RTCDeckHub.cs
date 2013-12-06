@@ -24,6 +24,14 @@ namespace RTCDeckServer.Hubs
 			_presentationState = presentationState;
 		}
 
+        /// <summary>
+        /// Reset the presentation state to the default
+        /// </summary>
+        public void ResetPresentation()
+        {
+            PresentationState.Reset();
+        }
+
 		/// <summary>
 		/// updates the slide state
 		/// expected to be set by a mastering device. currently not secured, but could 
@@ -88,6 +96,7 @@ namespace RTCDeckServer.Hubs
 
         public void StartPresentationTimer()
         {
+            Clients.Others.notifyTimerStarted();
             _presentationState.StartTimer();
         }
 
@@ -151,5 +160,19 @@ namespace RTCDeckServer.Hubs
 		}
 
 		#endregion
-	}
+
+        #region Annotate
+
+        /// <summary>
+        /// Passes the drawing event to other clients.
+        /// Co-ordinates are scaled for a 1024x768 canvas, as used by reveal for slides.
+        /// </summary>
+        /// <param name="drawObject"></param>
+        public void SendDraw(string drawObject)
+        {
+            Clients.Others.receiveDrawing(drawObject);
+        }
+
+        #endregion
+    }
 }

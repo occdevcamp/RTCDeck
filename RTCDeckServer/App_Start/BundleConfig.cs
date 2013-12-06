@@ -36,6 +36,12 @@ namespace RTCDeckServer
                       "~/Content/theme.css",
 					  "~/Content/site.css"));
 
+			bundles.Add(new StyleBundle("~/Content/secondscreencss").Include(
+					  "~/Content/bootstrap.css",
+					  "~/Content/site.css",
+					  "~/Content/secondscreen.css"));
+		}
+
 			bundles.Add(new ScriptBundle("~/bundles/d3").Include(
 						"~/Scripts/d3.v3.js"));
         }

@@ -36,6 +36,10 @@ input[type="checkbox"].input-validation-error {
 	display: none;
 }
 
+.centered {
+    text-align: center;
+}
+
 .navbar-brand {
 	font-weight: bold;
 }
