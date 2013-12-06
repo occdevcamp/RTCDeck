@@ -175,11 +175,18 @@ $selectionBackgroundColor: rgba(0, 0, 0, 0.99);
 			display: none;
 		}
 		
-		label {
+		label,
+		a {
 			display: block;
 			cursor: pointer;
 			opacity: 0.2;
 			margin: 5px 15px;
+		}
+
+		a:hover img {
+			background: none;
+			border: none;
+			box-shadow: none;
 		}
 	}
 
