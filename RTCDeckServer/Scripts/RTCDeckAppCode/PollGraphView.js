@@ -31,8 +31,15 @@ var PGV_Controllers;
                     $scope.$apply(function () {
                         // set up data for graph
                         var data = [];
+                        var total = 0;
+                        var percentageValue;
+
+                        for (var optionIndex in pollData)
+                            total += pollData[optionIndex].Count;
+
                         for (var optionIndex in pollData) {
-                            data[optionIndex] = { name: pollData[optionIndex].OptionText, value: pollData[optionIndex].Count };
+                            percentageValue = (total == 0) ? 0 : (Math.round(pollData[optionIndex].Count * 100 / total));
+                            data[optionIndex] = { name: pollData[optionIndex].OptionText, value: percentageValue, count: pollData[optionIndex].Count };
                         }
 
                         // common attributes whether creating new or updat
@@ -74,7 +81,7 @@ var PGV_Controllers;
                             bar.append("text").attr("x", x.rangeBand() / 2).attr("y", function (d) {
                                 return y(d.value) - 3;
                             }).text(function (d) {
-                                return d.value;
+                                return d.count;
                             });
 
                             // Add the x-axis labels
@@ -92,7 +99,7 @@ var PGV_Controllers;
                             chart.selectAll(".bar text").data(data).transition().duration(1000).attr("y", function (d) {
                                 return y(d.value) - 3;
                             }).text(function (d) {
-                                return d.value;
+                                return d.count;
                             });
                             $scope.graphs[pollIdentifier] = polls[pollIndex];
                         }
