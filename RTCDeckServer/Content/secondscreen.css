@@ -16,6 +16,8 @@
     padding: 10px 0; }
   .secondscreen .content {
     padding: 10px 0; }
+    .secondscreen .content :last-child {
+      margin-bottom: 0; }
   .secondscreen .polls {
     padding: 10px 0 13px 0;
     background-color: #34495e;
@@ -26,6 +28,11 @@
       margin-bottom: 20px; }
       .secondscreen .polls ul:last-child {
         margin-bottom: 0; }
+  .secondscreen .ThumbsUpThumbsDown a,
+  .secondscreen #controls a {
+    display: inline-block;
+    color: rgba(0, 0, 0, 0);
+    font: 0px/0 a; }
   .secondscreen .MultiChoice {
     font-size: 1.1em; }
     .secondscreen .MultiChoice .poll-option {
@@ -57,11 +64,8 @@
     .secondscreen .ThumbsUpThumbsDown .poll-option:last-child {
       padding: 0; }
   .secondscreen .ThumbsUpThumbsDown a {
-    display: inline-block;
     width: 45px;
-    height: 42px;
-    color: rgba(0, 0, 0, 0);
-    font: 0px/0 a; }
+    height: 42px; }
   .secondscreen .ThumbsUpThumbsDown .ThumbsUp {
     background: transparent url(Images/thumbsUpInactive.png) no-repeat; }
     .secondscreen .ThumbsUpThumbsDown .ThumbsUp.selected {
@@ -70,4 +74,21 @@
     background: transparent url(Images/thumbsDownInactive.png) no-repeat; }
     .secondscreen .ThumbsUpThumbsDown .ThumbsDown.selected {
       background-image: url(Images/thumbsDownActive.png); }
+  .secondscreen #controls a {
+    margin-right: 20px;
+    cursor: pointer; }
+    .secondscreen #controls a:last-child {
+      margin-right: 0; }
+  .secondscreen #controls .next {
+    width: 28px;
+    height: 36px;
+    background: transparent url(Images/next.png) no-repeat; }
+  .secondscreen #controls .prev {
+    width: 28px;
+    height: 36px;
+    background: transparent url(Images/previous.png) no-repeat; }
+  .secondscreen #controls .current {
+    width: 33px;
+    height: 34px;
+    background: transparent url(Images/play.png) no-repeat; }
 

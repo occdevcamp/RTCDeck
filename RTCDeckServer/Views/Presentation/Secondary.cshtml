@@ -7,9 +7,10 @@
 <html ng-app="secondaryView">
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Audience</title>
+    <title>Second Screen</title>
     @Styles.Render("~/Content/secondscreencss")
-    @Scripts.Render("~/bundles/modernizr")
+        @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/timer.css" rel="stylesheet" />
 </head>
 <body ng-controller="Controllers.SecondaryViewCtrl">
     <div class="container">
@@ -17,13 +18,27 @@
             <div class="col-md-4">
                 <h2>Slide ({{currentSlide.indexh}} , {{currentSlide.indexv}}, {{currentSlide.indexf}})</h2>
             </div>
-            <div ng-bind-html="currentSlide.speakerNotes" class="col-md-4"></div>
-        </div>
-    </div>
+            <div class="col-md-4">
+                <button ng-click="startTimer()" ng-hide="timerStarted">StartTimer</button>
+                <div class="time">
+                    <div class="clock">
+                        <h2>Time</h2>
+                        <span id="clock">0:00:00 AM</span>
+                    </div>
+                    <div class="elapsed">
+                        <h2>Elapsed</h2>
+                        <span id="hours">00</span><span id="minutes">:00</span><span id="seconds">:00</span>
+                    </div>
+                </div>
+            </div>
 
+                <div ng-bind-html="currentSlide.speakerNotes" class="col-md-4"></div>
+            </div>
+    </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/signalR")
     @Scripts.Render("~/bundles/angular")
+    <script src="~/Scripts/RTCDeckAppCode/RevealTimer.js"></script>
     <script>
         window.BASE_URL = "@Html.Raw(Url.Content("~"))";
         window.HUB_URL = "@Html.Raw(Url.Content("~/signalr/"))";

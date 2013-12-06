@@ -62,6 +62,9 @@ module Services {
             this.proxy.on("notifyCurrentSlide", function (slideData: Models.SlideData) {
                 $rootScope.$broadcast("acceptCurrentSlideIndex", slideData);
             });
+            this.proxy.on("notifyTimerStarted", function () {
+                $rootScope.$broadcast("acceptTimerStarted");
+            });
             this.proxy.on("notifyPollData", function (polls: Models.Poll[]) {
                 $rootScope.$broadcast("notifyPollData", polls);
             });
