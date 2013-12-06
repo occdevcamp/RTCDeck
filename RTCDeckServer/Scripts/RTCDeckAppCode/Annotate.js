@@ -4,7 +4,9 @@ var pointerState =
 {
     Down: 0,
     Up: 1,
-    Move: 2
+    Move: 2,
+    AnnotateOn: 3,
+    AnnotateOff: 4
 }
 
 function DrawObject() {
@@ -36,45 +38,12 @@ function createCanvasOverlay() {
             aCanvas.style.pointerEvents = 'none';
 
             var context = aCanvas.getContext('2d');
-            context.fillStyle = 'rgba(0,0,0,0.5)';
-            context.fillRect(0, 0, aCanvas.width, aCanvas.height);
-
-            context.strokeStyle = 'rgb(255,0,0)';  // a green line
-            context.lineWidth = 4;                 // 4 pixels thickness    
+            context.strokeStyle = 'rgb(255,0,0)';
+            context.lineWidth = 4; 
 
             sections[i].appendChild(aCanvas);
         }
     }
-
-    var showButton = document.createElement('div');
-    showButton.style.position = "absolute";
-    showButton.onclick = showHideCanvas;
-    showButton.style.left = "20px";
-    showButton.style.top = "14px";
-    showButton.style.width = "50px";
-    showButton.style.height = "20px";
-    showButton.style.background = "#f00";
-    showButton.style.cursor = "pointer";
-    showButton.style.zIndex = "1000001";
-    showButtonText = document.createTextNode("S/H");
-    showButton.appendChild(showButtonText);
-
-    document.body.appendChild(showButton);
-
-    var drawButton = document.createElement('div');
-    drawButton.style.position = "absolute";
-    drawButton.onclick = drawOnCanvas;
-    drawButton.style.left = "75px";
-    drawButton.style.top = "14px";
-    drawButton.style.width = "50px";
-    drawButton.style.height = "20px";
-    drawButton.style.background = "#f00";
-    drawButton.style.cursor = "pointer";
-    drawButton.style.zIndex = "1000002";
-    drawButtonText = document.createTextNode("ON/OFF");
-    drawButton.appendChild(drawButtonText);
-
-    document.body.appendChild(drawButton);
 
     eventCanvas = document.createElement('canvas');
     eventCanvas.width = 1024;
@@ -89,6 +58,7 @@ function createCanvasOverlay() {
     eventCanvas.style.WebkitTransform = 'translate(-50%, -50%)';
     eventCanvas.style.zIndex = "2000000";
     eventCanvas.style.visibility = 'hidden';
+    eventCanvas.style.pointerEvents = 'auto';
 
     slide.appendChild(eventCanvas);
 
@@ -162,6 +132,14 @@ function drawIt(drawObject, fromLocal, connectionId) {
                 ignoreMovement = true;
             }
             break;
+        case pointerState.AnnotateOn:
+            document.getElementById("cbxAnnotation").checked = true;
+            showHideCanvasInner();
+            break;
+        case pointerState.AnnotateOff:
+            document.getElementById("cbxAnnotation").checked = false;
+            showHideCanvasInner();
+            break;
     }
 
     if (fromLocal && !ignoreMovement) {
@@ -170,17 +148,33 @@ function drawIt(drawObject, fromLocal, connectionId) {
 }
 
 function showHideCanvas() {
+    showHideCanvasInner();
+
+    var drawObject = new DrawObject();
+    drawObject.currentState = document.getElementById("cbxAnnotation").checked ? pointerState.AnnotateOn : pointerState.AnnotateOff;
+    sendIt(drawObject);
+}
+
+function showHideCanvasInner() {
+
     if (presentCanvas()) {
-        presentCanvas().style.visibility = (presentCanvas().style.visibility == 'visible') ? 'hidden' : 'visible';
+        presentCanvas().style.visibility = document.getElementById("cbxAnnotation").checked ? 'visible' : 'hidden';
     }
     if (eventCanvas) {
         eventCanvas.style.visibility = presentCanvas().style.visibility;
     }
+
+    document.getElementById("cbxPen").checked = (eventCanvas.style.pointerEvents == "auto") && document.getElementById("cbxAnnotation").checked;
 }
 
 function drawOnCanvas() {
-    if (eventCanvas) {
-        eventCanvas.style.pointerEvents = (eventCanvas.style.pointerEvents == "none") ? "auto" : "none";
+    if (document.getElementById("cbxAnnotation").checked) {
+        if (eventCanvas) {
+            eventCanvas.style.pointerEvents = (eventCanvas.style.pointerEvents == "none") ? "auto" : "none";
+        }
+    }
+    else {
+        document.getElementById("cbxPen").checked = false;
     }
 }
 

@@ -226,7 +226,9 @@
     <Content Include="Content\reveal\theme\simple.css" />
     <Content Include="Content\reveal\theme\sky.css" />
     <Content Include="Content\reveal\theme\solarized.css" />
-    <Content Include="Content\reveal\theme\source\occ.css" />
+    <Content Include="Content\reveal\theme\source\occ.css">
+      <DependentUpon>occ.scss</DependentUpon>
+    </Content>
     <Content Include="Content\secondscreen.css">
       <DependentUpon>secondscreen.scss</DependentUpon>
     </Content>
