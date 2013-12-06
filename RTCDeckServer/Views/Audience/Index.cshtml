@@ -12,7 +12,7 @@
     <link href="http://fonts.googleapis.com/css?family=Raleway:300&text=Audience" rel="stylesheet">
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body class="secondscreen audience" ng-controller="Controllers.AudienceViewCtrl">
+<body class="audience" ng-controller="Controllers.AudienceViewCtrl">
     <div id="headerwrap">
         <div class="container centered">
             <h1>Audience</h1>
@@ -20,9 +20,7 @@
     </div>
     <div id="slides">
         <div ng-repeat="slideData in slides" ng-hide="!isCurrentSlide(slideData)">
-            <div class="content">
-                <div class="container" ng-bind-html="slideData.supplementaryContent"></div>
-            </div>
+            <div class="container content" ng-bind-html="slideData.supplementaryContent"></div>
             <div class="polls">
                 <div class="container">
                     <ul ng-repeat="poll in slideData.polls" ng-hide="!isCurrentServerSlide(slideData)" ng-cloak>

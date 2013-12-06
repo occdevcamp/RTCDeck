@@ -1,32 +1,100 @@
-.secondscreen {
-	background-color: #2f2f2f;
-    color: #555;
-
-	#headerwrap {
-		background-color: #34495e;
-		color: #ffffff;
-		h1 {
-			font-family: "Raleway";
-			font-weight: 300;
-			font-size: 1.6em;
-			margin: 10px 0;
-		}
+body {
+	color: #555;
+	&.audience {
+		background-color: #2f2f2f;
+		color: #555;
 	}
-
-	#slides {
+	&.speaker {
 		background-color: #f2f2f2;
 	}
+}
 
-	#controls {
-		color: #ffffff;
-		padding: 10px 0;
+#headerwrap {
+	background-color: #34495e;
+	color: #ffffff;
+}
+
+#headerwrap h1,
+.subheader,
+.time {
+	font-family: "Raleway";
+	font-weight: 300;
+}
+#headerwrap h1 {
+	font-size: 24px;
+	margin: 10px 0;
+}
+.subheader {
+	margin: 0 0 10px 0;
+	font-size: 20px;
+}
+
+#slides {
+	background-color: #f2f2f2;
+}
+
+#controls {
+	color: #ffffff;
+	padding: 10px 0;
+}
+
+.content,
+.polls {
+	:last-child {
+		margin-bottom: 0;
+	}
+}
+
+.ThumbsUpThumbsDown a,
+#controls a,
+.start-timer {
+	display: inline-block;
+	color: rgba(0, 0, 0, 0);
+	font: 0px/0 a;
+	cursor: pointer;
+}
+
+
+/* Speaker's second-screen view */
+
+.speaker {
+	.content,
+	.polls {
+		padding-top: 15px;
+		padding-bottom: 15px;
 	}
 
+	.start-timer {
+		width: 23px;
+		height: 27px;
+		background: transparent url(Images/stopwatch.png) no-repeat;
+		position: absolute;
+		top: 8px;
+		right: 8px;
+	}
+
+	.time {
+		margin-bottom: 10px;
+	}
+
+	.elapsed,
+	.clock {
+		font-size: 30px;
+		h2 {
+			margin: 0;
+		}
+	}
+
+	.elapsed .mute {
+		opacity: 0.4;
+	}
+}
+
+/* Audience view */
+
+.audience {
 	.content {
 		padding: 10px 0;
-		:last-child {
-			margin-bottom: 0;
-		}
 	}
 
 	.polls {
@@ -41,13 +109,6 @@
 				margin-bottom: 0;
 			}
 		}
-	}
-
-	.ThumbsUpThumbsDown a,
-	#controls a {
-		display: inline-block;
-		color: rgba(0, 0, 0, 0);
-		font: 0px/0 a;
 	}
 
 	.MultiChoice {
@@ -112,7 +173,6 @@
 	#controls {
 		a {
 			margin-right: 20px;
-			cursor: pointer;
 			&:last-child {
 				margin-right: 0;
 			}
