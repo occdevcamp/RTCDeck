@@ -57,66 +57,69 @@ module PGV_Controllers {
                             data[optionIndex] = { name: pollData[optionIndex].OptionText, value: percentageValue, count: pollData[optionIndex].Count };
                         }
 
-                        // common attributes whether creating new or updat
-                        var graphdivID = "graphforpoll" + pollIdentifier.trim();
-                        var graphdivselector = '#' + graphdivID;
-                        var graphsvg = '<svg id="' + graphdivID + '" class="chart"></svg>';
-                        var margin = { top: 20, right: 30, bottom: 30, left: 40 },
-                            width = 200 - margin.left - margin.right,
-                            height = 300 - margin.top - margin.bottom;
-                        // Set up the axes
-                        var x = d3.scale.ordinal()
-                            .rangeRoundBands([0, width], .1)
-                            .domain(data.map(function (d) { return d.name; }));
+                        // if total == 0 we don't yet attempt to create a graph
+                        if (total != 0) {
+                            // common attributes whether creating new or updat
+                            var graphdivID = "graphforpoll" + pollIdentifier.trim();
+                            var graphdivselector = '#' + graphdivID;
+                            var graphsvg = '<svg id="' + graphdivID + '" class="chart"></svg>';
+                            var margin = { top: 20, right: 30, bottom: 30, left: 40 },
+                                width = 200 - margin.left - margin.right,
+                                height = 300 - margin.top - margin.bottom;
+                            // Set up the axes
+                            var x = d3.scale.ordinal()
+                                .rangeRoundBands([0, width], .1)
+                                .domain(data.map(function (d) { return d.name; }));
 
-                        var y = d3.scale.linear()
-                            .domain([0, 100])
-                            .range([height, 0]);
+                            var y = d3.scale.linear()
+                                .domain([0, 100])
+                                .range([height, 0]);
 
-                        var xAxis = d3.svg.axis()
-                            .scale(x)
-                            .orient("bottom");
+                            var xAxis = d3.svg.axis()
+                                .scale(x)
+                                .orient("bottom");
 
-                        if ($scope.graphs[pollIdentifier] == null) {
-                            // make new svg in the main div
-                            $('#graphsDiv').append(graphsvg);
-                            // Chart size
-                            // Create the chart container
-                            var chart = d3.select(graphdivselector)
-                                .attr("width", width + margin.left + margin.right)
-                                .attr("height", height + margin.top + margin.bottom)
-                                .append("g")
-                                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+                            if ($scope.graphs[pollIdentifier] == null) {
+                                // make new svg in the main div
+                                $('#graphsDiv').append(graphsvg);
+                                // Chart size
+                                // Create the chart container
+                                var chart = d3.select(graphdivselector)
+                                    .attr("width", width + margin.left + margin.right)
+                                    .attr("height", height + margin.top + margin.bottom)
+                                    .append("g")
+                                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-                            // Create the bar and bar-label containers
-                            var bar = chart.selectAll("g")
-                                .data(data)
-                                .enter().append("g")
-                                .attr("class", "bar")
-                                .attr("transform", function (d) { return "translate(" + x(d.name) + ",0)"; });
+                                // Create the bar and bar-label containers
+                                var bar = chart.selectAll("g")
+                                    .data(data)
+                                    .enter().append("g")
+                                    .attr("class", "bar")
+                                    .attr("transform", function (d) { return "translate(" + x(d.name) + ",0)"; });
 
-                            // Create the bars
-                            bar.append("rect")
-                                .attr("y", function (d) { return y(d.value); })
-                                .attr("height", function (d) { return height - y(d.value); })
-                                .attr("width", x.rangeBand());
+                                // Create the bars
+                                bar.append("rect")
+                                    .attr("y", function (d) { return y(0); })
+                                    .attr("height", function (d) { return height - y(0); })
+                                    .attr("width", x.rangeBand());
 
-                            // Create the bar labels
-                            bar.append("text")
-                                .attr("x", x.rangeBand() / 2)
-                                .attr("y", function (d) { return y(d.value) - 3; })
-                                .text(function (d) { return d.count /*+ '%'*/; });
+                                // Create the bar labels
+                                bar.append("text")
+                                    .attr("x", x.rangeBand() / 2)
+                                    .attr("y", function (d) { return y(0) - 3; })
+                                    .text(function (d) { return 0 /*+ '%'*/; });
 
-                            // Add the x-axis labels
-                            chart.append("g")
-                                .attr("class", "x axis")
-                                .attr("transform", "translate(0," + height + ")")
-                                .call(xAxis);
+                                // Add the x-axis labels
+                                chart.append("g")
+                                    .attr("class", "x axis")
+                                    .attr("transform", "translate(0," + height + ")")
+                                    .call(xAxis);
 
 
-                            $scope.graphs[pollIdentifier] = polls[pollIndex];
-                        }
-                        else {
+                                $scope.graphs[pollIdentifier] = polls[pollIndex];
+                            }
+
+                            // now update with results, even for new graphs to get slide-from-zero effect
                             var chart = d3.select(graphdivselector).select("g");
                             chart.selectAll("rect")
                                 .data(data)
@@ -132,6 +135,7 @@ module PGV_Controllers {
                                 .attr("y", function (d) { return y(d.value) - 3; })
                                 .text(function (d) { return d.count /*+ '%'*/; });
                             $scope.graphs[pollIdentifier] = polls[pollIndex];
+
                         }
                     });
                 }
