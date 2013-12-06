@@ -75,9 +75,7 @@ module Services {
             });
 
             this.proxy.on("receivePresentationNavigationCommand", function (command: string) {
-                if (this.isPrimaryPresentation) {
                     $rootScope.$emit("receivePresentationNavigationCommand", command);
-                }
             });
 
             this.proxy.on("receiveDrawing", function (message: string) {

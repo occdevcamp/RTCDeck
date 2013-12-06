@@ -60,9 +60,7 @@ var Services;
             });
 
             this.proxy.on("receivePresentationNavigationCommand", function (command) {
-                if (this.isPrimaryPresentation) {
-                    $rootScope.$emit("receivePresentationNavigationCommand", command);
-                }
+                $rootScope.$emit("receivePresentationNavigationCommand", command);
             });
 
             this.proxy.on("receiveDrawing", function (message) {

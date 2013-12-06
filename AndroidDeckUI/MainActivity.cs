@@ -22,7 +22,7 @@ namespace OxfordCC.DevCamp2013.AndroidDeckUI
         /// <summary>
         /// URL of the Hub server.
         /// </summary>
-        private const string HUB_URL = "http://129.67.35.145/RTCDeckServer/signalr";
+        private const string HUB_URL = "http://129.67.33.245/RTCDeckServer/signalr";
 
         RTCHubProxy hubProxy;
 
