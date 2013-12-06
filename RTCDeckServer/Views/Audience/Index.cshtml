@@ -41,12 +41,19 @@
             </div>
         </div>
     </div>
-    </div>
     <div id="controls">
         <div class="container centered">
-            <button ng-click="navPrev()">Prev</button>
-            <button ng-click="navNext()">Next</button>
-            <button ng-hide="!paused" ng-click="goToCurrentServerSlide()">Go to current slide</button>
+            <div class="row">
+                <div class="col-xs-4">
+                    <a class="prev" ng-click="navPrev()">Prev</a>
+                </div>
+                <div class="col-xs-4">
+                    <a class="current" ng-hide="!paused" ng-click="goToCurrentServerSlide()">Current</a>
+                </div>
+                <div class="col-xs-4">
+                    <a class="next" ng-click="navNext()">Next</a>
+                </div>
+            </div>
         </div>
     </div>
 
