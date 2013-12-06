@@ -46,6 +46,14 @@ input[type="checkbox"].input-validation-error {
 
 /* Graphs */
 
+.chart {
+	margin-right: 40px;
+}
+
+.chart:last-child {
+	margin-right: 0;
+}
+
 .chart rect {
 	fill: steelblue;
 }
