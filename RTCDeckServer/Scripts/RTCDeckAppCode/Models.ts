@@ -30,6 +30,7 @@ module Models {
         OptionText: string;
         selected?: boolean;
         Count?: number;
+        OptionStyle?: string;
     }
     export class PollAnswer {
         constructor(poll: Poll, option: PollOption) {
