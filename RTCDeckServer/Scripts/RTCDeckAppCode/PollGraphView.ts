@@ -48,7 +48,8 @@ module PGV_Controllers {
                         // set up data for graph
                         var data = [];
                         var total = 0;
-                        var percentageValue, optionname, barlabel;
+                        var percentageValue, optionname, barlabel,
+                            optionsaretruncated: boolean = false, optionslabels: string = "";
                         // work out total so we can calc percentages
                         for (var optionIndex in pollData) total += pollData[optionIndex].Count;
 
@@ -57,10 +58,23 @@ module PGV_Controllers {
                             optionname = pollData[optionIndex].OptionText;
                             if (optionname == "Dislike")
                                 barlabel = "Dislike";
-                            else 
-                                barlabel = (optionname.length > 5) ? optionname.substring(0, 1) : optionname;
+                            else {
+                                if (optionname.length > 5) {
+                                    barlabel = optionname.substring(0, 1);
+                                    optionsaretruncated = true;
+                                }
+                                else
+                                    barlabel = optionname;
+                            }
 
                             data[optionIndex] = { name: barlabel, value: percentageValue, count: pollData[optionIndex].Count };
+                        }
+                        if (optionsaretruncated) {
+                            optionslabels = "<ul>";
+                            for (var optionIndex in pollData) {
+                                optionslabels += "<li>" + pollData[optionIndex].OptionText + "</li>";
+                            }
+                            optionslabels += "</ul>";
                         }
 
                         // if total == 0 we don't yet attempt to create a graph
@@ -68,9 +82,12 @@ module PGV_Controllers {
                             // common attributes whether creating new or updat
                             var graphdivID = "graphforpoll" + pollIdentifier.trim();
                             var graphdivselector = '#' + graphdivID;
-                            var graphtags = "";
-                            if ($scope.allPollsView) graphtags = "<h2>" + polls[pollIndex].Question + "</h2>";
-                            graphtags += '<svg id="' + graphdivID + '" class="chart"></svg>';
+                            var graphtags = '<svg id="' + graphdivID + '" class="chart"></svg>';
+                            if ($scope.allPollsView) {
+                                graphtags += "<p>" + polls[pollIndex].Question;
+                                if (optionsaretruncated) graphtags += optionslabels;
+                                graphtags += "</p>";
+                            }
                             var margin = { top: 20, right: 30, bottom: 30, left: 40 },
                                 width = 200 - margin.left - margin.right,
                                 height = 300 - margin.top - margin.bottom;
