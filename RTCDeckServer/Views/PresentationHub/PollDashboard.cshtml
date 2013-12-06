@@ -4,19 +4,6 @@
 
 <div class="container" ng-app="pollGraphView">
     <h2>Polls.</h2>
-    <!--
-    <div class="row">
-        <div class="col-md-6">
-            <!-- Poll Answer div: will be graph- ->
-            <div ng-show="latestPollAnswers"> <!-- taking a punt on this evaluating to false when empty and true when results.-- >
-                <h4>{{latestPollAnswers.Question}}</h4>
-                <ul ng-repeat="option in latestPollAnswers.Options">
-                    <li>{{option.OptionText}}: {{option.Count}}</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    -->
     <div ng-controller="PGV_Controllers.PollGraphViewCtrl" ng-init="init(false);">
         @Html.Partial("_PollGraphsPartial")
         <input type="checkbox" ng-model="allPollsView" />
@@ -26,9 +13,9 @@
 @section scripts {
     @Scripts.Render("~/bundles/angular")
     <script>
-            window.BASE_URL = "@Html.Raw(Url.Content("~"))";
-            window.HUB_URL = "@Html.Raw(Url.Content("~/signalr/"))";
-            window.HUB_NAME = "RTCDeckHub";
+        window.BASE_URL = "@Html.Raw(Url.Content("~"))";
+        window.HUB_URL = "@Html.Raw(Url.Content("~/signalr/"))";
+        window.HUB_NAME = "RTCDeckHub";
     </script>
     <script src="~/Scripts/RTCDeckAppCode/Models.js"></script>
     <script src="~/Scripts/RTCDeckAppCode/HubCommunications.js"></script>
