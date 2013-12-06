@@ -201,13 +201,19 @@ body {
   .reveal .graphs {
     position: absolute;
     bottom: 50%;
-    right: 50%; }
-  .reveal .chart rect {
-    fill: steelblue; }
-  .reveal .chart text {
-    fill: black;
-    font-size: 16px;
-    text-anchor: middle; }
+    right: 50%;
+    width: 100%;
+    text-align: right; }
+  .reveal .chart {
+    margin-left: 40px; }
+    .reveal .chart:first-child {
+      margin-left: 0; }
+    .reveal .chart rect {
+      fill: steelblue; }
+    .reveal .chart text {
+      fill: black;
+      font-size: 16px;
+      text-anchor: middle; }
   .reveal .axis path,
   .reveal .axis line {
     fill: none;
