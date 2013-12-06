@@ -1,94 +1,111 @@
-.secondscreen {
+body {
   background-color: #2f2f2f;
   color: #555; }
-  .secondscreen #headerwrap {
-    background-color: #34495e;
-    color: #ffffff; }
-    .secondscreen #headerwrap h1 {
-      font-family: "Raleway";
-      font-weight: 300;
-      font-size: 1.6em;
-      margin: 10px 0; }
-  .secondscreen #slides {
-    background-color: #f2f2f2; }
-  .secondscreen #controls {
-    color: #ffffff;
-    padding: 10px 0; }
-  .secondscreen .content {
-    padding: 10px 0; }
-    .secondscreen .content :last-child {
+
+#headerwrap {
+  background-color: #34495e;
+  color: #ffffff; }
+
+#headerwrap h1,
+.subheader {
+  font-family: "Raleway";
+  font-weight: 300;
+  font-size: 1.6em;
+  margin: 10px 0; }
+
+.subheader {
+  font-size: 1.4em;
+  margin: 0 0 10px 0; }
+
+#slides {
+  background-color: #f2f2f2; }
+
+#controls {
+  color: #ffffff;
+  padding: 10px 0; }
+
+.content :last-child,
+.polls :last-child {
+  margin-bottom: 0; }
+
+.speaker .content,
+.speaker .polls {
+  padding-top: 15px;
+  padding-bottom: 15px; }
+
+.audience .content {
+  padding: 10px 0; }
+.audience .polls {
+  padding: 10px 0 13px 0;
+  background-color: #34495e;
+  color: #ffffff; }
+  .audience .polls ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 20px; }
+    .audience .polls ul:last-child {
       margin-bottom: 0; }
-  .secondscreen .polls {
-    padding: 10px 0 13px 0;
-    background-color: #34495e;
-    color: #ffffff; }
-    .secondscreen .polls ul {
-      list-style: none;
-      padding-left: 0;
-      margin-bottom: 20px; }
-      .secondscreen .polls ul:last-child {
-        margin-bottom: 0; }
-  .secondscreen .ThumbsUpThumbsDown a,
-  .secondscreen #controls a {
-    display: inline-block;
-    color: rgba(0, 0, 0, 0);
-    font: 0px/0 a; }
-  .secondscreen .MultiChoice {
-    font-size: 1.1em; }
-    .secondscreen .MultiChoice .poll-option {
-      margin-bottom: 5px; }
-      .secondscreen .MultiChoice .poll-option:last-child {
-        margin-bottom: 0; }
-    .secondscreen .MultiChoice a {
-      border: 1px solid rgba(0, 0, 0, 0);
-      border-radius: 4px;
-      display: block;
-      line-height: 1.42857;
-      margin-bottom: 0;
-      padding: 6px 12px;
-      vertical-align: middle;
-      background-color: #428BCA;
-      border-color: #357EBD;
-      color: #FFFFFF; }
-      .secondscreen .MultiChoice a.selected {
-        background-color: #5CB85C;
-        border-color: #4CAE4C; }
-  .secondscreen .ThumbsUpThumbsDown ul {
-    text-align: center;
-    line-height: 0; }
-  .secondscreen .ThumbsUpThumbsDown .poll-text {
-    display: none; }
-  .secondscreen .ThumbsUpThumbsDown .poll-option {
-    display: inline;
-    padding-right: 10px; }
-    .secondscreen .ThumbsUpThumbsDown .poll-option:last-child {
-      padding: 0; }
-  .secondscreen .ThumbsUpThumbsDown a {
-    width: 45px;
-    height: 42px; }
-  .secondscreen .ThumbsUpThumbsDown .ThumbsUp {
-    background: transparent url(Images/thumbsUpInactive.png) no-repeat; }
-    .secondscreen .ThumbsUpThumbsDown .ThumbsUp.selected {
-      background-image: url(Images/thumbsUpActive.png); }
-  .secondscreen .ThumbsUpThumbsDown .ThumbsDown {
-    background: transparent url(Images/thumbsDownInactive.png) no-repeat; }
-    .secondscreen .ThumbsUpThumbsDown .ThumbsDown.selected {
-      background-image: url(Images/thumbsDownActive.png); }
-  .secondscreen #controls a {
-    margin-right: 20px;
-    cursor: pointer; }
-    .secondscreen #controls a:last-child {
-      margin-right: 0; }
-  .secondscreen #controls .next {
-    width: 28px;
-    height: 36px;
-    background: transparent url(Images/next.png) no-repeat; }
-  .secondscreen #controls .prev {
-    width: 28px;
-    height: 36px;
-    background: transparent url(Images/previous.png) no-repeat; }
-  .secondscreen #controls .current {
-    width: 33px;
-    height: 34px;
-    background: transparent url(Images/play.png) no-repeat; }
+.audience .ThumbsUpThumbsDown a,
+.audience #controls a {
+  display: inline-block;
+  color: rgba(0, 0, 0, 0);
+  font: 0px/0 a; }
+.audience .MultiChoice {
+  font-size: 1.1em; }
+  .audience .MultiChoice .poll-option {
+    margin-bottom: 5px; }
+    .audience .MultiChoice .poll-option:last-child {
+      margin-bottom: 0; }
+  .audience .MultiChoice a {
+    border: 1px solid rgba(0, 0, 0, 0);
+    border-radius: 4px;
+    display: block;
+    line-height: 1.42857;
+    margin-bottom: 0;
+    padding: 6px 12px;
+    vertical-align: middle;
+    background-color: #428BCA;
+    border-color: #357EBD;
+    color: #FFFFFF; }
+    .audience .MultiChoice a.selected {
+      background-color: #5CB85C;
+      border-color: #4CAE4C; }
+.audience .ThumbsUpThumbsDown ul {
+  text-align: center;
+  line-height: 0; }
+.audience .ThumbsUpThumbsDown .poll-text {
+  display: none; }
+.audience .ThumbsUpThumbsDown .poll-option {
+  display: inline;
+  padding-right: 10px; }
+  .audience .ThumbsUpThumbsDown .poll-option:last-child {
+    padding: 0; }
+.audience .ThumbsUpThumbsDown a {
+  width: 45px;
+  height: 42px; }
+.audience .ThumbsUpThumbsDown .ThumbsUp {
+  background: transparent url(Images/thumbsUpInactive.png) no-repeat; }
+  .audience .ThumbsUpThumbsDown .ThumbsUp.selected {
+    background-image: url(Images/thumbsUpActive.png); }
+.audience .ThumbsUpThumbsDown .ThumbsDown {
+  background: transparent url(Images/thumbsDownInactive.png) no-repeat; }
+  .audience .ThumbsUpThumbsDown .ThumbsDown.selected {
+    background-image: url(Images/thumbsDownActive.png); }
+.audience #controls a {
+  margin-right: 20px;
+  cursor: pointer; }
+  .audience #controls a:last-child {
+    margin-right: 0; }
+.audience #controls .next {
+  width: 28px;
+  height: 36px;
+  background: transparent url(Images/next.png) no-repeat; }
+.audience #controls .prev {
+  width: 28px;
+  height: 36px;
+  background: transparent url(Images/previous.png) no-repeat; }
+.audience #controls .current {
+  width: 33px;
+  height: 34px;
+  background: transparent url(Images/play.png) no-repeat; }
 

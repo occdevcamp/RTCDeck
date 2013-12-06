@@ -7,17 +7,29 @@
 <html ng-app="secondaryView">
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Audience</title>
+    <title>Speaker</title>
     @Styles.Render("~/Content/secondscreencss")
+    <link href="http://fonts.googleapis.com/css?family=Raleway:300&text=SpeakerNotsCh" rel="stylesheet">
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body ng-controller="Controllers.SecondaryViewCtrl">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <h2>Slide ({{currentSlide.indexh}} , {{currentSlide.indexv}}, {{currentSlide.indexf}})</h2>
+<body class="speaker" ng-controller="Controllers.SecondaryViewCtrl">
+    <div id="headerwrap">
+        <div class="container centered">
+            <h1>Speaker</h1>
+        </div>
+    </div>
+    <div id="slides">
+        <div class="container">
+            <div class="row">
+                <div class="content col-md-6">
+                    <h2 class="subheader">Notes</h2>
+                    <div ng-bind-html="currentSlide.speakerNotes"></div>
+                </div>
+                <div class="polls col-md-6">
+                    <h2 class="subheader">Charts</h2>
+                    <p>Charts go here</p>
+                </div>
             </div>
-            <div ng-bind-html="currentSlide.speakerNotes" class="col-md-4"></div>
         </div>
     </div>
 

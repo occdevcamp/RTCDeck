@@ -1,32 +1,52 @@
-.secondscreen {
+body {
 	background-color: #2f2f2f;
-    color: #555;
+	color: #555;
+}
 
-	#headerwrap {
-		background-color: #34495e;
-		color: #ffffff;
-		h1 {
-			font-family: "Raleway";
-			font-weight: 300;
-			font-size: 1.6em;
-			margin: 10px 0;
-		}
+#headerwrap {
+	background-color: #34495e;
+	color: #ffffff;
+}
+
+#headerwrap h1,
+.subheader {
+	font-family: "Raleway";
+	font-weight: 300;
+	font-size: 1.6em;
+	margin: 10px 0;
+}
+.subheader {
+	font-size: 1.4em;
+	margin: 0 0 10px 0;
+}
+
+#slides {
+	background-color: #f2f2f2;
+}
+
+#controls {
+	color: #ffffff;
+	padding: 10px 0;
+}
+
+.content,
+.polls {
+	:last-child {
+		margin-bottom: 0;
 	}
+}
 
-	#slides {
-		background-color: #f2f2f2;
+.speaker {
+	.content,
+	.polls {
+		padding-top: 15px;
+		padding-bottom: 15px;
 	}
+}
 
-	#controls {
-		color: #ffffff;
-		padding: 10px 0;
-	}
-
+.audience {
 	.content {
 		padding: 10px 0;
-		:last-child {
-			margin-bottom: 0;
-		}
 	}
 
 	.polls {
