@@ -30,7 +30,7 @@
                             <p class="poll-text">{{poll.Question}}</p>
                             <ul>
                                 <li class="poll-option" ng-repeat="option in poll.Options">
-                                    <a href="#" ng-click="selectAnswer(poll,option)" ng-class="{selected : option.selected}">
+                                    <a href="#" ng-click="selectAnswer(poll,option)" ng-class="{selected : option.selected}" class="{{option.OptionStyle}}">
                                         {{option.OptionText}}
                                     </a>
                                 </li>
