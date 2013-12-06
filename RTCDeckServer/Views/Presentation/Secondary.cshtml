@@ -9,15 +9,26 @@
     <meta name="viewport" content="width=device-width" />
     <title>Speaker</title>
     @Styles.Render("~/Content/secondscreencss")
-    <link href="http://fonts.googleapis.com/css?family=Raleway:300&text=SpeakerNotsCh" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Raleway:300&text=SpeakerNotsChTimEld1234567890:" rel="stylesheet">
     @Scripts.Render("~/bundles/modernizr")
-        @Scripts.Render("~/bundles/modernizr")
-    <link href="~/Content/timer.css" rel="stylesheet" />
 </head>
 <body class="speaker" ng-controller="Controllers.SecondaryViewCtrl">
     <div id="headerwrap">
         <div class="container centered">
             <h1>Speaker</h1>
+            <a class="start-timer" ng-click="startTimer()" ng-hide="timerStarted">StartTimer</a>
+        </div>
+        <div class="container centered" ng-hide="!timerStarted">
+            <div class="row time">
+                <div class="clock col-md-6">
+                    <h2 class="subheader">Time</h2>
+                    <span id="clock">0:00:00</span>
+                </div>
+                <div class="elapsed col-md-6">
+                    <h2 class="subheader">Elapsed</h2>
+                    <span id="hours">00</span><span id="minutes">:00</span><span id="seconds">:00</span>
+                </div>
+            </div>
         </div>
     </div>
     <div id="slides">
@@ -32,22 +43,7 @@
                     <p>Charts go here</p>
                 </div>
             </div>
-            <div class="col-md-4">
-                <button ng-click="startTimer()" ng-hide="timerStarted">StartTimer</button>
-                <div class="time">
-                    <div class="clock">
-                        <h2>Time</h2>
-                        <span id="clock">0:00:00 AM</span>
-                    </div>
-                    <div class="elapsed">
-                        <h2>Elapsed</h2>
-                        <span id="hours">00</span><span id="minutes">:00</span><span id="seconds">:00</span>
-                    </div>
-                </div>
-            </div>
-
-                <div ng-bind-html="currentSlide.speakerNotes" class="col-md-4"></div>
-            </div>
+        </div>
     </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/signalR")

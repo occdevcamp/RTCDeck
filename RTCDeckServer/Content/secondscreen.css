@@ -1,21 +1,28 @@
 body {
-  background-color: #2f2f2f;
   color: #555; }
+  body.audience {
+    background-color: #2f2f2f;
+    color: #555; }
+  body.speaker {
+    background-color: #f2f2f2; }
 
 #headerwrap {
   background-color: #34495e;
   color: #ffffff; }
 
 #headerwrap h1,
-.subheader {
+.subheader,
+.time {
   font-family: "Raleway";
-  font-weight: 300;
-  font-size: 1.6em;
+  font-weight: 300; }
+
+#headerwrap h1 {
+  font-size: 24px;
   margin: 10px 0; }
 
 .subheader {
-  font-size: 1.4em;
-  margin: 0 0 10px 0; }
+  margin: 0 0 10px 0;
+  font-size: 20px; }
 
 #slides {
   background-color: #f2f2f2; }
@@ -28,11 +35,38 @@ body {
 .polls :last-child {
   margin-bottom: 0; }
 
+.ThumbsUpThumbsDown a,
+#controls a,
+.start-timer {
+  display: inline-block;
+  color: rgba(0, 0, 0, 0);
+  font: 0px/0 a;
+  cursor: pointer; }
+
+/* Speaker's second-screen view */
 .speaker .content,
 .speaker .polls {
   padding-top: 15px;
   padding-bottom: 15px; }
+.speaker .start-timer {
+  width: 23px;
+  height: 27px;
+  background: transparent url(Images/stopwatch.png) no-repeat;
+  position: absolute;
+  top: 8px;
+  right: 8px; }
+.speaker .time {
+  margin-bottom: 10px; }
+.speaker .elapsed,
+.speaker .clock {
+  font-size: 30px; }
+  .speaker .elapsed h2,
+  .speaker .clock h2 {
+    margin: 0; }
+.speaker .elapsed .mute {
+  opacity: 0.4; }
 
+/* Audience view */
 .audience .content {
   padding: 10px 0; }
 .audience .polls {
@@ -45,11 +79,6 @@ body {
     margin-bottom: 20px; }
     .audience .polls ul:last-child {
       margin-bottom: 0; }
-.audience .ThumbsUpThumbsDown a,
-.audience #controls a {
-  display: inline-block;
-  color: rgba(0, 0, 0, 0);
-  font: 0px/0 a; }
 .audience .MultiChoice {
   font-size: 1.1em; }
   .audience .MultiChoice .poll-option {
@@ -92,8 +121,7 @@ body {
   .audience .ThumbsUpThumbsDown .ThumbsDown.selected {
     background-image: url(Images/thumbsDownActive.png); }
 .audience #controls a {
-  margin-right: 20px;
-  cursor: pointer; }
+  margin-right: 20px; }
   .audience #controls a:last-child {
     margin-right: 0; }
 .audience #controls .next {

@@ -205,6 +205,7 @@
     <Content Include="Content\Images\previous.png" />
     <Content Include="Content\Images\secondScreen.png" />
     <Content Include="Content\Images\secondScreenInactive.png" />
+    <Content Include="Content\Images\stopwatch.png" />
     <Content Include="Content\images\thumbsDownActive.png" />
     <Content Include="Content\images\thumbsDownInactive.png" />
     <Content Include="Content\images\thumbsUpActive.png" />
@@ -225,7 +226,9 @@
     <Content Include="Content\reveal\theme\sky.css" />
     <Content Include="Content\reveal\theme\solarized.css" />
     <Content Include="Content\reveal\theme\source\occ.css" />
-    <Content Include="Content\timer.css" />
+    <Content Include="Content\secondscreen.css">
+      <DependentUpon>secondscreen.scss</DependentUpon>
+    </Content>
     <Content Include="Content\theme.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -274,6 +277,7 @@
     <Content Include="Content\reveal\theme\template\mixins.scss" />
     <Content Include="Content\reveal\theme\template\settings.scss" />
     <Content Include="Content\reveal\theme\template\theme.scss" />
+    <Content Include="Content\secondscreen.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\hand-1.2.2.js" />
     <Content Include="Scripts\i18n\angular-locale_af-na.js" />
