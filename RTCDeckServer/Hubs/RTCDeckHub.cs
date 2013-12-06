@@ -88,6 +88,7 @@ namespace RTCDeckServer.Hubs
 
         public void StartPresentationTimer()
         {
+            Clients.Others.notifyTimerStarted();
             _presentationState.StartTimer();
         }
 

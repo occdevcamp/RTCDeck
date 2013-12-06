@@ -8,8 +8,48 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Audience</title>
-    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/secondscreencss")
+    <link href="http://fonts.googleapis.com/css?family=Raleway:300&text=Audience" rel="stylesheet">
     @Scripts.Render("~/bundles/modernizr")
+</head>
+<body class="secondscreen audience" ng-controller="Controllers.AudienceViewCtrl">
+    <div id="headerwrap">
+        <div class="container centered">
+            <h1>Audience</h1>
+        </div>
+    </div>
+    <div id="slides">
+        <div ng-repeat="slideData in slides" ng-hide="!isCurrentSlide(slideData)">
+            <div class="content">
+                <div class="container" ng-bind-html="slideData.supplementaryContent"></div>
+            </div>
+            <div class="polls">
+                <div class="container">
+                    <ul ng-repeat="poll in slideData.polls" ng-hide="!isCurrentServerSlide(slideData)">
+                        <li class="poll" ng-class="poll.Style">
+                            <p class="poll-text">{{poll.Question}}</p>
+                            <ul>
+                                <li class="poll-option" ng-repeat="option in poll.Options">
+                                    <a href="#" ng-click="selectAnswer(poll,option)" ng-class="{selected : option.selected}" class="{{option.OptionStyle}}">
+                                        {{option.OptionText}}
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div id="controls">
+        <div class="container centered">
+            <button ng-click="navPrev()">Prev</button>
+            <button ng-click="navNext()">Next</button>
+            <button ng-hide="!paused" ng-click="goToCurrentServerSlide()">Go to current slide</button>
+        </div>
+    </div>
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/signalR")
     @Scripts.Render("~/bundles/angular")
@@ -21,36 +61,5 @@
     <script src="~/Scripts/RTCDeckAppCode/Models.js"></script>
     <script src="~/Scripts/RTCDeckAppCode/HubCommunications.js"></script>
     <script src="~/Scripts/RTCDeckAppCode/AudienceView.js"></script>
-</head>
-<body ng-controller="Controllers.AudienceViewCtrl">
-    <div class ="row">
-
-        <div ng-repeat="slideData in slides">
-            <div ng-hide="!isCurrentSlide(slideData)">
-                <div class="col-md-4" ng-cloak>
-                    <h2>Slide ({{slideData.indexh}} , {{slideData.indexv}}, {{slideData.indexf}})</h2>
-                    <button ng-click="navPrev()">Prev</button><button ng-click="navNext()">Next</button><button ng-hide="!paused" ng-click="goToCurrentServerSlide()">Go to current slide</button>
-                </div>
-                <div ng-bind-html="slideData.supplementaryContent" class="col-md-4"></div>
-
-                <div class="col-md-4" >
-                    <ul class="polls" ng-repeat="poll in slideData.polls" ng-hide="!isCurrentServerSlide(slideData)">
-                        <li class="poll" ng-class="poll.Style" ng-cloak>
-                            <p class="poll-text">{{poll.Question}}</p>
-                            <ul>
-                                <li class="poll-option" ng-repeat="option in poll.Options">
-                                    <a href="#" ng-click="selectAnswer(poll,option)" ng-class="{selected : option.selected}" class="{{option.OptionStyle}}">
-                                        <img src="{{option.OptionImagePath}}" alt="{{option.OptionText}}">
-                                        <span>{{option.OptionText}}</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-    </div>
 </body>
 </html>

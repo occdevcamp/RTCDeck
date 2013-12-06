@@ -8,12 +8,15 @@ var Controllers;
             this.$scope = $scope;
             this.RTCDeckHubService = RTCDeckHubService;
             this.$window = $window;
+            $scope.timerStarted = false;
+
             $scope.updateSlide = function (slideData) {
                 $scope.currentSlide = slideData;
             };
 
             $scope.startTimer = function () {
-                $window.startTimer(0);
+                $scope.timerStarted = true;
+                $window.startTimer();
                 RTCDeckHubService.startPresentationTimer();
             };
 
@@ -24,9 +27,17 @@ var Controllers;
                 });
             });
 
+            $scope.$parent.$on("acceptTimerStarted", function (e, slideData) {
+                $scope.$apply(function () {
+                    $scope.timerStarted = true;
+                    $window.startTimer();
+                });
+            });
+
             $scope.$parent.$on("acceptTimeElapsed", function (e, secondsElapsed) {
                 if (secondsElapsed != 0) {
                     $scope.$apply(function () {
+                        $scope.timerStarted = true;
                         $window.startTimer(secondsElapsed);
                     });
                 }
