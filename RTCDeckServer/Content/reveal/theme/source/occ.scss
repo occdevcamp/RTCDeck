@@ -140,9 +140,35 @@ $selectionBackgroundColor: rgba(0, 0, 0, 0.99);
 		}
 	}
 
-	// General ---------------------------------
-	letter-spacing: 0em;
+	// Graphs ----------------------------------
+	.graphs {
+		position: absolute;
+		bottom: 50%;
+		right: 50%;
+	}
 
+	.chart rect {
+		fill: steelblue;
+	}
+
+	.chart text {
+		fill: black;
+		font-size: 16px;
+		text-anchor: middle;
+	}
+
+	.axis path,
+	.axis line {
+		fill: none;
+		stroke: #000;
+		shape-rendering: crispEdges;
+	}
+
+	.x.axis path {
+		display: none;
+	}
+
+	// Menu ------------------------------------
 	.menu,
 	.topMenu {
 		input {
@@ -168,7 +194,6 @@ $selectionBackgroundColor: rgba(0, 0, 0, 0.99);
 		}
 	}
 
-
 	.topMenu {
 		position: absolute;
 		left: 0;
@@ -184,6 +209,8 @@ $selectionBackgroundColor: rgba(0, 0, 0, 0.99);
 		}
 	}
 
+	// General ---------------------------------
+	letter-spacing: 0em;
 
 	.slides {
 		text-align: left;

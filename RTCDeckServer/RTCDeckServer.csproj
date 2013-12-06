@@ -574,7 +574,6 @@
     <Content Include="Views\Presentation\Secondary.cshtml" />
     <TypeScriptCompile Include="Scripts\RTCDeckAppCode\SecondaryView.ts" />
     <Content Include="Views\PresentationHub\PollDashboard.cshtml" />
-    <Content Include="Views\Shared\_PollGraphsPartial.cshtml" />
     <TypeScriptCompile Include="Scripts\RTCDeckAppCode\PollGraphView.ts" />
     <TypeScriptCompile Include="Scripts\RTCDeckAppCode\HubView.ts" />
     <Content Include="Scripts\_references.js" />
