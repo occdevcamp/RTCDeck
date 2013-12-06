@@ -219,11 +219,18 @@ body {
   .reveal .topMenu input {
     display: none; }
   .reveal .menu label,
-  .reveal .topMenu label {
+  .reveal .menu a,
+  .reveal .topMenu label,
+  .reveal .topMenu a {
     display: block;
     cursor: pointer;
     opacity: 0.2;
     margin: 5px 15px; }
+  .reveal .menu a:hover img,
+  .reveal .topMenu a:hover img {
+    background: none;
+    border: none;
+    box-shadow: none; }
   .reveal .menu {
     visibility: hidden; }
     .reveal .menu input.cbs1-selector-2:checked ~ label.cbs1-label-2,
