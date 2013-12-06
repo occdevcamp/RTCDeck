@@ -68,10 +68,10 @@ body {
   opacity: 0.4; }
 .speaker .presentation-view {
   width: 23px;
-  height: 27px;
+  height: 23px;
   background: transparent url(Images/secondScreenSmall.png) no-repeat;
   position: absolute;
-  top: 8px;
+  top: 11px;
   left: 8px; }
 
 /* Audience view */
