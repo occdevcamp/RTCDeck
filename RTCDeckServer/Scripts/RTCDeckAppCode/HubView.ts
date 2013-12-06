@@ -93,5 +93,5 @@ module Controllers {
 var app = angular.module("hubView", ["ngSanitize"]);
 
 app.value('$', $);
-app.factory('RTCDeckHubService', function ($, $rootScope) {return new Services.RTCDeckHubService($, $rootScope, window) });
+app.factory('RTCDeckHubService', function ($, $rootScope) {return new Services.RTCDeckHubService($, $rootScope, window, true) });
 app.controller('Controllers.HubViewCtrl', Controllers.HubViewCtrl);

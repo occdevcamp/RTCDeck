@@ -1,15 +1,18 @@
 /// <reference path='HubCommunications.ts'/>
+
 module Models {
 
     export interface PollGraphViewModel extends ng.IScope {
         // props
         slideData: Models.SlideData;
-        pollAnswers: Models.Poll[];
+        //pollAnswers: Models.Poll[];
+        graphs: Models.Poll[];
         allPollsView: boolean;
 
         // methods
         applyslide(slideData: Models.SlideData): void;
         init(allPollsView: boolean): void;
+        updateGraphs(polls: Models.Poll[]): void;
     }
 }
 
@@ -20,10 +23,113 @@ module PGV_Controllers {
         // Constructor
         constructor(private $scope: Models.PollGraphViewModel, private RTCDeckHubService: Services.RTCDeckHubService, private $window) {
             $scope.allPollsView = false;
+            $scope.graphs = [];
 
-            $scope.init = function(allPollsView: boolean) {
+            $scope.init = function (allPollsView: boolean) {
                 $scope.allPollsView = allPollsView;
             };
+
+            $scope.updateGraphs = function (polls: Models.Poll[]) {
+                // this function builds up a set of graphs in the "graphs" div.
+                // well, it will one day any way. hopefully today.
+
+                // strategy: Check whether a graph has been made or not
+                // if not, add a new graph. if yes, update the existing graph.
+                // I probably could have written this whole section without adding the "graphs" array 
+                // but this allows me to leave original debug-type code in place still working throughout which 
+                // is useful. If ever revisiting this code we should probably merge "pollAnswers" and "graphs"
+                var pollIndex, pollIdentifier, pollData;
+                for (pollIndex in polls) {
+
+                    pollIdentifier = polls[pollIndex].Identifier;
+                    pollData = polls[pollIndex].Options;
+
+                    $scope.$apply(function () {
+                        // set up data for graph
+                        var data = [];
+                        for (var optionIndex in pollData) {
+                            data[optionIndex] = { name: pollData[optionIndex].OptionText, value: pollData[optionIndex].Count };
+                        }
+
+                        // common attributes whether creating new or updat
+                        var graphdivID = "graphforpoll" + pollIdentifier.trim();
+                        var graphdivselector = '#' + graphdivID;
+                        var graphsvg = '<svg id="' + graphdivID + '" class="chart"></svg>';
+                        var margin = { top: 20, right: 30, bottom: 30, left: 40 },
+                            width = 200 - margin.left - margin.right,
+                            height = 300 - margin.top - margin.bottom;
+                        // Set up the axes
+                        var x = d3.scale.ordinal()
+                            .rangeRoundBands([0, width], .1)
+                            .domain(data.map(function (d) { return d.name; }));
+
+                        var y = d3.scale.linear()
+                            .domain([0, 100])
+                            .range([height, 0]);
+
+                        var xAxis = d3.svg.axis()
+                            .scale(x)
+                            .orient("bottom");
+
+                        if ($scope.graphs[pollIdentifier] == null) {
+                            // make new svg in the main div
+                            $('#graphsDiv').append(graphsvg);
+                            // Chart size
+                            // Create the chart container
+                            var chart = d3.select(graphdivselector)
+                                .attr("width", width + margin.left + margin.right)
+                                .attr("height", height + margin.top + margin.bottom)
+                                .append("g")
+                                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+                            // Create the bar and bar-label containers
+                            var bar = chart.selectAll("g")
+                                .data(data)
+                                .enter().append("g")
+                                .attr("class", "bar")
+                                .attr("transform", function (d) { return "translate(" + x(d.name) + ",0)"; });
+
+                            // Create the bars
+                            bar.append("rect")
+                                .attr("y", function (d) { return y(d.value); })
+                                .attr("height", function (d) { return height - y(d.value); })
+                                .attr("width", x.rangeBand());
+
+                            // Create the bar labels
+                            bar.append("text")
+                                .attr("x", x.rangeBand() / 2)
+                                .attr("y", function (d) { return y(d.value) - 3; })
+                                .text(function (d) { return d.value /*+ '%'*/; });
+
+                            // Add the x-axis labels
+                            chart.append("g")
+                                .attr("class", "x axis")
+                                .attr("transform", "translate(0," + height + ")")
+                                .call(xAxis);
+
+
+                            $scope.graphs[pollIdentifier] = polls[pollIndex];
+                        }
+                        else {
+                            var chart = d3.select(graphdivselector).select("g");
+                            chart.selectAll("rect")
+                                .data(data)
+                                .transition()
+                                .duration(1000)
+                                .attr("y", function (d) { return y(d.value); })
+                                .attr("height", function (d) { return height - y(d.value); })
+
+                            chart.selectAll(".bar text")
+                                .data(data)
+                                .transition()
+                                .duration(1000)
+                                .attr("y", function (d) { return y(d.value) - 3; })
+                                .text(function (d) { return d.value /*+ '%'*/; });
+                            $scope.graphs[pollIdentifier] = polls[pollIndex];
+                        }
+                    });
+                }
+            }
 
             //bind to events from server
             $scope.applyslide = function (slideData: Models.SlideData) {
@@ -31,31 +137,21 @@ module PGV_Controllers {
                 // exactly the same as the polls on the current slide. We may change behaviour later 
                 // to allow an override specified set of identifiers through a new element on slideData, with 
                 // a fallback to "polls on slide" behaviour if not specified?
-                if ($scope.slideData != null && 
+                if ($scope.slideData != null &&
                     slideData.indexh == $scope.slideData.indexh && slideData.indexv == $scope.slideData.indexv) return;
+
                 $scope.$apply(function () {
                     // store data: we probably don't need this, and in the case of the dashboard we definitely don't. 
                     // but for debug it proves we're showing polls for the current slide
                     $scope.slideData = slideData;
-
-                    // new slide => clear down cached answers?
-                    // don't do this in "all polls" view.
-                    if (!$scope.allPollsView)
-                        $scope.pollAnswers = [];
-
-                    // if we haven't logged anything yet, just create a new set of polls
-                    if ($scope.pollAnswers == null)
-                        $scope.pollAnswers = [];
-
-                    var pollIndex;
-                    for (pollIndex in slideData.polls) {
-                        $scope.pollAnswers[$scope.pollAnswers.length] = slideData.polls[pollIndex];
-                    }
+                    // clear down graphs
+                    $scope.graphs = [];
+                    $('#graphsDiv').empty();
                 });
                 var pollIndex;
                 for (pollIndex in slideData.polls) {
                     // get initial state for the poll answers from the hub on new page load.
-                    //RTCDeckHubService.RequestPollAnswers(slideData.polls[pollIndex].Identifier);
+                    RTCDeckHubService.RequestPollAnswers(slideData.polls[pollIndex].Identifier);
                 }
             };
 
@@ -67,35 +163,13 @@ module PGV_Controllers {
             });
 
             $scope.$parent.$on("notifyPollData", function (e, polls: Models.Poll[]) {
-                $scope.$apply(function () {
-                    $scope.pollAnswers = [];
-                    var pollIndex;
-                    for (pollIndex in polls) {
-                        $scope.pollAnswers[$scope.pollAnswers.length] = polls[pollIndex];
-                    }
-                });
+                $scope.updateGraphs(polls);
             });
 
             $scope.$parent.$on("updatePollAnswers", function (e, pollIdentifier: string, pollAnswers: Models.Poll) {
-                // find poll in $scope.pollAnswers and update it
-                $scope.$apply(function () {
-                    //var filteredPolls = $scope.pollAnswers.filter(function (elem, index, array) {
-                    //    return elem.Identifier === pollAnswers.Identifier;
-                    //})
-
-                    //if (filteredPolls.length == 0) {
-                    //    //$scope.pollAnswers[$scope.pollAnswers.length] = pollAnswers;
-                    //}
-                    //else {
-                    //    filteredPolls[0] = pollAnswers;
-                    //}
-                        var pollIndex;
-                        for (pollIndex in $scope.pollAnswers) {
-                            if (pollIdentifier == $scope.pollAnswers[pollIndex].Identifier) {
-                                $scope.pollAnswers[pollIndex] = pollAnswers;
-                            }
-                        }
-                    });
+                var polls = new Array<Models.Poll>();
+                polls[0] = pollAnswers;
+                $scope.updateGraphs(polls);
             });
 
             //initialise
