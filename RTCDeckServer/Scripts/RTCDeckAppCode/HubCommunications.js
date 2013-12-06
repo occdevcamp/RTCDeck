@@ -76,6 +76,10 @@ var Services;
             this.proxy.on("notifyTimeElapsed", function (secondsElapsed) {
                 $rootScope.$broadcast("acceptTimeElapsed", secondsElapsed);
             });
+
+            this.proxy.on("presenterClearPollGraphs", function () {
+                $rootScope.$emit("clearPollGraphs");
+            });
         }
         return RTCDeckHubService;
     })();

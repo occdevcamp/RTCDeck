@@ -40,6 +40,10 @@ namespace RTCDeckServer.Hubs
 		public void SetCurrentSlide(CurrentSlide currentSlide)
 		{
 			Debug.WriteLine(String.Format("Received Current Slide Request: {0}/{1}:{2}", currentSlide.indexf, currentSlide.indexh, currentSlide.indexv));
+			
+			// has the slide changed (h or v index)? from point of view of polling really
+			bool slideHasChanged = (currentSlide.indexh != _presentationState.CurrentSlide.indexh || currentSlide.indexv != _presentationState.CurrentSlide.indexv);
+
 			_presentationState.CurrentSlide = currentSlide;
 
 
@@ -50,8 +54,13 @@ namespace RTCDeckServer.Hubs
 			Clients.Others.notifyCurrentSlide(_presentationState.CurrentSlide);
 
             var polls = currentSlide.polls.Select(poll => _presentationState.Polls[poll.Identifier]).ToList();
-            Clients.Caller.notifyPollData(polls);
 
+			// a bit bodgy, but this tells the "polls" part of the presenter that they've changed the slide 
+			// but without issuing a "notifyCurrentSlide".
+			if (slideHasChanged)
+				Clients.Caller.presenterClearPollGraphs();
+
+            Clients.Caller.notifyPollData(currentSlide, polls);
 		}
 
 		/// <summary>

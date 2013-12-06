@@ -52,10 +52,10 @@ else
                             // common attributes whether creating new or updat
                             var graphdivID = "graphforpoll" + pollIdentifier.trim();
                             var graphdivselector = '#' + graphdivID;
-                            var graphtags;
-
-                            // IN PROGRESS: if ($scope.allPollsView) graphtags = "<h2>Polls for Slide ";
-                            graphtags = '<svg id="' + graphdivID + '" class="chart"></svg>';
+                            var graphtags = "";
+                            if ($scope.allPollsView)
+                                graphtags = "<h2>" + polls[pollIndex].Question + "</h2>";
+                            graphtags += '<svg id="' + graphdivID + '" class="chart"></svg>';
                             var margin = { top: 20, right: 30, bottom: 30, left: 40 }, width = 200 - margin.left - margin.right, height = 300 - margin.top - margin.bottom;
 
                             // Set up the axes
@@ -156,6 +156,13 @@ else
                 var polls = new Array();
                 polls[0] = pollAnswers;
                 $scope.updateGraphs(polls);
+            });
+            $scope.$parent.$on("clearPollGraphs", function (e) {
+                console.log('clear Poll Graphs please');
+                if (!$scope.allPollsView) {
+                    $scope.graphs = [];
+                    $('#graphsDiv').empty();
+                }
             });
 
             //initialise
