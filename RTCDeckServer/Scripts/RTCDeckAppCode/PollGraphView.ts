@@ -192,7 +192,6 @@ module PGV_Controllers {
                 $scope.updateGraphs(polls);
             });
             $scope.$parent.$on("clearPollGraphs", function (e) {
-                console.log('clear Poll Graphs please');
                 if (!$scope.allPollsView) {
                     $scope.graphs = [];
                     $('#graphsDiv').empty();

@@ -93,7 +93,7 @@ module Services {
             });
 
             this.proxy.on("presenterClearPollGraphs", function () {
-                $rootScope.$emit("clearPollGraphs");
+                $rootScope.$broadcast("clearPollGraphs");
             });
 
         }

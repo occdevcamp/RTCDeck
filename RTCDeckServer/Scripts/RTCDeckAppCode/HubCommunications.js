@@ -78,7 +78,7 @@ var Services;
             });
 
             this.proxy.on("presenterClearPollGraphs", function () {
-                $rootScope.$emit("clearPollGraphs");
+                $rootScope.$broadcast("clearPollGraphs");
             });
         }
         return RTCDeckHubService;
