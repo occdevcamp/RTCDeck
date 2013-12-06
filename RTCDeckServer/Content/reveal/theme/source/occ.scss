@@ -168,6 +168,47 @@ $selectionBackgroundColor: rgba(0, 0, 0, 0.99);
 		display: none;
 	}
 
+	// Menu ------------------------------------
+	.menu,
+	.topMenu {
+		input {
+			display: none;
+		}
+		
+		label {
+			display: block;
+			cursor: pointer;
+			opacity: 0.2;
+			margin: 5px 15px;
+		}
+	}
+
+	.menu {
+		visibility: hidden;
+
+		input.cbs1-selector-2:checked ~ label.cbs1-label-2,
+		input.cbs1-selector-3:checked ~ label.cbs1-label-3,
+		input.cbs1-selector-4:checked ~ label.cbs1-label-4 {
+			filter: alpha(opacity=100);
+			opacity: 1;
+		}
+	}
+
+	.topMenu {
+		position: absolute;
+		left: 0;
+		top: 0;
+
+		input.cbs1-selector-1:checked ~ label.cbs1-label-1 {
+			filter: alpha(opacity=100);
+			opacity: 1;
+		}
+
+		input.cbs1-selector-1:checked ~ div.menu {
+			visibility : visible;
+		}
+	}
+
 	// General ---------------------------------
 	letter-spacing: 0em;
 
