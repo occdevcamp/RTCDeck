@@ -5,6 +5,7 @@ module Services {
 
     export class RTCDeckHubService {
         private proxy: HubProxy;
+        private isPrimaryPresentation: boolean;
         public sendCurrentSlideData: Function;
         public SendPresentationNavigationCommand: Function;
         public requestCurrentSlide: Function;
@@ -14,10 +15,10 @@ module Services {
         public requestPresentationTimeElapsed: Function;
         public startPresentationTimer: Function;
 
-        constructor($, $rootScope, $window) {
+        constructor($, $rootScope, $window, $isPrimaryPresentation = false) {
             var connection: HubConnection = $.hubConnection($window.HUB_URL);
             this.proxy = connection.createHubProxy($window.HUB_NAME);
-
+            this.isPrimaryPresentation = $isPrimaryPresentation;
             connection.start().done(
                 function () {
                     $rootScope.$emit("connectionStarted")
@@ -26,12 +27,9 @@ module Services {
             //sending
 
             this.sendCurrentSlideData = function (slideData: Models.SlideData) {
-                this.proxy.invoke('SetCurrentSlide', slideData);
-                // there may be a nicer way of doing this.....
-                // but I want my PollGraphView module to listen to the slide deck being changed 
-                // but we've disabled the slide deck getting a message back from the hub when this happens
-                // so it has to be done internally in the client-side code
-                //$rootScope.$broadcast('slideChangedForPollGraph', slideData);
+                if (this.isPrimaryPresentation) {
+                    this.proxy.invoke('SetCurrentSlide', slideData);
+                }
             }
 
             this.SendPresentationNavigationCommand = function (command: string) {
@@ -72,7 +70,9 @@ module Services {
             });
 
             this.proxy.on("receivePresentationNavigationCommand", function (command: string) {
-                $rootScope.$emit("receivePresentationNavigationCommand", command);
+                if (this.isPrimaryPresentation) {
+                    $rootScope.$emit("receivePresentationNavigationCommand", command);
+                }
             });
 
             this.proxy.on("receiveDrawing", function (message: string) {
