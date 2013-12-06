@@ -14,6 +14,10 @@ function DrawObject() {
 
 function createCanvasOverlay() {
 
+    window.Reveal.addEventListener('slidechanged', function (event) {
+        showHideCanvasInner();
+    });
+
     var slides = document.getElementsByClassName(" slides");
 
     var slide = slides[0];

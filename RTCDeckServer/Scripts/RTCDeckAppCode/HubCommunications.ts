@@ -91,6 +91,11 @@ module Services {
             this.proxy.on("notifyTimeElapsed", function (secondsElapsed : number) {
                 $rootScope.$broadcast("acceptTimeElapsed", secondsElapsed);
             });
+
+            this.proxy.on("presenterClearPollGraphs", function () {
+                $rootScope.$emit("clearPollGraphs");
+            });
+
         }
     }
 

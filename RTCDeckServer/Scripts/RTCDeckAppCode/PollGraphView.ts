@@ -48,13 +48,19 @@ module PGV_Controllers {
                         // set up data for graph
                         var data = [];
                         var total = 0;
-                        var percentageValue;
+                        var percentageValue, optionname, barlabel;
                         // work out total so we can calc percentages
                         for (var optionIndex in pollData) total += pollData[optionIndex].Count;
 
                         for (var optionIndex in pollData) {
                             percentageValue = (total == 0) ? 0 : (Math.round(pollData[optionIndex].Count * 100 / total));
-                            data[optionIndex] = { name: pollData[optionIndex].OptionText, value: percentageValue, count: pollData[optionIndex].Count };
+                            optionname = pollData[optionIndex].OptionText;
+                            if (optionname == "Dislike")
+                                barlabel = "Dislike";
+                            else 
+                                barlabel = (optionname.length > 5) ? optionname.substring(0, 1) : optionname;
+
+                            data[optionIndex] = { name: barlabel, value: percentageValue, count: pollData[optionIndex].Count };
                         }
 
                         // if total == 0 we don't yet attempt to create a graph
@@ -62,7 +68,9 @@ module PGV_Controllers {
                             // common attributes whether creating new or updat
                             var graphdivID = "graphforpoll" + pollIdentifier.trim();
                             var graphdivselector = '#' + graphdivID;
-                            var graphsvg = '<svg id="' + graphdivID + '" class="chart"></svg>';
+                            var graphtags = "";
+                            if ($scope.allPollsView) graphtags = "<h2>" + polls[pollIndex].Question + "</h2>";
+                            graphtags += '<svg id="' + graphdivID + '" class="chart"></svg>';
                             var margin = { top: 20, right: 30, bottom: 30, left: 40 },
                                 width = 200 - margin.left - margin.right,
                                 height = 300 - margin.top - margin.bottom;
@@ -81,7 +89,7 @@ module PGV_Controllers {
 
                             if ($scope.graphs[pollIdentifier] == null) {
                                 // make new svg in the main div
-                                $('#graphsDiv').append(graphsvg);
+                                $('#graphsDiv').append(graphtags);
                                 // Chart size
                                 // Create the chart container
                                 var chart = d3.select(graphdivselector)
@@ -154,9 +162,11 @@ module PGV_Controllers {
                     // store data: we probably don't need this, and in the case of the dashboard we definitely don't. 
                     // but for debug it proves we're showing polls for the current slide
                     $scope.slideData = slideData;
-                    // clear down graphs
-                    $scope.graphs = [];
-                    $('#graphsDiv').empty();
+                    // clear down graphs, but not in "all polls" view.
+                    if (!$scope.allPollsView) {
+                        $scope.graphs = [];
+                        $('#graphsDiv').empty();
+                    }
                 });
                 var pollIndex;
                 for (pollIndex in slideData.polls) {
@@ -180,6 +190,13 @@ module PGV_Controllers {
                 var polls = new Array<Models.Poll>();
                 polls[0] = pollAnswers;
                 $scope.updateGraphs(polls);
+            });
+            $scope.$parent.$on("clearPollGraphs", function (e) {
+                console.log('clear Poll Graphs please');
+                if (!$scope.allPollsView) {
+                    $scope.graphs = [];
+                    $('#graphsDiv').empty();
+                }
             });
 
             //initialise

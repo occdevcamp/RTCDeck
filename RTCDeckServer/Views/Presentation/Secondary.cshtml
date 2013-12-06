@@ -40,9 +40,7 @@
                 </div>
                 <div class="polls col-md-6">
                     <h2 class="subheader">Charts</h2>
-                    <div ng-controller="PGV_Controllers.PollGraphViewCtrl" ng-init="init(false);">
-                        @Html.Partial("_PollGraphsPartial")
-                    </div>
+                    <div id="graphsDiv" ng-controller="PGV_Controllers.PollGraphViewCtrl" ng-init="init(false);"></div>
                 </div>
             </div>
         </div>
