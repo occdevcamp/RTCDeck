@@ -23,6 +23,7 @@
     <script src="~/Scripts/RTCDeckAppCode/Models.js"></script>
     <script src="~/Scripts/RTCDeckAppCode/HubCommunications.js"></script>
     <script src="~/Scripts/RTCDeckAppCode/SecondaryView.js"></script>
+    <script src="~/Scripts/RTCDeckAppCode/PollGraphView.js"></script>
     <script type="text/javascript">
         function pad(val) { return val > 9 ? val.toFixed(0) : "0" + val.toFixed(0); };
 
@@ -38,8 +39,11 @@
 <body ng-controller="Controllers.SecondaryViewCtrl">
     <div class="row">
 
-        <div class="col-md-4">
+        <div class="col-md-4" ng-cloak>
             <h2>Slide ({{currentSlide.indexh}} , {{currentSlide.indexv}}, {{currentSlide.indexf}})</h2>
+        </div>
+        <div class="col-md-4" ng-controller="PGV_Controllers.PollGraphViewCtrl" ng-init="init(false);">
+            @Html.Partial("_PollGraphsPartial")
         </div>
         <div class="col-md-4">
             <label id="minutes">00</label>:<label id="seconds">00</label> <button ng-click="startTimer()">Start</button>

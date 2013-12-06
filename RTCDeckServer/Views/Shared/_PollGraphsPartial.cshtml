@@ -1,6 +1,6 @@
-﻿<div ng-repeat="poll in pollAnswers" ng-show="pollAnswers" class="ng-hide">
+﻿<div ng-repeat="poll in pollAnswers" ng-show="pollAnswers" class="ng-hide" ng-cloak>
     <div>
-        <p>{{poll.Question}}</p>
+        <p ng-bind="poll.Question"></p>
         <ul ng-repeat="option in poll.Options">
             <li><strong>{{option.OptionText}}</strong>: {{option.Count}}</li>
         </ul>

@@ -27,7 +27,7 @@
 
         <div ng-repeat="slideData in slides">
             <div ng-hide="!isCurrentSlide(slideData)">
-                <div class="col-md-4">
+                <div class="col-md-4" ng-cloak>
                     <h2>Slide ({{slideData.indexh}} , {{slideData.indexv}}, {{slideData.indexf}})</h2>
                     <button ng-click="navPrev()">Prev</button><button ng-click="navNext()">Next</button><button ng-hide="!paused" ng-click="goToCurrentServerSlide()">Go to current slide</button>
                 </div>
@@ -35,11 +35,11 @@
 
                 <div class="col-md-4" >
                     <ul class="polls" ng-repeat="poll in slideData.polls" ng-hide="!isCurrentServerSlide(slideData)">
-                        <li class="poll" ng-class="poll.Style">
+                        <li class="poll" ng-class="poll.Style" ng-cloak>
                             <p class="poll-text">{{poll.Question}}</p>
                             <ul>
                                 <li class="poll-option" ng-repeat="option in poll.Options">
-                                    <a href="#" ng-click="selectAnswer(poll,option)"  ng-class="[{selected : option.selected}, option.OptionStyle]">
+                                    <a href="#" ng-click="selectAnswer(poll,option)" ng-class="{selected : option.selected}" class="{{option.OptionStyle}}">
                                         <img src="{{option.OptionImagePath}}" alt="{{option.OptionText}}">
                                         <span>{{option.OptionText}}</span>
                                     </a>
