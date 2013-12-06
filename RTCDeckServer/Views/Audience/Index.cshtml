@@ -25,12 +25,12 @@
             </div>
             <div class="polls">
                 <div class="container">
-                    <ul ng-repeat="poll in slideData.polls" ng-hide="!isCurrentServerSlide(slideData)">
+                    <ul ng-repeat="poll in slideData.polls" ng-hide="!isCurrentServerSlide(slideData)" ng-cloak>
                         <li class="poll" ng-class="poll.Style">
                             <p class="poll-text">{{poll.Question}}</p>
                             <ul>
                                 <li class="poll-option" ng-repeat="option in poll.Options">
-                                    <a href="#" ng-click="selectAnswer(poll,option)" ng-class="{selected : option.selected}" class="{{option.OptionStyle}}">
+                                    <a href="#" ng-click="selectAnswer(poll,option)" ng-class="option.selected ? option.OptionStyle + ' selected' : option.OptionStyle">
                                         {{option.OptionText}}
                                     </a>
                                 </li>
