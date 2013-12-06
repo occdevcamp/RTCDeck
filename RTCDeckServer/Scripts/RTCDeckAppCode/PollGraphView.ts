@@ -47,8 +47,14 @@ module PGV_Controllers {
                     $scope.$apply(function () {
                         // set up data for graph
                         var data = [];
+                        var total = 0;
+                        var percentageValue;
+                        // work out total so we can calc percentages
+                        for (var optionIndex in pollData) total += pollData[optionIndex].Count;
+
                         for (var optionIndex in pollData) {
-                            data[optionIndex] = { name: pollData[optionIndex].OptionText, value: pollData[optionIndex].Count };
+                            percentageValue = (total == 0) ? 0 : (Math.round(pollData[optionIndex].Count * 100 / total));
+                            data[optionIndex] = { name: pollData[optionIndex].OptionText, value: percentageValue, count: pollData[optionIndex].Count };
                         }
 
                         // common attributes whether creating new or updat
@@ -99,7 +105,7 @@ module PGV_Controllers {
                             bar.append("text")
                                 .attr("x", x.rangeBand() / 2)
                                 .attr("y", function (d) { return y(d.value) - 3; })
-                                .text(function (d) { return d.value /*+ '%'*/; });
+                                .text(function (d) { return d.count /*+ '%'*/; });
 
                             // Add the x-axis labels
                             chart.append("g")
@@ -124,7 +130,7 @@ module PGV_Controllers {
                                 .transition()
                                 .duration(1000)
                                 .attr("y", function (d) { return y(d.value) - 3; })
-                                .text(function (d) { return d.value /*+ '%'*/; });
+                                .text(function (d) { return d.count /*+ '%'*/; });
                             $scope.graphs[pollIdentifier] = polls[pollIndex];
                         }
                     });
