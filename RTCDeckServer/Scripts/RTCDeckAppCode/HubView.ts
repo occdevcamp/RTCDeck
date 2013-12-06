@@ -2,18 +2,18 @@
 module Models {
 
     export interface HubViewModel extends ng.IScope {
-		// props
+        // props
         slideData: Models.SlideData;
         slideDataForForm: Models.SlideData;
-		navigationCommandIn: string;
+        navigationCommandIn: string;
         navigationCommandOut: string;
         latestPollAnswers: Models.Poll; // transitory debug data only here
 
-		// methods
+        // methods
         updateSlideIndex(slideData: Models.SlideData): void;
-		sendSlideUpdate(): void;
+        sendSlideUpdate(): void;
         sendNavigationCommand(): void;
-
+        sendResetCommand(): void;
     }
 }
 
@@ -57,7 +57,11 @@ module Controllers {
 
 			$scope.sendNavigationCommand = function() {
 				RTCDeckHubService.SendPresentationNavigationCommand($scope.navigationCommandOut);
-			}
+            }
+
+            $scope.sendResetCommand = function () {
+                RTCDeckHubService.SendResetCommand()
+            }
 
             //bind to events from server
             $scope.$parent.$on("acceptCurrentSlideIndex", function (e, slideData: Models.SlideData) {

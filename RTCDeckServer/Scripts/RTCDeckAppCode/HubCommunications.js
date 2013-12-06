@@ -22,6 +22,10 @@ var Services;
                 this.proxy.invoke('SendPresentationNavigationCommand', command);
             };
 
+            this.SendResetCommand = function () {
+                this.proxy.invoke('ResetPresentation');
+            };
+
             this.sendPollAnswer = function (answer) {
                 this.proxy.invoke('AddPollAnswer', answer);
             };

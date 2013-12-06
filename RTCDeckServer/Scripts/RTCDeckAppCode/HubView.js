@@ -42,6 +42,10 @@ var Controllers;
                 RTCDeckHubService.SendPresentationNavigationCommand($scope.navigationCommandOut);
             };
 
+            $scope.sendResetCommand = function () {
+                RTCDeckHubService.SendResetCommand();
+            };
+
             //bind to events from server
             $scope.$parent.$on("acceptCurrentSlideIndex", function (e, slideData) {
                 $scope.updateSlideIndex(slideData);

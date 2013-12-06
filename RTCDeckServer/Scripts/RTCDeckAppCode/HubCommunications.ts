@@ -8,6 +8,7 @@ module Services {
         private isPrimaryPresentation: boolean;
         public sendCurrentSlideData: Function;
         public SendPresentationNavigationCommand: Function;
+        public SendResetCommand: Function;
         public requestCurrentSlide: Function;
         public sendPollAnswer: Function;
         public RequestPollAnswers: Function;
@@ -35,6 +36,10 @@ module Services {
             this.SendPresentationNavigationCommand = function (command: string) {
                 this.proxy.invoke('SendPresentationNavigationCommand', command);
             };
+
+            this.SendResetCommand = function () {
+                this.proxy.invoke('ResetPresentation');
+            }
 
             this.sendPollAnswer = function (answer: Models.PollAnswer) {
                 this.proxy.invoke('AddPollAnswer', answer);

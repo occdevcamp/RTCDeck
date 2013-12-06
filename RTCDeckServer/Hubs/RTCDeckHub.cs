@@ -24,6 +24,14 @@ namespace RTCDeckServer.Hubs
 			_presentationState = presentationState;
 		}
 
+        /// <summary>
+        /// Reset the presentation state to the default
+        /// </summary>
+        public void ResetPresentation()
+        {
+            PresentationState.Reset();
+        }
+
 		/// <summary>
 		/// updates the slide state
 		/// expected to be set by a mastering device. currently not secured, but could 

@@ -14,12 +14,17 @@ namespace RTCDeckServer.Models
 	public class PresentationState
 	{
 		// Singleton instance
-		private readonly static Lazy<PresentationState> _instance = new Lazy<PresentationState>(() => new PresentationState());
+		private static Lazy<PresentationState> _instance = new Lazy<PresentationState>(() => new PresentationState());
 
 		public static PresentationState Instance
 		{
 			get { return _instance.Value; }
 		}
+
+        public static void Reset()
+        {
+            _instance = new Lazy<PresentationState>(() => new PresentationState());
+        }
 
 		private CurrentSlide _currentSlide;
 		public CurrentSlide CurrentSlide
