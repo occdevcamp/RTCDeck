@@ -18,12 +18,11 @@ var PGV_Controllers;
             $scope.updateGraphs = function (polls) {
                 // this function builds up a set of graphs in the "graphs" div.
                 // well, it will one day any way. hopefully today.
-                // strategy: loop through pollAnswers. Check whether a graph has been made or not
+                // strategy: Check whether a graph has been made or not
                 // if not, add a new graph. if yes, update the existing graph.
                 // I probably could have written this whole section without adding the "graphs" array
                 // but this allows me to leave original debug-type code in place still working throughout which
                 // is useful. If ever revisiting this code we should probably merge "pollAnswers" and "graphs"
-                //console.log('updating graphs');
                 var pollIndex, pollIdentifier, pollData;
                 for (pollIndex in polls) {
                     pollIdentifier = polls[pollIndex].Identifier;
@@ -39,7 +38,7 @@ var PGV_Controllers;
                         // common attributes whether creating new or updat
                         var graphdivID = "graphforpoll" + pollIdentifier.trim();
                         var graphdivselector = '#' + graphdivID;
-                        var graphdiv = '<svg id="' + graphdivID + '" class="chart"></svg>';
+                        var graphsvg = '<svg id="' + graphdivID + '" class="chart"></svg>';
                         var margin = { top: 20, right: 30, bottom: 30, left: 40 }, width = 200 - margin.left - margin.right, height = 300 - margin.top - margin.bottom;
 
                         // Set up the axes
@@ -52,10 +51,8 @@ var PGV_Controllers;
                         var xAxis = d3.svg.axis().scale(x).orient("bottom");
 
                         if ($scope.graphs[pollIdentifier] == null) {
-                            console.log('add a new graph for ' + pollIdentifier);
-
-                            // make new div
-                            $('#graphsDiv').append(graphdiv);
+                            // make new svg in the main div
+                            $('#graphsDiv').append(graphsvg);
 
                             // Chart size
                             // Create the chart container
@@ -85,7 +82,6 @@ var PGV_Controllers;
 
                             $scope.graphs[pollIdentifier] = polls[pollIndex];
                         } else {
-                            console.log('update graph for ' + pollIdentifier);
                             var chart = d3.select(graphdivselector).select("g");
                             chart.selectAll("rect").data(data).transition().duration(1000).attr("y", function (d) {
                                 return y(d.value);
@@ -100,7 +96,6 @@ var PGV_Controllers;
                             });
                             $scope.graphs[pollIdentifier] = polls[pollIndex];
                         }
-                        //console.log($scope.graphs);
                     });
                 }
             };
