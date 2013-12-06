@@ -198,6 +198,23 @@ body {
     .reveal .blockquote-attribution:after {
       content: "\002014";
       margin-left: 0.2em; }
+  .reveal .graphs {
+    position: absolute;
+    bottom: 50%;
+    right: 50%; }
+  .reveal .chart rect {
+    fill: steelblue; }
+  .reveal .chart text {
+    fill: black;
+    font-size: 16px;
+    text-anchor: middle; }
+  .reveal .axis path,
+  .reveal .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges; }
+  .reveal .x.axis path {
+    display: none; }
   .reveal .slides {
     text-align: left; }
     .reveal .slides section {

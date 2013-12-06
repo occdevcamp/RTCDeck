@@ -1,9 +1,12 @@
 ﻿var OccTheme = (function () {
 
 	function initialize(contentPath) {
-		var wrapper = document.querySelector( '.reveal' );
+		var wrapper = document.querySelector('.reveal');
 		var logo = createSingletonNode(wrapper, 'div', 'logo', '<img src="' + contentPath + 'reveal/theme/images/occlogo.png" alt="OCC Logo" />');
 		var border = createSingletonNode(wrapper, 'div', 'bottom-border', '');
+
+		wrapper = document.querySelector('.slides');
+		var graphs = createSingletonNode(wrapper, 'div', 'graphs', '<div id="graphsDiv" ng-controller="PGV_Controllers.PollGraphViewCtrl"></div>')
 	}
 
 	/**

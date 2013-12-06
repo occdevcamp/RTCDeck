@@ -44,13 +44,14 @@ input[type="checkbox"].input-validation-error {
 	font-weight: bold;
 }
 
+/* Graphs */
+
 .chart rect {
 	fill: steelblue;
 }
 
 .chart text {
 	fill: black;
-	font: 10px sans-serif;
 	text-anchor: middle;
 }
 

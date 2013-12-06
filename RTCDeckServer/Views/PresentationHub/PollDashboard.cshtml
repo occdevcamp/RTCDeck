@@ -17,8 +17,7 @@
         </div>
     </div>
     -->
-    <div ng-controller="PGV_Controllers.PollGraphViewCtrl" ng-init="init(false);">
-        @Html.Partial("_PollGraphsPartial")
+    <div id="graphsDiv" ng-controller="PGV_Controllers.PollGraphViewCtrl" ng-init="init(false);">
         <input type="checkbox" ng-model="allPollsView" />
     </div>
 </div>
