@@ -1,0 +1,45 @@
+.secondscreen {
+  background-color: #2f2f2f;
+  color: #555; }
+  .secondscreen #headerwrap {
+    background-color: #34495e;
+    color: #ffffff; }
+    .secondscreen #headerwrap h1 {
+      font-family: "Raleway";
+      font-weight: 300;
+      font-size: 1.6em;
+      margin: 10px 0; }
+  .secondscreen #slides {
+    background-color: #f2f2f2; }
+  .secondscreen #controls {
+    color: #ffffff;
+    padding: 10px 0; }
+  .secondscreen .content {
+    padding: 10px 0; }
+  .secondscreen .polls {
+    padding: 10px 0;
+    background-color: #34495e;
+    color: #ffffff; }
+    .secondscreen .polls ul {
+      list-style: none;
+      padding-left: 0;
+      padding-bottom: 10px; }
+  .secondscreen .poll-option a.selected {
+    background-color: red; }
+  .secondscreen .poll.ThumbsUpThumbsDown ul {
+    text-align: center; }
+  .secondscreen .poll.ThumbsUpThumbsDown .poll-text {
+    display: none; }
+  .secondscreen .poll.ThumbsUpThumbsDown .poll-option {
+    display: inline;
+    padding-right: 5px; }
+  .secondscreen .poll.ThumbsUpThumbsDown a {
+    background: transparent url(Images/thumbsUpInactive.png) no-repeat;
+    display: inline-block;
+    width: 45px;
+    height: 42px;
+    color: rgba(0, 0, 0, 0);
+    font: 0px/0 a; }
+    .secondscreen .poll.ThumbsUpThumbsDown a.selected {
+      background-image: url(Images/thumbsUpActive.png); }
+
