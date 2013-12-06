@@ -47,7 +47,8 @@ body {
 
 .ThumbsUpThumbsDown a,
 #controls a,
-.start-timer {
+.start-timer,
+.presentation-view {
 	display: inline-block;
 	color: rgba(0, 0, 0, 0);
 	font: 0px/0 a;
@@ -86,6 +87,15 @@ body {
 
 	.elapsed .mute {
 		opacity: 0.4;
+	}
+
+	.presentation-view {
+		width: 23px;
+		height: 27px;
+		background: transparent url(Images/secondScreenSmall.png) no-repeat;
+		position: absolute;
+		top: 8px;
+		left: 8px;
 	}
 }
 
