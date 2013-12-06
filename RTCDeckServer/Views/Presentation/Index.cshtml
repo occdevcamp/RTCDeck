@@ -42,7 +42,25 @@
             <section class="title" data-background="@Url.Content("~/Content/reveal/theme/images/occbackground.png")">
                 <h2>Show &amp; tell</h2>
                 <h1>Clear and engaging writing</h1>
-                <aside class="polls" data-polls='[{"Identifier": " pollforslideblah","question" : "Hello?" ,"style" : "MultiChoice" ,"options" : [{ "optionid": 1, "optiontext": "Hello" },{ "optionid": 2, "optiontext": "Goodbye" }] },{"Identifier": " pollforslide22","question" : "Does this work?" ,"style" : "MultiChoice" ,"options" : [{ "optionid": 1, "optiontext": "Maybe" },{ "optionid": 2, "optiontext": "No" }] }]'></aside>
+                <aside class="notes">
+                    <p><strong>These are the notes for the title slide of the presentation.</strong> They will not be shown to the audience.</p>
+                    <ul>
+                        <li>List item 1</li>
+                        <li>List item 2</li>
+                    </ul>
+                </aside>
+                <aside class="supplementary">
+                    <p><strong>This is some supplementary content for the title slide of the presentation.</strong> This is for the audience members.</p>
+                    <ol>
+                        <li>List item 1</li>
+                        <li>List item 2</li>
+                    </ol>
+                </aside>
+                <aside class="polls" data-polls='[{"Identifier": " slideTitlePoll1","question" : "Choose any option?" ,"style" : "MultiChoice" ,"options" :
+                       [
+                       {"Identifier": " pollforslide22","question" : "Does this work?" ,"style" : "MultiChoice" ,"options" : [{ "optionid": 1, "optiontext": "Maybe" },{ "optionid": 2, "optiontext": "No" }] },
+                       { "optionid": 1, "optiontext": "Hello" },{ "optionid": 2, "optiontext": "Bonjour" }, {"optionid": 3, "optiontext": "¡Hola!"}, {"optionid": 4, "optiontext": "Guten tag"}] }
+                       ]'></aside>
             </section>
             <section>
                 <h2>Why writing is important</h2>
@@ -52,20 +70,23 @@
                     <li class="fragment">We are judged by it</li>
                 </ul>
                 <aside class="notes">
-                    <p><strong>Oh hey, these are some notes.</strong> They'll be hidden in your presentation.</p>
+                    <p><strong>These are the notes for the title slide of the presentation.</strong> They will not be shown to the audience.</p>
                     <ul>
                         <li>List item 1</li>
                         <li>List item 2</li>
                     </ul>
                 </aside>
                 <aside class="supplementary">
-                    <p><strong>Oh hey, this is some supplementary content.</strong> It'll be hidden in the presentation.</p>
+                    <p><strong>This is some supplementary content for the title slide of the presentation.</strong> This is for the audience members.</p>
                     <ol>
                         <li>List item 1</li>
                         <li>List item 2</li>
                     </ol>
                 </aside>
-                <aside class="polls" data-polls='[{"Identifier": " pollforslide1","question" : "Is this slide helpful?" ,"style" : "ThumbsUpThumbsDown" ,"options" : [{ "optionid": 1, "optiontext": "Yes", "optionstyle" : "ThumbsUp" },{ "optionid": 2, "optiontext": "No", "optionstyle" : "ThumbsDown" }] },{"Identifier": " pollforslide2","question" : "Does this work?" ,"style" : "ThumbsUpThumbsDown" ,"options" : [{ "optionid": 1, "optiontext": "Maybe","optionstyle" : "ThumbsUp" },{ "optionid": 2, "optiontext": "No" ,"optionstyle" : "ThumbsDown"}] }]'></aside>
+                <aside class="polls" data-polls='[
+                       {"Identifier": " pollforslide1","question" : "Is this slide helpful?" ,"style" : "ThumbsUpThumbsDown" ,"options" : [{ "optionid": 1, "optiontext": "Yes", "optionstyle" : "ThumbsUp" },{ "optionid": 2, "optiontext": "No", "optionstyle" : "ThumbsDown" }] },
+                       {"Identifier": " pollforslide2","question" : "Does this work?" ,"style" : "ThumbsUpThumbsDown" ,"options" : [{ "optionid": 1, "optiontext": "Maybe","optionstyle" : "ThumbsUp" },{ "optionid": 2, "optiontext": "No" ,"optionstyle" : "ThumbsDown"}]
+                        }]'></aside>
             </section>
             <section>
                 <blockquote>The most valuable of all talents is that of never using two words when one will do</blockquote>
@@ -95,12 +116,6 @@
                             </ol>
                         </li>
                     </ul>
-                    <aside class="notes">
-                        <p>Here's a link: <a href="http://blog.oxfordcc.co.uk/category/technology/devcamp/">OCC Blog</a></p>
-                    </aside>
-                    <aside class="supplementary">
-                        <p>Here's a link: <a href="http://blog.oxfordcc.co.uk/category/technology/devcamp/">OCC Blog</a></p>
-                    </aside>
                 </section>
                 <section>
                     <h2>Tips for clear writing</h2>
@@ -157,6 +172,14 @@
                         <li class="fragment">Will your readers leave with the right message?</li>
                     </ul>
                 </section>
+
+                <aside class="notes">
+                    <p>Here's a link: <a href="http://blog.oxfordcc.co.uk/category/technology/devcamp/">OCC Blog</a></p>
+                </aside>
+                <aside class="supplementary">
+                    <p>Here's a link: <a href="http://blog.oxfordcc.co.uk/category/technology/devcamp/">OCC Blog</a></p>
+                </aside>
+
             </section>
             <section>
                 <h2>How to say what you mean</h2>
@@ -167,6 +190,26 @@
                     <li>One sentence, one idea</li>
                     <li>Proof it</li>
                 </ul>
+
+                <aside class="notes">
+                    <p><strong>These are the notes for the title slide of the presentation.</strong> They will not be shown to the audience.</p>
+                    <ul>
+                        <li>List item 1</li>
+                        <li>List item 2</li>
+                    </ul>
+                </aside>
+                <aside class="supplementary">
+                    <p><strong>This is some supplementary content for the title slide of the presentation.</strong> This is for the audience members.</p>
+                    <ol>
+                        <li>List item 1</li>
+                        <li>List item 2</li>
+                    </ol>
+                </aside>
+                <aside class="polls" data-polls='[
+                       {"Identifier": " pollforslide1","question" : "Is this slide helpful?" ,"style" : "ThumbsUpThumbsDown" ,"options" : [{ "optionid": 1, "optiontext": "Yes", "optionstyle" : "ThumbsUp" },{ "optionid": 2, "optiontext": "No", "optionstyle" : "ThumbsDown" }] },
+                       {"Identifier": " pollforslide2","question" : "Does this work?" ,"style" : "ThumbsUpThumbsDown" ,"options" : [{ "optionid": 1, "optiontext": "Maybe","optionstyle" : "ThumbsUp" },{ "optionid": 2, "optiontext": "No" ,"optionstyle" : "ThumbsDown"}]
+                        }]'></aside>
+
             </section>
             <section>
                 <h2>Be direct</h2>
@@ -177,6 +220,24 @@
                     <li class="fragment" data-fragment-index="1">‘You’ and ‘we’ make writing more confident, transparent and personal</li>
                     <li class="fragment" data-fragment-index="2">Write about what concerns your reader</li>
                 </ul>
+                <aside class="notes">
+                    <p><strong>These are the notes for the title slide of the presentation.</strong> They will not be shown to the audience.</p>
+                    <ul>
+                        <li>List item 1</li>
+                        <li>List item 2</li>
+                    </ul>
+                </aside>
+                <aside class="supplementary">
+                    <p><strong>This is some supplementary content for the title slide of the presentation.</strong> This is for the audience members.</p>
+                    <ol>
+                        <li>List item 1</li>
+                        <li>List item 2</li>
+                    </ol>
+                </aside>
+                <aside class="polls" data-polls='[
+                       {"Identifier": " pollforslide1","question" : "Is this slide helpful?" ,"style" : "ThumbsUpThumbsDown" ,"options" : [{ "optionid": 1, "optiontext": "Yes", "optionstyle" : "ThumbsUp" },{ "optionid": 2, "optiontext": "No", "optionstyle" : "ThumbsDown" }] },
+                       {"Identifier": " pollforslide2","question" : "Does this work?" ,"style" : "ThumbsUpThumbsDown" ,"options" : [{ "optionid": 1, "optiontext": "Maybe","optionstyle" : "ThumbsUp" },{ "optionid": 2, "optiontext": "No" ,"optionstyle" : "ThumbsDown"}]
+                        }]'></aside>
             </section>
             <section>
                 <section>
@@ -225,6 +286,24 @@
                         </li>
                     </ul>
                 </section>
+                <aside class="notes">
+                    <p><strong>These are the notes for the title slide of the presentation.</strong> They will not be shown to the audience.</p>
+                    <ul>
+                        <li>List item 1</li>
+                        <li>List item 2</li>
+                    </ul>
+                </aside>
+                <aside class="supplementary">
+                    <p><strong>This is some supplementary content for the title slide of the presentation.</strong> This is for the audience members.</p>
+                    <ol>
+                        <li>List item 1</li>
+                        <li>List item 2</li>
+                    </ol>
+                </aside>
+                <aside class="polls" data-polls='[
+                       {"Identifier": " pollforslide1","question" : "Is this slide helpful?" ,"style" : "ThumbsUpThumbsDown" ,"options" : [{ "optionid": 1, "optiontext": "Yes", "optionstyle" : "ThumbsUp" },{ "optionid": 2, "optiontext": "No", "optionstyle" : "ThumbsDown" }] },
+                       {"Identifier": " pollforslide2","question" : "Does this work?" ,"style" : "ThumbsUpThumbsDown" ,"options" : [{ "optionid": 1, "optiontext": "Maybe","optionstyle" : "ThumbsUp" },{ "optionid": 2, "optiontext": "No" ,"optionstyle" : "ThumbsDown"}]
+                        }]'></aside>
             </section>
             <section>
                 <section>
@@ -264,6 +343,24 @@
                         </li>
                     </ul>
                 </section>
+                <aside class="notes">
+                    <p><strong>These are the notes for the title slide of the presentation.</strong> They will not be shown to the audience.</p>
+                    <ul>
+                        <li>List item 1</li>
+                        <li>List item 2</li>
+                    </ul>
+                </aside>
+                <aside class="supplementary">
+                    <p><strong>This is some supplementary content for the title slide of the presentation.</strong> This is for the audience members.</p>
+                    <ol>
+                        <li>List item 1</li>
+                        <li>List item 2</li>
+                    </ol>
+                </aside>
+                <aside class="polls" data-polls='[
+                       {"Identifier": " pollforslide1","question" : "Is this slide helpful?" ,"style" : "ThumbsUpThumbsDown" ,"options" : [{ "optionid": 1, "optiontext": "Yes", "optionstyle" : "ThumbsUp" },{ "optionid": 2, "optiontext": "No", "optionstyle" : "ThumbsDown" }] },
+                       {"Identifier": " pollforslide2","question" : "Does this work?" ,"style" : "ThumbsUpThumbsDown" ,"options" : [{ "optionid": 1, "optiontext": "Maybe","optionstyle" : "ThumbsUp" },{ "optionid": 2, "optiontext": "No" ,"optionstyle" : "ThumbsDown"}]
+                        }]'></aside>
             </section>
             <section>
                 <h2>One sentence, one idea</h2>
@@ -274,6 +371,24 @@
                     <li>Varying the rhythm of your sentences keep them engaging</li>
                     <li>Try to stick to one main point per paragraph</li>
                 </ul>
+                <aside class="notes">
+                    <p><strong>These are the notes for the title slide of the presentation.</strong> They will not be shown to the audience.</p>
+                    <ul>
+                        <li>List item 1</li>
+                        <li>List item 2</li>
+                    </ul>
+                </aside>
+                <aside class="supplementary">
+                    <p><strong>This is some supplementary content for the title slide of the presentation.</strong> This is for the audience members.</p>
+                    <ol>
+                        <li>List item 1</li>
+                        <li>List item 2</li>
+                    </ol>
+                </aside>
+                <aside class="polls" data-polls='[
+                       {"Identifier": " pollforslide1","question" : "Is this slide helpful?" ,"style" : "ThumbsUpThumbsDown" ,"options" : [{ "optionid": 1, "optiontext": "Yes", "optionstyle" : "ThumbsUp" },{ "optionid": 2, "optiontext": "No", "optionstyle" : "ThumbsDown" }] },
+                       {"Identifier": " pollforslide2","question" : "Does this work?" ,"style" : "ThumbsUpThumbsDown" ,"options" : [{ "optionid": 1, "optiontext": "Maybe","optionstyle" : "ThumbsUp" },{ "optionid": 2, "optiontext": "No" ,"optionstyle" : "ThumbsDown"}]
+                        }]'></aside>
             </section>
             <section>
                 <h2>Proof it</h2>
@@ -283,6 +398,24 @@
                     <li>Perhaps ask someone else</li>
                     <li>In some cases, printing it might be useful</li>
                 </ul>
+                <aside class="notes">
+                    <p><strong>These are the notes for the title slide of the presentation.</strong> They will not be shown to the audience.</p>
+                    <ul>
+                        <li>List item 1</li>
+                        <li>List item 2</li>
+                    </ul>
+                </aside>
+                <aside class="supplementary">
+                    <p><strong>This is some supplementary content for the title slide of the presentation.</strong> This is for the audience members.</p>
+                    <ol>
+                        <li>List item 1</li>
+                        <li>List item 2</li>
+                    </ol>
+                </aside>
+                <aside class="polls" data-polls='[
+                       {"Identifier": " pollforslide1","question" : "Is this slide helpful?" ,"style" : "ThumbsUpThumbsDown" ,"options" : [{ "optionid": 1, "optiontext": "Yes", "optionstyle" : "ThumbsUp" },{ "optionid": 2, "optiontext": "No", "optionstyle" : "ThumbsDown" }] },
+                       {"Identifier": " pollforslide2","question" : "Does this work?" ,"style" : "ThumbsUpThumbsDown" ,"options" : [{ "optionid": 1, "optiontext": "Maybe","optionstyle" : "ThumbsUp" },{ "optionid": 2, "optiontext": "No" ,"optionstyle" : "ThumbsDown"}]
+                        }]'></aside>
             </section>
             <section>
                 <h2>Top ten tips</h2>
@@ -298,10 +431,46 @@
                     <li>Edit, then edit again</li>
                     <li>Proofread when you’re fresh</li>
                 </ol>
+                <aside class="notes">
+                    <p><strong>These are the notes for the title slide of the presentation.</strong> They will not be shown to the audience.</p>
+                    <ul>
+                        <li>List item 1</li>
+                        <li>List item 2</li>
+                    </ul>
+                </aside>
+                <aside class="supplementary">
+                    <p><strong>This is some supplementary content for the title slide of the presentation.</strong> This is for the audience members.</p>
+                    <ol>
+                        <li>List item 1</li>
+                        <li>List item 2</li>
+                    </ol>
+                </aside>
+                <aside class="polls" data-polls='[
+                       {"Identifier": " pollforslide1","question" : "Is this slide helpful?" ,"style" : "ThumbsUpThumbsDown" ,"options" : [{ "optionid": 1, "optiontext": "Yes", "optionstyle" : "ThumbsUp" },{ "optionid": 2, "optiontext": "No", "optionstyle" : "ThumbsDown" }] },
+                       {"Identifier": " pollforslide2","question" : "Does this work?" ,"style" : "ThumbsUpThumbsDown" ,"options" : [{ "optionid": 1, "optiontext": "Maybe","optionstyle" : "ThumbsUp" },{ "optionid": 2, "optiontext": "No" ,"optionstyle" : "ThumbsDown"}]
+                        }]'></aside>
             </section>
             <section>
                 <blockquote>I try to leave out the parts that people skip</blockquote>
                 <p class="blockquote-attribution">Elmore Leonard</p>
+                <aside class="notes">
+                    <p><strong>These are the notes for the title slide of the presentation.</strong> They will not be shown to the audience.</p>
+                    <ul>
+                        <li>List item 1</li>
+                        <li>List item 2</li>
+                    </ul>
+                </aside>
+                <aside class="supplementary">
+                    <p><strong>This is some supplementary content for the title slide of the presentation.</strong> This is for the audience members.</p>
+                    <ol>
+                        <li>List item 1</li>
+                        <li>List item 2</li>
+                    </ol>
+                </aside>
+                <aside class="polls" data-polls='[
+                       {"Identifier": " pollforslide1","question" : "Is this slide helpful?" ,"style" : "ThumbsUpThumbsDown" ,"options" : [{ "optionid": 1, "optiontext": "Yes", "optionstyle" : "ThumbsUp" },{ "optionid": 2, "optiontext": "No", "optionstyle" : "ThumbsDown" }] },
+                       {"Identifier": " pollforslide2","question" : "Does this work?" ,"style" : "ThumbsUpThumbsDown" ,"options" : [{ "optionid": 1, "optiontext": "Maybe","optionstyle" : "ThumbsUp" },{ "optionid": 2, "optiontext": "No" ,"optionstyle" : "ThumbsDown"}]
+                        }]'></aside>
             </section>
             <section>
                 <section>
@@ -328,11 +497,47 @@
                             </ul>
                         </li>
                     </ul>
-                </section>
+                </section><aside class="notes">
+    <p><strong>These are the notes for the title slide of the presentation.</strong> They will not be shown to the audience.</p>
+    <ul>
+        <li>List item 1</li>
+        <li>List item 2</li>
+    </ul>
+</aside>
+<aside class="supplementary">
+    <p><strong>This is some supplementary content for the title slide of the presentation.</strong> This is for the audience members.</p>
+    <ol>
+        <li>List item 1</li>
+        <li>List item 2</li>
+    </ol>
+</aside>
+<aside class="polls" data-polls='[
+                       {"Identifier": " pollforslide1","question" : "Is this slide helpful?" ,"style" : "ThumbsUpThumbsDown" ,"options" : [{ "optionid": 1, "optiontext": "Yes", "optionstyle" : "ThumbsUp" },{ "optionid": 2, "optiontext": "No", "optionstyle" : "ThumbsDown" }] },
+                       {"Identifier": " pollforslide2","question" : "Does this work?" ,"style" : "ThumbsUpThumbsDown" ,"options" : [{ "optionid": 1, "optiontext": "Maybe","optionstyle" : "ThumbsUp" },{ "optionid": 2, "optiontext": "No" ,"optionstyle" : "ThumbsDown"}]
+                        }]'></aside>
+
             </section>
             <section>
                 <blockquote>Last, but not least, avoice clich&eacute;s like the plague</blockquote>
                 <p class="blockquote-attribution">William Safire</p>
+                <aside class="notes">
+                    <p><strong>These are the notes for the title slide of the presentation.</strong> They will not be shown to the audience.</p>
+                    <ul>
+                        <li>List item 1</li>
+                        <li>List item 2</li>
+                    </ul>
+                </aside>
+                <aside class="supplementary">
+                    <p><strong>This is some supplementary content for the title slide of the presentation.</strong> This is for the audience members.</p>
+                    <ol>
+                        <li>List item 1</li>
+                        <li>List item 2</li>
+                    </ol>
+                </aside>
+                <aside class="polls" data-polls='[
+                       {"Identifier": " pollforslide1","question" : "Is this slide helpful?" ,"style" : "ThumbsUpThumbsDown" ,"options" : [{ "optionid": 1, "optiontext": "Yes", "optionstyle" : "ThumbsUp" },{ "optionid": 2, "optiontext": "No", "optionstyle" : "ThumbsDown" }] },
+                       {"Identifier": " pollforslide2","question" : "Does this work?" ,"style" : "ThumbsUpThumbsDown" ,"options" : [{ "optionid": 1, "optiontext": "Maybe","optionstyle" : "ThumbsUp" },{ "optionid": 2, "optiontext": "No" ,"optionstyle" : "ThumbsDown"}]
+                        }]'></aside>
             </section>
         </div>
     </div>
