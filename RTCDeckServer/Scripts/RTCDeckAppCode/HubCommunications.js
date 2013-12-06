@@ -50,6 +50,9 @@ var Services;
             this.proxy.on("notifyCurrentSlide", function (slideData) {
                 $rootScope.$broadcast("acceptCurrentSlideIndex", slideData);
             });
+            this.proxy.on("notifyTimerStarted", function () {
+                $rootScope.$broadcast("acceptTimerStarted");
+            });
             this.proxy.on("notifyPollData", function (polls) {
                 $rootScope.$broadcast("notifyPollData", polls);
             });

@@ -11,6 +11,8 @@
     @Styles.Render("~/Content/secondscreencss")
     <link href="http://fonts.googleapis.com/css?family=Raleway:300&text=SpeakerNotsCh" rel="stylesheet">
     @Scripts.Render("~/bundles/modernizr")
+        @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/timer.css" rel="stylesheet" />
 </head>
 <body class="speaker" ng-controller="Controllers.SecondaryViewCtrl">
     <div id="headerwrap">
@@ -30,12 +32,27 @@
                     <p>Charts go here</p>
                 </div>
             </div>
-        </div>
-    </div>
+            <div class="col-md-4">
+                <button ng-click="startTimer()" ng-hide="timerStarted">StartTimer</button>
+                <div class="time">
+                    <div class="clock">
+                        <h2>Time</h2>
+                        <span id="clock">0:00:00 AM</span>
+                    </div>
+                    <div class="elapsed">
+                        <h2>Elapsed</h2>
+                        <span id="hours">00</span><span id="minutes">:00</span><span id="seconds">:00</span>
+                    </div>
+                </div>
+            </div>
 
+                <div ng-bind-html="currentSlide.speakerNotes" class="col-md-4"></div>
+            </div>
+    </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/signalR")
     @Scripts.Render("~/bundles/angular")
+    <script src="~/Scripts/RTCDeckAppCode/RevealTimer.js"></script>
     <script>
         window.BASE_URL = "@Html.Raw(Url.Content("~"))";
         window.HUB_URL = "@Html.Raw(Url.Content("~/signalr/"))";

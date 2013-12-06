@@ -9,6 +9,7 @@ module Models {
 
         updateSlide(indices: Models.SlideData): void;
         startTimer(): void;
+        timerStarted: boolean;
     }
 }
 
@@ -20,12 +21,15 @@ module Controllers {
         // Constructor
         constructor(private $scope: Models.SecondaryViewModel, private RTCDeckHubService: Services.RTCDeckHubService, private $window) {
 
+            $scope.timerStarted = false;
+
             $scope.updateSlide = function (slideData: Models.SlideData) {
                 $scope.currentSlide = slideData;
             };
 
             $scope.startTimer = function () {
-                $window.startTimer(0);
+                $scope.timerStarted = true;
+                $window.startTimer();
                 RTCDeckHubService.startPresentationTimer();
             };      
                       
@@ -36,9 +40,17 @@ module Controllers {
                 });
             });
 
+            $scope.$parent.$on("acceptTimerStarted", function (e, slideData: Models.SlideData) {
+                $scope.$apply(function () {
+                    $scope.timerStarted = true;
+                    $window.startTimer();
+                });
+            });
+
             $scope.$parent.$on("acceptTimeElapsed", function (e, secondsElapsed: number) {
                 if (secondsElapsed != 0) {
                     $scope.$apply(function () {
+                        $scope.timerStarted = true;
                         $window.startTimer(secondsElapsed);
                     });
                 }

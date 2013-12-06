@@ -225,9 +225,7 @@
     <Content Include="Content\reveal\theme\sky.css" />
     <Content Include="Content\reveal\theme\solarized.css" />
     <Content Include="Content\reveal\theme\source\occ.css" />
-    <Content Include="Content\secondscreen.css">
-      <DependentUpon>secondscreen.scss</DependentUpon>
-    </Content>
+    <Content Include="Content\timer.css" />
     <Content Include="Content\theme.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -276,7 +274,6 @@
     <Content Include="Content\reveal\theme\template\mixins.scss" />
     <Content Include="Content\reveal\theme\template\settings.scss" />
     <Content Include="Content\reveal\theme\template\theme.scss" />
-    <Content Include="Content\secondscreen.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\hand-1.2.2.js" />
     <Content Include="Scripts\i18n\angular-locale_af-na.js" />
@@ -563,6 +560,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\RTCDeckAppCode\Annotate.js" />
+    <Content Include="Scripts\RTCDeckAppCode\RevealTimer.js" />
     <Content Include="Views\Presentation\Secondary.cshtml" />
     <TypeScriptCompile Include="Scripts\RTCDeckAppCode\SecondaryView.ts" />
     <Content Include="Views\PresentationHub\PollDashboard.cshtml" />
