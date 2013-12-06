@@ -172,5 +172,5 @@ var app = angular.module("audienceView", ["ngSanitize"]);
 
 
 app.value('$', $);
-app.factory('RTCDeckHubService', ["$","$rootScope",function ($, $rootScope) {return new Services.RTCDeckHubService($, $rootScope,window) }]);
+app.factory('RTCDeckHubService', ["$","$rootScope",function ($, $rootScope) {return new Services.RTCDeckHubService($, $rootScope,window, false) }]);
 app.controller('Controllers.AudienceViewCtrl', ["$scope", "RTCDeckHubService", "$window", Controllers.AudienceViewCtrl]);

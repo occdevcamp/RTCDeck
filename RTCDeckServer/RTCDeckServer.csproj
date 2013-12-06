@@ -179,6 +179,7 @@
     <Compile Include="Hubs\RTCDeckHub.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\PresentationModel.cs" />
     <Compile Include="Models\PresentationModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -617,7 +618,9 @@
     <TypeScriptCompile Include="Scripts\RTCDeckAppCode\AudienceView.ts" />
     <TypeScriptCompile Include="Scripts\RTCDeckAppCode\HubCommunications.ts" />
     <TypeScriptCompile Include="Scripts\RTCDeckAppCode\Models.ts" />
+    <TypeScriptCompile Include="Scripts\RTCDeckAppCode\PrimarySlideView.ts" />
     <TypeScriptCompile Include="Scripts\RTCDeckAppCode\SlideView.ts" />
+    <TypeScriptCompile Include="Scripts\RTCDeckAppCode\SlideViewCtrl.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-cookies.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-mocks.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-resource.d.ts" />
