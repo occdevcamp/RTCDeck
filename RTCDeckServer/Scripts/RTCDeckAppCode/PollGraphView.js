@@ -32,21 +32,30 @@ var PGV_Controllers;
                         // set up data for graph
                         var data = [];
                         var total = 0;
-                        var percentageValue;
+                        var percentageValue, optionname, barlabel;
 
                         for (var optionIndex in pollData)
                             total += pollData[optionIndex].Count;
 
                         for (var optionIndex in pollData) {
                             percentageValue = (total == 0) ? 0 : (Math.round(pollData[optionIndex].Count * 100 / total));
-                            data[optionIndex] = { name: pollData[optionIndex].OptionText, value: percentageValue, count: pollData[optionIndex].Count };
+                            optionname = pollData[optionIndex].OptionText;
+                            if (optionname == "Dislike")
+                                barlabel = "Dislike";
+else
+                                barlabel = (optionname.length > 5) ? optionname.substring(0, 1) : optionname;
+
+                            data[optionIndex] = { name: barlabel, value: percentageValue, count: pollData[optionIndex].Count };
                         }
 
                         if (total != 0) {
                             // common attributes whether creating new or updat
                             var graphdivID = "graphforpoll" + pollIdentifier.trim();
                             var graphdivselector = '#' + graphdivID;
-                            var graphsvg = '<svg id="' + graphdivID + '" class="chart"></svg>';
+                            var graphtags;
+
+                            // IN PROGRESS: if ($scope.allPollsView) graphtags = "<h2>Polls for Slide ";
+                            graphtags = '<svg id="' + graphdivID + '" class="chart"></svg>';
                             var margin = { top: 20, right: 30, bottom: 30, left: 40 }, width = 200 - margin.left - margin.right, height = 300 - margin.top - margin.bottom;
 
                             // Set up the axes
@@ -60,7 +69,7 @@ var PGV_Controllers;
 
                             if ($scope.graphs[pollIdentifier] == null) {
                                 // make new svg in the main div
-                                $('#graphsDiv').append(graphsvg);
+                                $('#graphsDiv').append(graphtags);
 
                                 // Chart size
                                 // Create the chart container
@@ -120,9 +129,10 @@ var PGV_Controllers;
                     // but for debug it proves we're showing polls for the current slide
                     $scope.slideData = slideData;
 
-                    // clear down graphs
-                    $scope.graphs = [];
-                    $('#graphsDiv').empty();
+                    if (!$scope.allPollsView) {
+                        $scope.graphs = [];
+                        $('#graphsDiv').empty();
+                    }
                 });
                 var pollIndex;
                 for (pollIndex in slideData.polls) {
