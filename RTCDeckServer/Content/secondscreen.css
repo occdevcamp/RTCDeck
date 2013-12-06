@@ -68,7 +68,8 @@ body {
 
 /* Audience view */
 .audience .content {
-  padding: 10px 0; }
+  padding-top: 10px;
+  padding-bottom: 10px; }
 .audience .polls {
   padding: 10px 0 13px 0;
   background-color: #34495e;
