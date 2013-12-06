@@ -54,6 +54,36 @@ namespace RTCDeckServer.Models
 		/// PROBABLY WON'T REMAIN PUBLIC: DEBUG ONLY
 		public List<PollAnswer> PollAnswers = new List<PollAnswer>();
 
+        /// <summary>
+        /// Stores the connection IDs that requested a poll answer before the poll was initialised
+        /// </summary>
+        public Dictionary<string, ISet<string>> PollAnswerRequests = new Dictionary<string, ISet<string>>();
+
+        /// <summary>
+        /// Record the fact that we were requested the details for a poll but haven't yet sent them out
+        /// [likely due to the fact we don't know about the poll yet]
+        /// </summary>
+        /// <param name="pollID">The ID of the poll</param>
+        /// <param name="connectionID">The connection ID of the requester</param>
+        public void StoreUnansweredPollAnswerRequest(string pollID, string connectionID)
+        {
+            if (!PollAnswerRequests.ContainsKey(pollID))
+                PollAnswerRequests.Add(pollID, new HashSet<string>());
+            PollAnswerRequests[pollID].Add(connectionID);
+        }
+
+        /// <summary>
+        /// Gets the list of unanswered poll requests and removes them from the list
+        /// </summary>
+        /// <param name="pollID"></param>
+        /// <returns></returns>
+        public ICollection<string> GetAndRemoveUnansweredPollAnswerRequests(string pollID)
+        {
+            ICollection<string> requests = PollAnswerRequests.ContainsKey(pollID) ? PollAnswerRequests[pollID] : new HashSet<string>();
+            PollAnswerRequests[pollID] = new HashSet<string>();
+            return requests;
+        }
+
 		/// <summary>
 		/// This maintains a set of polls the server currnetly knows about
 		/// This will be added to piecemeal as new polls are discovered by virtue

@@ -12,6 +12,7 @@ module Services {
         public RequestPollAnswers: Function;
         public sendDraw: Function;
         public requestPresentationTimeElapsed: Function;
+        public startPresentationTimer: Function;
 
         constructor($, $rootScope, $window) {
             var connection: HubConnection = $.hubConnection($window.HUB_URL);
@@ -30,7 +31,7 @@ module Services {
                 // but I want my PollGraphView module to listen to the slide deck being changed 
                 // but we've disabled the slide deck getting a message back from the hub when this happens
                 // so it has to be done internally in the client-side code
-                $rootScope.$broadcast('slideChangedForPollGraph', slideData);
+                //$rootScope.$broadcast('slideChangedForPollGraph', slideData);
             }
 
             this.SendPresentationNavigationCommand = function (command: string) {
@@ -47,6 +48,9 @@ module Services {
             this.requestPresentationTimeElapsed = function () {
                 this.proxy.invoke('RequestPresentationTimeElapsed');
             };
+            this.startPresentationTimer = function () {
+                this.proxy.invoke('StartPresentationTimer');
+            };
 
             this.RequestPollAnswers = function (pollIdentifier: string) {
                 this.proxy.invoke('RequestPollAnswers', pollIdentifier);
@@ -59,6 +63,9 @@ module Services {
             //receiving
             this.proxy.on("notifyCurrentSlide", function (slideData: Models.SlideData) {
                 $rootScope.$broadcast("acceptCurrentSlideIndex", slideData);
+            });
+            this.proxy.on("notifyPollData", function (polls: Models.Poll[]) {
+                $rootScope.$broadcast("notifyPollData", polls);
             });
 
             this.proxy.on("receivePresentationNavigationCommand", function (command: string) {
