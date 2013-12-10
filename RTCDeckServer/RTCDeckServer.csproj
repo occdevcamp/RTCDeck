@@ -285,6 +285,7 @@
     <Content Include="Content\reveal\theme\template\settings.scss" />
     <Content Include="Content\reveal\theme\template\theme.scss" />
     <Content Include="Content\secondscreen.scss" />
+    <None Include="Properties\PublishProfiles\File system.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\hand-1.2.2.js" />
     <Content Include="Scripts\i18n\angular-locale_af-na.js" />
@@ -578,7 +579,6 @@
     <TypeScriptCompile Include="Scripts\RTCDeckAppCode\PollGraphView.ts" />
     <TypeScriptCompile Include="Scripts\RTCDeckAppCode\HubView.ts" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
