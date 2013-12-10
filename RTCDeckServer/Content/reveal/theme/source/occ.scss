@@ -66,12 +66,22 @@ $selectionBackgroundColor: rgba(0, 0, 0, 0.99);
 		h1 {
 			line-height: 1.1em;
 		}
-		h2 {
-			margin-top: 2em;
-			text-transform: uppercase;
+		h2, p {
 			font-size: 0.8em;
 			font-weight: normal;
+		}
+		h2 {
+			margin-top: 2em;
+			margin-bottom: 0.7em;
+			text-transform: uppercase;
 			color: $lightblue;
+		}
+		p {
+			margin-top: 2.5em;
+			margin-bottom: 0;
+			color: $midblue;
+			background: transparent url(../../../Images/phone.png) no-repeat left center;
+			padding-left: 24px;
 		}
 	}
 

@@ -202,6 +202,7 @@
     <Content Include="Content\Images\next.png" />
     <Content Include="Content\Images\pen.png" />
     <Content Include="Content\Images\penInactive.png" />
+    <Content Include="Content\Images\phone.png" />
     <Content Include="Content\Images\play.png" />
     <Content Include="Content\Images\previous.png" />
     <Content Include="Content\Images\secondScreen.png" />

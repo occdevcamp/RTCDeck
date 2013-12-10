@@ -35,8 +35,9 @@
         <!-- Any section element inside of this container is displayed as a slide -->
         <div class=" slides">
             <section class="title" data-background="@Url.Content("~/Content/reveal/theme/images/occbackground.png")">
-                <h2>Show &amp; tell</h2>
+                <h2>Show &amp; Tell</h2>
                 <h1>Clear and engaging writing</h1>
+                <p>bit.ly/rtcdeck</p>
                 <aside class="notes">
                     <p><strong>Remember not to talk too quickly. You're aiming to spend about one minute per slide.</strong></p>
                     <ul>
@@ -574,7 +575,6 @@
     <script src="@Url.Content("~/Scripts/reveal/reveal.js")"></script>
     <script src="@Url.Content("~/Scripts/reveal/occtheme.js")"></script>
     <script>
-
         // Full list of configuration options available here:
         // https://github.com/hakimel/reveal.js#configuration
         Reveal.initialize({
@@ -604,10 +604,7 @@
             ]
         });
 
-        OccTheme.initialize('@Url.Content("~/Content/")');
-
-
-
+        OccTheme.initialize('@Html.Raw(Url.Content("~"))');
     </script>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/signalR")

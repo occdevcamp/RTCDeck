@@ -1,6 +1,7 @@
 ﻿var OccTheme = (function () {
 
-	function initialize(contentPath) {
+	function initialize(basePath) {
+		var contentPath = basePath + '/Content/';
 		var wrapper = document.querySelector('.reveal');
 		var logo = createSingletonNode(wrapper, 'div', 'logo', '<img src="' + contentPath + 'reveal/theme/images/occlogo.png" alt="OCC Logo" />');
 		var border = createSingletonNode(wrapper, 'div', 'bottom-border', '');

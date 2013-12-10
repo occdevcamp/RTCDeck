@@ -148,12 +148,20 @@ body {
     font-weight: bold; }
   .reveal section.title h1 {
     line-height: 1.1em; }
+  .reveal section.title h2, .reveal section.title p {
+    font-size: 0.8em;
+    font-weight: normal; }
   .reveal section.title h2 {
     margin-top: 2em;
+    margin-bottom: 0.7em;
     text-transform: uppercase;
-    font-size: 0.8em;
-    font-weight: normal;
     color: #84d0f4; }
+  .reveal section.title p {
+    margin-top: 2.5em;
+    margin-bottom: 0;
+    color: #0291d3;
+    background: transparent url(../../../Images/phone.png) no-repeat left center;
+    padding-left: 24px; }
   .reveal ul {
     list-style: none;
     margin: 0;
