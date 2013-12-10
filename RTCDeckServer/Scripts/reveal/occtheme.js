@@ -19,7 +19,7 @@
 			<label class="cbs1-label-3" for="cbxPen"> \
 			<img alt="pen button" src="' + contentPath + 'images/pen.png"></img> \
             </label> \
-			<a href="/RTCDeckServer/Presentation/Secondary"> \
+			<a href=' + basePath + '"/Presentation/Secondary"> \
 			<img alt="second-screen button" src="' + contentPath + 'images/secondScreen.png"></img> \
 			</a>');
 
