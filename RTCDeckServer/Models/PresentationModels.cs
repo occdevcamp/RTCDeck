@@ -113,8 +113,12 @@ namespace RTCDeckServer.Models
 				Poll poll = Polls[pollAnswer.PollIdentifier];
 				foreach (PollOption po in poll.Options)
 				{
+					// Remove any existing vote by the answerer
+					if (po.Answerers.Contains(pollAnswer.ConnectionId))
+						po.Answerers.Remove(pollAnswer.ConnectionId);
+					// Add in the answerer's new vote
 					if (po.OptionID == selectedPollOption.OptionID)
-						po.Count = (po.Count == null) ? 1 : (po.Count + 1);
+						po.Answerers.Add(pollAnswer.ConnectionId);
 				}
 			}
 		}

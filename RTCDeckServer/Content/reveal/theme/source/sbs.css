@@ -1,5 +1,5 @@
 /**
- * An OCC theme for reveal.js presentations, similar to the simple theme.
+ * A Said Business School theme for reveal.js presentations, similar to the simple theme.
  *
  * This theme is Copyright (C) 2013 Oxford Computer Consultants Ltd.
  * reveal.js is Copyright (C) 2011-2012 Hakim El Hattab, http://hakim.se
@@ -13,7 +13,7 @@ body {
 
 .reveal {
   font-family: Arial, sans-serif;
-  font-size: 48px;
+  font-size: 26px;
   font-weight: normal;
   letter-spacing: -0.02em;
   color: #000; }
@@ -28,10 +28,10 @@ body {
  *********************************************/
 .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
   margin: 0 0 20px 0;
-  color: #005ca1;
+  color: #021e42;
   font-family: Arial, sans-serif;
   line-height: 0.9em;
-  letter-spacing: -0.03em;
+  letter-spacing: 0em;
   text-transform: none;
   text-shadow: none; }
 
@@ -42,7 +42,7 @@ body {
  * LINKS
  *********************************************/
 .reveal a:not(.image) {
-  color: #0291d3;
+  color: #007e7a;
   text-decoration: none;
   -webkit-transition: color 0.15s ease;
   -moz-transition: color 0.15s ease;
@@ -57,7 +57,7 @@ body {
 
 .reveal .roll span:after {
   color: #fff;
-  background: #015f87; }
+  background: #003230; }
 
 /*********************************************
  * IMAGES
@@ -75,23 +75,23 @@ body {
 
 .reveal a:hover img {
   background: rgba(255, 255, 255, 0.2);
-  border-color: #0291d3;
+  border-color: #007e7a;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.55); }
 
 /*********************************************
  * NAVIGATION CONTROLS
  *********************************************/
 .reveal .controls div.navigate-left, .reveal .controls div.navigate-left.enabled {
-  border-right-color: #0291d3; }
+  border-right-color: #007e7a; }
 
 .reveal .controls div.navigate-right, .reveal .controls div.navigate-right.enabled {
-  border-left-color: #0291d3; }
+  border-left-color: #007e7a; }
 
 .reveal .controls div.navigate-up, .reveal .controls div.navigate-up.enabled {
-  border-bottom-color: #0291d3; }
+  border-bottom-color: #007e7a; }
 
 .reveal .controls div.navigate-down, .reveal .controls div.navigate-down.enabled {
-  border-top-color: #0291d3; }
+  border-top-color: #007e7a; }
 
 .reveal .controls div.navigate-left.enabled:hover {
   border-right-color: #71ebf4; }
@@ -112,7 +112,7 @@ body {
   background: rgba(0, 0, 0, 0.2); }
 
 .reveal .progress span {
-  background: #0291d3;
+  background: #007e7a;
   -webkit-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
   -moz-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
   -ms-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
@@ -123,9 +123,18 @@ body {
  * SLIDE NUMBER
  *********************************************/
 .reveal .slide-number {
-  color: #0291d3; }
+  color: #007e7a; }
 
 .reveal {
+  /* We don't need any of this if all the graphs are on the same slide
+	.graphs {
+		position: absolute;
+		bottom: 50%;
+		right: 50%;
+		width: 100%;
+		text-align: right;
+		z-index: 1000;
+	}*/
   letter-spacing: 0em; }
   .reveal h1 {
     font-size: 2.3em; }
@@ -135,24 +144,9 @@ body {
     font-size: 1.1em; }
   .reveal h4 {
     font-size: 1em; }
-  .reveal h1, .reveal h2, .reveal h3, .reveal h4 {
-    font-weight: bold; }
-  .reveal section.title h1 {
-    line-height: 1.1em; }
-  .reveal section.title h2, .reveal section.title p {
-    font-size: 0.8em;
-    font-weight: normal; }
-  .reveal section.title h2 {
-    margin-top: 2em;
-    margin-bottom: 0.7em;
-    text-transform: uppercase;
-    color: #84d0f4; }
-  .reveal section.title p {
-    margin-top: 2.5em;
-    margin-bottom: 0;
-    color: #0291d3;
-    background: transparent url(../../../Images/phone.png) no-repeat left center;
-    padding-left: 24px; }
+  .reveal img, .reveal video, .reveal iframe {
+    max-height: none;
+    max-width: none; }
   .reveal ul {
     list-style: none;
     margin: 0;
@@ -161,16 +155,16 @@ body {
     .reveal ul > li:before {
       content: "\002022";
       font-size: 1.1em;
-      color: #0291d3;
+      color: #007e7a;
       margin-right: 0.5em; }
     .reveal ul ul {
       list-style: none; }
       .reveal ul ul > li:before {
-        color: #84d0f4; }
+        color: #00a94f; }
       .reveal ul ul ul {
         list-style: none; }
         .reveal ul ul ul > li:before {
-          color: #005ba4; }
+          color: #021e42; }
   .reveal ol {
     text-indent: 0; }
   .reveal ul ul, .reveal ol ol, .reveal ol ul {
@@ -195,35 +189,63 @@ body {
     .reveal .blockquote-attribution:after {
       content: "\002014";
       margin-left: 0.2em; }
-  .reveal .graphs {
-    position: absolute;
-    bottom: 50%;
-    right: 50%;
-    width: 100%;
-    text-align: right; }
-  .reveal .chart {
-    margin-left: 40px; }
-    .reveal .chart:first-child {
-      margin-left: 0; }
-    .reveal .chart rect {
-      fill: steelblue; }
-    .reveal .chart text {
-      fill: black;
-      font-size: 16px;
-      text-anchor: middle; }
+  .reveal .chart-container {
+    display: inline-block;
+    margin-right: 40px; }
+    .reveal .chart-container p {
+      text-align: center;
+      font-size: 0.7em;
+      margin: 0;
+      line-height: 0.2em; }
+  .reveal .chart rect {
+    fill: steelblue; }
+  .reveal .chart text {
+    fill: black;
+    font-size: 16px;
+    text-anchor: middle; }
   .reveal .axis path, .reveal .axis line {
     fill: none;
     stroke: #000;
     shape-rendering: crispEdges; }
   .reveal .x.axis path {
     display: none; }
+  .reveal .poll-average-container {
+    position: relative; }
+  .reveal .poll-average {
+    position: absolute;
+    text-align: center;
+    width: 41px; }
+  .reveal #avgforpollmulti0-0 {
+    left: 418px;
+    top: 50px; }
+  .reveal #avgforpollmulti0-1 {
+    left: 87px;
+    top: 242px; }
+  .reveal #avgforpollmulti0-2 {
+    left: 418px;
+    top: 430px; }
+  .reveal #avgforpollmulti0-3 {
+    left: 749px;
+    top: 242px; }
+  .reveal #avgforpollmulti1-0 {
+    left: 117px;
+    top: 158px; }
+  .reveal #avgforpollmulti1-1 {
+    left: 117px;
+    top: 328px; }
+  .reveal #avgforpollmulti1-2 {
+    left: 721px;
+    top: 328px; }
+  .reveal #avgforpollmulti1-3 {
+    left: 720px;
+    top: 158px; }
   .reveal .menu input, .reveal .topMenu input {
     display: none; }
   .reveal .menu label, .reveal .menu a, .reveal .topMenu label, .reveal .topMenu a {
     display: block;
     cursor: pointer;
     opacity: 0.2;
-    margin: 5px 15px; }
+    margin: 15px; }
   .reveal .menu a:hover img, .reveal .topMenu a:hover img {
     background: none;
     border: none;
@@ -236,7 +258,8 @@ body {
   .reveal .topMenu {
     position: absolute;
     left: 0;
-    top: 0; }
+    top: 0;
+    z-index: 1000; }
     .reveal .topMenu input.cbs1-selector-1:checked ~ label.cbs1-label-1 {
       filter: alpha(opacity=100);
       opacity: 1; }
@@ -245,32 +268,41 @@ body {
   .reveal .slides {
     text-align: left; }
     .reveal .slides section {
-      line-height: 1.3em; }
+      line-height: 1.3em;
+      padding: 55px 30px 0 70px; }
+      .reveal .slides section img {
+        border: none;
+        box-shadow: none;
+        margin: 0; }
   .reveal .separate {
     margin-top: 1em; }
   .reveal .indent {
     text-indent: 1em; }
   .reveal .correct {
-    color: #00b050; }
+    color: #00a94f; }
   .reveal .incorrect {
     color: #ff2c2d; }
   .reveal .smaller {
     font-size: 0.85em;
     line-height: 1.4em; }
+  .reveal p.connect {
+    color: #021e42;
+    background: transparent url(../../../Images/phone.png) no-repeat left center;
+    padding-left: 27px; }
   .reveal > .logo {
     position: absolute;
-    bottom: 17px;
-    left: 10px; }
-  .reveal > .bottom-border {
+    top: 27px;
+    right: 20px; }
+  .reveal > .side-border {
     position: absolute;
-    bottom: 3px;
-    height: 12px;
-    width: 100%;
-    background: none;
-    background: -moz-linear-gradient(left, #005ba4 0%, #0291d3 50%, #84d0f4 100%);
-    background: -webkit-gradient(linear, left top, right top, color-stop(0%, #005ba4), color-stop(50%, #0291d3), color-stop(100%, #84d0f4));
-    background: -webkit-linear-gradient(left, #005ba4 0%, #0291d3 50%, #84d0f4 100%);
-    background: -o-linear-gradient(left, #005ba4 0%, #0291d3 50%, #84d0f4 100%);
-    background: -ms-linear-gradient(left, #005ba4 0%, #0291d3 50%, #84d0f4 100%);
-    background: linear-gradient(to right, #005ba4 0%, #0291d3 50%, #84d0f4 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#005ba4', endColorstr='#84d0f4',GradientType=1 ); }
+    bottom: -4px;
+    right: -1px; }
+  .reveal > .footer-left, .reveal > .footer-right {
+    color: #898b93;
+    font-size: 0.6em;
+    position: absolute;
+    bottom: 7px; }
+  .reveal > .footer-left {
+    left: 70px; }
+  .reveal > .footer-right {
+    right: 60px; }

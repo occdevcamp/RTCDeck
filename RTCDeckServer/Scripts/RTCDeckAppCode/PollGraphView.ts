@@ -46,15 +46,22 @@ module PGV_Controllers {
 
                     $scope.$apply(function () {
                         // set up data for graph
-                        var data = [];
-                        var total = 0;
-                        var percentageValue, optionname, barlabel,
+                        var data = [],
+                            totalCount = 0,
+                            totalValue = 0,
+                            averageValue = 0,
+                            percentageValue, optionname, barlabel,
                             optionsaretruncated: boolean = false, optionslabels: string = "";
-                        // work out total so we can calc percentages
-                        for (var optionIndex in pollData) total += pollData[optionIndex].Count;
 
                         for (var optionIndex in pollData) {
-                            percentageValue = (total == 0) ? 0 : (Math.round(pollData[optionIndex].Count * 100 / total));
+                            // work out total so we can calc percentages
+                            totalCount += pollData[optionIndex].Count;
+                            totalValue += pollData[optionIndex].OptionText * pollData[optionIndex].Count;
+                        }
+                        averageValue = Math.round((totalValue / totalCount) * 10) / 10;
+
+                        for (var optionIndex in pollData) {
+                            percentageValue = (totalCount == 0) ? 0 : (Math.round(pollData[optionIndex].Count * 100 / totalCount));
                             optionname = pollData[optionIndex].OptionText;
                             if (optionname == "Dislike")
                                 barlabel = "Dislike";
@@ -78,19 +85,20 @@ module PGV_Controllers {
                         }
 
                         // if total == 0 we don't yet attempt to create a graph
-                        if (total != 0) {
+                        if (totalCount != 0) {
                             // common attributes whether creating new or updat
                             var graphdivID = "graphforpoll" + pollIdentifier.trim();
                             var graphdivselector = '#' + graphdivID;
-                            var graphtags = '<svg id="' + graphdivID + '" class="chart"></svg>';
-                            if ($scope.allPollsView) {
-                                graphtags += "<p>" + polls[pollIndex].Question;
+                            var graphtags = '<div class="chart-container"><svg id="' + graphdivID + '" class="chart"></svg>';
+                           // if ($scope.allPollsView) {
+                                graphtags += '<p>' + polls[pollIndex].Question + ': <span class="chart-average"></span>';
                                 if (optionsaretruncated) graphtags += optionslabels;
                                 graphtags += "</p>";
-                            }
+                            //}
+                            graphtags += "</div>";
 
-                            var height = 300,
-                                barWidth = 50,
+                            var height = 200,
+                                barWidth = 30,
                                 barMargin = 5,
                                 marginBottom = 30,
                                 marginTop = 30;
@@ -163,6 +171,10 @@ module PGV_Controllers {
                                 .duration(1000)
                                 .attr("y", function (d) { return y(d.value) - 3; })
                                 .text(function (d) { return d.count; });
+
+                            $(graphdivselector).parent().find(".chart-average")
+                                .text(averageValue);
+
                             $scope.graphs[pollIdentifier] = polls[pollIndex];
 
                         }

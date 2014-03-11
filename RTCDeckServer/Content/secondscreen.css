@@ -10,9 +10,7 @@ body {
   background-color: #34495e;
   color: #ffffff; }
 
-#headerwrap h1,
-.subheader,
-.time {
+#headerwrap h1, .subheader, .time {
   font-family: "Raleway";
   font-weight: 300; }
 
@@ -31,22 +29,17 @@ body {
   color: #ffffff;
   padding: 10px 0; }
 
-.content :last-child,
-.polls :last-child {
+.content :last-child, .polls :last-child {
   margin-bottom: 0; }
 
-.ThumbsUpThumbsDown a,
-#controls a,
-.start-timer,
-.presentation-view {
+.ThumbsUpThumbsDown a, #controls a, .start-timer, .presentation-view {
   display: inline-block;
   color: rgba(0, 0, 0, 0);
   font: 0px/0 a;
   cursor: pointer; }
 
 /* Speaker's second-screen view */
-.speaker .content,
-.speaker .polls {
+.speaker .content, .speaker .polls {
   padding-top: 15px;
   padding-bottom: 15px; }
 .speaker .start-timer {
@@ -58,11 +51,9 @@ body {
   right: 8px; }
 .speaker .time {
   margin-bottom: 10px; }
-.speaker .elapsed,
-.speaker .clock {
+.speaker .elapsed, .speaker .clock {
   font-size: 30px; }
-  .speaker .elapsed h2,
-  .speaker .clock h2 {
+  .speaker .elapsed h2, .speaker .clock h2 {
     margin: 0; }
 .speaker .elapsed .mute {
   opacity: 0.4; }
@@ -91,16 +82,17 @@ body {
 .audience .MultiChoice {
   font-size: 1.1em; }
   .audience .MultiChoice .poll-option {
-    margin-bottom: 5px; }
+    padding: 0 5px 5px 0;
+    display: inline-block; }
     .audience .MultiChoice .poll-option:last-child {
-      margin-bottom: 0; }
+      padding-right: 0; }
   .audience .MultiChoice a {
     border: 1px solid rgba(0, 0, 0, 0);
     border-radius: 4px;
-    display: block;
+    display: inline-block;
     line-height: 1.42857;
     margin-bottom: 0;
-    padding: 6px 12px;
+    padding: 9px 15px;
     vertical-align: middle;
     background-color: #428BCA;
     border-color: #357EBD;
@@ -145,4 +137,3 @@ body {
   width: 33px;
   height: 34px;
   background: transparent url(Images/play.png) no-repeat; }
-

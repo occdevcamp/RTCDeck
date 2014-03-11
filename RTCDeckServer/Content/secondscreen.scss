@@ -124,18 +124,19 @@ body {
 	.MultiChoice {
 		font-size: 1.1em;
 		.poll-option {
-			margin-bottom: 5px;
+			padding: 0 5px 5px 0;
+			display: inline-block;
 			&:last-child {
-				margin-bottom: 0;
+				padding-right: 0;
 			}
 		}
 		a {
 			border: 1px solid rgba(0, 0, 0, 0);
 			border-radius: 4px;
-			display: block;
+			display: inline-block;
 			line-height: 1.42857;
 			margin-bottom: 0;
-			padding: 6px 12px;
+			padding: 9px 15px;
 			vertical-align: middle;
 			background-color: #428BCA;
 			border-color: #357EBD;

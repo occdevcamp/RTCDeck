@@ -205,6 +205,7 @@
     <Content Include="Content\Images\phone.png" />
     <Content Include="Content\Images\play.png" />
     <Content Include="Content\Images\previous.png" />
+    <Content Include="Content\Images\SbsSwirlScoreSheet.PNG" />
     <Content Include="Content\Images\secondScreen.png" />
     <Content Include="Content\Images\secondScreenInactive.png" />
     <Content Include="Content\Images\secondScreenSmall.png" />
@@ -222,16 +223,96 @@
     <Content Include="Content\reveal\theme\default.css" />
     <Content Include="Content\reveal\theme\images\OccBackground.png" />
     <Content Include="Content\reveal\theme\images\OccLogo.png" />
+    <Content Include="Content\reveal\theme\images\SbsBackground.png" />
+    <Content Include="Content\reveal\theme\images\SbsLogo.png" />
     <Content Include="Content\reveal\theme\moon.css" />
     <Content Include="Content\reveal\theme\night.css" />
     <Content Include="Content\reveal\theme\serif.css" />
     <Content Include="Content\reveal\theme\simple.css" />
     <Content Include="Content\reveal\theme\sky.css" />
     <Content Include="Content\reveal\theme\solarized.css" />
+    <Content Include="Content\reveal\theme\source\beige.css">
+      <DependentUpon>beige.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\reveal\theme\source\beige.min.css">
+      <DependentUpon>beige.css</DependentUpon>
+    </Content>
+    <Content Include="Content\reveal\theme\source\blood.css">
+      <DependentUpon>blood.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\reveal\theme\source\blood.min.css">
+      <DependentUpon>blood.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\reveal\theme\source\default.css">
+      <DependentUpon>default.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\reveal\theme\source\default.min.css">
+      <DependentUpon>default.css</DependentUpon>
+    </Content>
+    <Content Include="Content\reveal\theme\source\moon.css">
+      <DependentUpon>moon.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\reveal\theme\source\moon.min.css">
+      <DependentUpon>moon.css</DependentUpon>
+    </Content>
+    <Content Include="Content\reveal\theme\source\night.css">
+      <DependentUpon>night.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\reveal\theme\source\night.min.css">
+      <DependentUpon>night.scss</DependentUpon>
+    </Content>
     <Content Include="Content\reveal\theme\source\occ.css">
       <DependentUpon>occ.scss</DependentUpon>
     </Content>
+    <Content Include="Content\reveal\theme\source\occ.min.css">
+      <DependentUpon>occ.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\reveal\theme\source\sbs.css">
+      <DependentUpon>sbs.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\reveal\theme\source\sbs.min.css">
+      <DependentUpon>sbs.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\reveal\theme\source\serif.css">
+      <DependentUpon>serif.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\reveal\theme\source\serif.min.css">
+      <DependentUpon>serif.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\reveal\theme\source\simple.css">
+      <DependentUpon>simple.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\reveal\theme\source\simple.min.css">
+      <DependentUpon>simple.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\reveal\theme\source\sky.css">
+      <DependentUpon>sky.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\reveal\theme\source\sky.min.css">
+      <DependentUpon>sky.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\reveal\theme\source\solarized.css">
+      <DependentUpon>solarized.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\reveal\theme\source\solarized.min.css">
+      <DependentUpon>solarized.css</DependentUpon>
+    </Content>
+    <Content Include="Content\reveal\theme\template\mixins.css">
+      <DependentUpon>mixins.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\reveal\theme\template\mixins.min.css">
+      <DependentUpon>mixins.css</DependentUpon>
+    </Content>
+    <Content Include="Content\reveal\theme\template\settings.css">
+      <DependentUpon>settings.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\reveal\theme\template\settings.min.css">
+      <DependentUpon>settings.css</DependentUpon>
+    </Content>
     <Content Include="Content\secondscreen.css">
+      <DependentUpon>secondscreen.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\secondscreen.min.css">
       <DependentUpon>secondscreen.scss</DependentUpon>
     </Content>
     <Content Include="Content\theme.css" />
@@ -286,6 +367,7 @@
     <Content Include="Content\reveal\theme\template\settings.scss" />
     <Content Include="Content\reveal\theme\template\theme.scss" />
     <Content Include="Content\secondscreen.scss" />
+    <Content Include="Content\reveal\theme\source\sbs.scss" />
     <None Include="Properties\PublishProfiles\File system.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\hand-1.2.2.js" />
@@ -543,6 +625,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\reveal\sbstheme.js" />
     <Content Include="Scripts\reveal\occtheme.js" />
     <Content Include="Scripts\reveal\reveal.js" />
     <Content Include="Scripts\reveal\reveal.min.js" />
@@ -575,6 +658,8 @@
     <Content Include="Scripts\RTCDeckAppCode\Annotate.js" />
     <Content Include="Scripts\RTCDeckAppCode\RevealTimer.js" />
     <Content Include="Views\Presentation\Secondary.cshtml" />
+    <Content Include="Views\Presentation\OccDemo.cshtml" />
+    <TypeScriptCompile Include="Scripts\RTCDeckAppCode\PollAverageView.ts" />
     <TypeScriptCompile Include="Scripts\RTCDeckAppCode\SecondaryView.ts" />
     <Content Include="Views\PresentationHub\PollDashboard.cshtml" />
     <TypeScriptCompile Include="Scripts\RTCDeckAppCode\PollGraphView.ts" />

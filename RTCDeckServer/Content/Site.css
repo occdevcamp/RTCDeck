@@ -73,3 +73,8 @@ input[type="checkbox"].input-validation-error {
 .x.axis path {
 	display: none;
 }
+
+.chart-container {
+	display: inline-block;
+	margin-right: 40px;
+}
